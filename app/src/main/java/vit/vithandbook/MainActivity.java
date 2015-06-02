@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity {
 
     boolean searchMode = false ;
+    GridLayout mainNavGrid;
     LinearLayout mainNavigator,searchLayout;
 
     @Override
@@ -23,8 +26,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
+        mainNavGrid = (GridLayout)findViewById(R.id.mainNavGrid);
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
         setupDatabase();
+       // fillNavGrid();
     }
 
     @Override
@@ -96,6 +101,15 @@ public class MainActivity extends ActionBarActivity {
         if(cursor.getCount()>0)
             return ;
         // to add data to database
-        Toast.makeText(this,"to add",Toast.LENGTH_LONG).show();
     }
+  /*  void fillNavGrid()
+    {
+        int cardwidth = (int)(mainNavGrid.getWidth());
+        Toast.makeText(this,Integer.toString(cardwidth),Toast.LENGTH_LONG).show();
+        android.support.v7.widget.CardView card = (android.support.v7.widget.CardView)getLayoutInflater().inflate(R.layout.nav_cards,mainNavGrid,false);
+        GridLayout.LayoutParams params = (GridLayout.LayoutParams)card.getLayoutParams();
+        params.width = cardwidth ;
+        card.setLayoutParams(params);
+        mainNavGrid.addView(card);
+    }*/
 }
