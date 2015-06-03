@@ -174,4 +174,8 @@ public class MainActivity extends ActionBarActivity {
         });
         animator.start();
     }
+    public void suggestionClick(View view)
+    {
+        // show apprpriate info based on the view's tag or id or whatever we decide :p
+    }
 }

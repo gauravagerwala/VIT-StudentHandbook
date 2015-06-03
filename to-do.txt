@@ -7,3 +7,4 @@ we can also add cards dynamically inflating from nav_card - to be decided
 
 2) add transitions to fragments
 3) fix the circle drawable to be a proper circle in any case
+4) how are we implementing suggestions  ?? :p
