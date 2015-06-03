@@ -1,0 +1,9 @@
+ok first of all i redid the app using fragments .. i used them because all the activities had a common layout with different colors in the main header .
+
+thigs to fix
+
+1) equally assign width to cards in the gridlayout in fragment_main_navigator or
+we can also add cards dynamically inflating from nav_card - to be decided
+
+2) add transitions to fragments
+3) fix the circle drawable to be a proper circle in any case

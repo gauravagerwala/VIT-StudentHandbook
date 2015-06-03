@@ -6,5 +6,13 @@
         <item name = "android:colorPrimaryDark">#2980b9</item>
         <item name = "android:textColorPrimary">#FFFF</item>
     </style>
+   <color name="academics">#e74c3c</color>
+    <color name="mainHeader">#3498db</color>
+    <color name="college">#f1c40f</color>
 
+    <array name="colors">
+        <item>#1abc9c</item>
+        <item>#2ecc71</item>
+        <item>#3498db</item>
+    </array>
 </resources>

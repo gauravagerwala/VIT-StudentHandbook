@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="30dp" android:textColor="#FFF"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content" android:background="@drawable/circle"
+        android:id="@+id/tvCircle"
+ />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+ <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center_vertical"
+     android:textSize="20dp"
+     android:id="@+id/tvContent"
+     android:layout_weight="3"/>
+</LinearLayout>

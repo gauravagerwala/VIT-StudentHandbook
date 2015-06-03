@@ -2,13 +2,19 @@ package vit.vithandbook;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -19,7 +25,9 @@ public class MainActivity extends ActionBarActivity {
 
     boolean searchMode = false ;
     GridLayout mainNavGrid;
-    LinearLayout mainNavigator,searchLayout;
+    int backFragmentint = -1 , currentFragmentint = 0 ;
+    LinearLayout mainNavigator,searchLayout,mainHeader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +36,9 @@ public class MainActivity extends ActionBarActivity {
         mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
         mainNavGrid = (GridLayout)findViewById(R.id.mainNavGrid);
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
+        mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
         setupDatabase();
+        getFragmentManager().beginTransaction().add(R.id.mainNavigator,new MainNavigator(),"mainNavigator").addToBackStack(null).commit();
        // fillNavGrid();
     }
 
@@ -81,6 +91,29 @@ public class MainActivity extends ActionBarActivity {
                        }
                    });
        }
+       else if(backFragmentint == -1)
+       {
+           super.onBackPressed();
+       }
+        else
+       {
+           FragmentTransaction ft = getFragmentManager().beginTransaction() ;
+           switch(currentFragmentint)
+           {
+               case 1 : ft.remove(getFragmentManager().findFragmentByTag("subSectionFragment"));break;
+               case 2 : ft.remove(getFragmentManager().findFragmentByTag("articles"));break;
+           }
+           switch(backFragmentint)
+           {
+               case 1 : ft.show(getFragmentManager().findFragmentByTag("subSectionFragment"));break;
+               case 0 : ft.show(getFragmentManager().findFragmentByTag("mainNavigator"));break;
+           }
+           ft.commit();
+           currentFragmentint = backFragmentint ;
+           backFragmentint -- ;
+           if(currentFragmentint == 0)
+               AnimateMainHeader(null,true);
+       }
     }
     void setupDatabase()
     {
@@ -102,7 +135,16 @@ public class MainActivity extends ActionBarActivity {
             return ;
         // to add data to database
     }
-  /*  void fillNavGrid()
+
+    public void navigate(View view)
+    {
+       AnimateMainHeader((ViewGroup)view,false);
+       MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
+       getFragmentManager().beginTransaction().hide(main).add(R.id.mainNavigator,SubSectionFragment.newInstance("subcat"),"subSectionFragment").addToBackStack(null).commit();
+        currentFragmentint = 1 ;
+        backFragmentint = 0 ;
+    }
+    void fillNavGrid()
     {
         int cardwidth = (int)(mainNavGrid.getWidth());
         Toast.makeText(this,Integer.toString(cardwidth),Toast.LENGTH_LONG).show();
@@ -111,5 +153,25 @@ public class MainActivity extends ActionBarActivity {
         params.width = cardwidth ;
         card.setLayoutParams(params);
         mainNavGrid.addView(card);
-    }*/
+    }
+    void AnimateMainHeader(ViewGroup view , boolean back )
+    {
+        int startColor = ((ColorDrawable)mainHeader.getBackground()).getColor();
+        int endcolor ;
+        if(back)
+        {
+            endcolor = getResources().getColor(R.color.mainHeader);
+        }
+        else {
+            endcolor = ((ColorDrawable) ((LinearLayout) view.getChildAt(0)).getBackground()).getColor();
+        }
+        final ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(), startColor, endcolor);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mainHeader.setBackgroundColor((int)animator.getAnimatedValue());
+            }
+        });
+        animator.start();
+    }
 }
