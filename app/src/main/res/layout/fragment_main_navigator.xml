@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
-                android:textSize="10dp"
+                android:textSize="15sp"
                 android:text="Academics"
                 android:layout_gravity="left"/>
         </LinearLayout>
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
-                android:textSize="10dp"
+                android:textSize="15sp"
                 android:text="College"
                 android:layout_gravity="left"/>
         </LinearLayout>
