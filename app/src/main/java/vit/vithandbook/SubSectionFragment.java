@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,9 +20,10 @@ import java.util.Random;
 import java.util.zip.Inflater;
 
 
-public class SubSectionFragment extends Fragment {
+public class SubSectionFragment extends BackHandlerFragment {
 
     public  String mainCategory ;
+    boolean onSecondLevel =false ;
     ArrayList<String> Subtopics ;
 
     public static SubSectionFragment newInstance(String mainCategory)
@@ -45,8 +47,27 @@ public class SubSectionFragment extends Fragment {
         ListView list =(ListView) view.findViewById(R.id.subSectionList);
         list.setAdapter(new SubSectionAdapter(getActivity(), R.layout.sub_section_item, Subtopics));
         ((ArrayAdapter)list.getAdapter()).notifyDataSetChanged();
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                onSecondLevel = true ;
+                // to navigate to sub sub level
+            }
+        });
         return view ;
     }
+    @Override
+    public boolean onBackPressed()
+    {
+        if(onSecondLevel) // navigate back to level 1 if on level 2
+        {
+            Toast.makeText(getActivity(),"going back to level 1 ",Toast.LENGTH_LONG).show();
+            onSecondLevel = false ;
+            return true ;
+        }
+        return false ;
+    }
+
 }
 
 
@@ -61,7 +82,7 @@ class SubSectionAdapter extends ArrayAdapter<String>
     }
     public SubSectionAdapter(Context context, int resource, ArrayList<String> objects)
     {
-        super(context,resource,objects);
+        super(context, resource, objects);
         activity = context ;
         this.objects = objects ;
         colors = activity.getResources().getIntArray(R.array.colors);

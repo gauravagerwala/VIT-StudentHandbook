@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,7 +26,9 @@ public class MainActivity extends ActionBarActivity {
 
     boolean searchMode = false ;
     GridLayout mainNavGrid;
-    int backFragmentint = -1 , currentFragmentint = 0 ;
+    public boolean isInSubSubSection = false ;
+    BackHandlerFragment selectedFragment ;
+   // int backFragmentint = -1 , currentFragmentint = 0 ;
     LinearLayout mainNavigator,searchLayout,mainHeader;
 
 
@@ -38,8 +41,8 @@ public class MainActivity extends ActionBarActivity {
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
         setupDatabase();
-        getFragmentManager().beginTransaction().add(R.id.mainNavigator,new MainNavigator(),"mainNavigator").addToBackStack(null).commit();
-       // fillNavGrid();
+        selectedFragment = new MainNavigator();
+        getFragmentManager().beginTransaction().add(R.id.mainNavigator,selectedFragment,"mainNavigator").commit();
     }
 
     @Override
@@ -51,8 +54,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -77,6 +78,30 @@ public class MainActivity extends ActionBarActivity {
     }
     @Override
     public void onBackPressed() {
+        if(searchMode)
+        {
+            mainNavigator.setVisibility(View.VISIBLE);
+            mainNavigator.animate().translationY(0)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            Toast.makeText(getApplicationContext(), Integer.toString(mainNavigator.getHeight()), Toast.LENGTH_LONG).show();
+                            searchLayout.setVisibility(View.GONE);
+                            searchMode = false;
+                        }
+                    });
+        }
+        else if(getFragmentManager().getBackStackEntryCount()==0)
+            super.onBackPressed();
+        else if(selectedFragment!=null &&  !selectedFragment.onBackPressed())
+        {
+            getFragmentManager().popBackStack();
+            AnimateMainHeader(null,true);
+        }
+    }
+  /*  old fragment navigation system not to remove
+   public void onBackPressed() {
        if(searchMode)
        {
            mainNavigator.setVisibility(View.VISIBLE);
@@ -114,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
            if(currentFragmentint == 0)
                AnimateMainHeader(null,true);
        }
-    }
+    }*/
     void setupDatabase()
     {
         SQLiteDatabase db = openOrCreateDatabase("Handbook",MODE_PRIVATE,null);
@@ -128,6 +153,12 @@ public class MainActivity extends ActionBarActivity {
         db.execSQL("CREATE TABLE IF NOT EXISTS images ( " +
                 "id VARCHAR primary key ," +
                 "tags varchar ) ;");
+        db.execSQL("CREATE TABLE IF NOT EXISTS subcategories (" +
+                "name varchar primary key ," +
+                "main_category varchar ) ;");
+        db.execSQL("CREATE TABLE IF NOT EXISTS sub_subcategories (" +
+                "name varchar primary key ," +
+                "subcategory varchar ) ;");
         db.setTransactionSuccessful();
         db.endTransaction();
         Cursor cursor  = db.rawQuery("SELECT * FROM articles",null);
@@ -138,21 +169,12 @@ public class MainActivity extends ActionBarActivity {
 
     public void navigate(View view)
     {
-       AnimateMainHeader((ViewGroup)view,false);
+       AnimateMainHeader((ViewGroup) view, false);
        MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
-       getFragmentManager().beginTransaction().hide(main).add(R.id.mainNavigator,SubSectionFragment.newInstance("subcat"),"subSectionFragment").addToBackStack(null).commit();
-        currentFragmentint = 1 ;
-        backFragmentint = 0 ;
-    }
-    void fillNavGrid()
-    {
-        int cardwidth = (int)(mainNavGrid.getWidth());
-        Toast.makeText(this,Integer.toString(cardwidth),Toast.LENGTH_LONG).show();
-        android.support.v7.widget.CardView card = (android.support.v7.widget.CardView)getLayoutInflater().inflate(R.layout.nav_cards,mainNavGrid,false);
-        GridLayout.LayoutParams params = (GridLayout.LayoutParams)card.getLayoutParams();
-        params.width = cardwidth ;
-        card.setLayoutParams(params);
-        mainNavGrid.addView(card);
+        selectedFragment =SubSectionFragment.newInstance("subcat");
+       getFragmentManager().beginTransaction().hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
+        //currentFragmentint = 1 ;
+        //backFragmentint = 0 ;
     }
     void AnimateMainHeader(ViewGroup view , boolean back )
     {

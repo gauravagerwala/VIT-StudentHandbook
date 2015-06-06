@@ -4,14 +4,21 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
-public class MainNavigator extends Fragment {
+public class MainNavigator extends BackHandlerFragment {
 
     int AppState = 1 ;
+    GridLayout grid ;
+
     public MainNavigator()
     {
 
@@ -19,7 +26,38 @@ public class MainNavigator extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_main_navigator,container,false);
+        View view = inflater.inflate(R.layout.fragment_main_navigator, container, false);
         return view ;
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+        ViewTreeObserver vto = getView().getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int width = getView().getWidth();
+                allignCards(width);
+            }
+        });
+    }
+    void allignCards(int width)
+    {
+        GridLayout grid = (GridLayout)(getView());
+        int cols = grid.getColumnCount();
+        int idealW = (width - (30*cols))/cols;
+        for(int i = 0 ; i < grid.getChildCount() ; i ++)
+        {
+           android.support.v7.widget.CardView card = (android.support.v7.widget.CardView)grid.getChildAt(i) ;
+            GridLayout.LayoutParams params = (GridLayout.LayoutParams)card.getLayoutParams();
+            params.width = idealW ;
+            card.setLayoutParams(params);
+        }
+    }
+    @Override
+    public boolean onBackPressed()
+    {
+        return false ;
     }
 }
