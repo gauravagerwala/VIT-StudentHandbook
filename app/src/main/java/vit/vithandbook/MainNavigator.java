@@ -27,24 +27,24 @@ public class MainNavigator extends BackHandlerFragment {
     public View onCreateView(LayoutInflater inflater , ViewGroup container,Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_main_navigator, container, false);
+        grid = (GridLayout)view.findViewById(R.id.mainNavGrid);
         return view ;
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        ViewTreeObserver vto = getView().getViewTreeObserver();
+        ViewTreeObserver vto = grid.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                int width = (int) (0.97*(getView().getWidth()));
+                int width = (int)(grid.getWidth());
                 allignCards(width);
             }
         });
     }
     void allignCards(int width)
     {
-        GridLayout grid = (GridLayout)(getView());
         int cols = grid.getColumnCount();
         int idealW = (width - (30*cols))/cols;
         for(int i = 0 ; i < grid.getChildCount() ; i ++)
