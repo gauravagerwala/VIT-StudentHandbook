@@ -37,7 +37,7 @@ public class MainNavigator extends BackHandlerFragment {
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                int width = getView().getWidth();
+                int width = (int) (0.97*(getView().getWidth()));
                 allignCards(width);
             }
         });

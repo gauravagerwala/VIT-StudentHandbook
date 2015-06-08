@@ -21,6 +21,7 @@
          android:layout_width="wrap_content"
          android:layout_marginTop="15dp"
          android:text="Suggestions"
+         android:elevation="5dp"
          android:textSize="20dp" android:textColor="#FFF"
           />
 
@@ -35,23 +36,25 @@
          <TextView
            android:layout_width="wrap_content" android:textSize="35sp" android:textColor="#FFF"
            android:layout_height="wrap_content"  android:text="Ac" android:background="@drawable/circle"
-           android:onClick="suggestionClick" />
+           android:onClick="suggestionClick" android:elevation="2dp"
+             />
 
          <TextView
              android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="50dp" android:textColor="#FFF"
+             android:layout_marginLeft="25dp" android:textColor="#FFF"
              android:layout_height="wrap_content"  android:text="Co" android:background="@drawable/circle"
-             android:onClick="suggestionClick" />
+             android:onClick="suggestionClick" android:elevation="2dp"
+             />
          <TextView
              android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="50dp" android:textColor="#FFF"
+             android:layout_marginLeft="25dp" android:textColor="#FFF"
              android:layout_height="wrap_content"  android:text="Ho" android:background="@drawable/circle"
-             android:onClick="suggestionClick" />
+             android:onClick="suggestionClick" android:elevation="2dp"/>
          <TextView
              android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="50dp" android:textColor="#FFF"
+             android:layout_marginLeft="25dp" android:textColor="#FFF"
              android:layout_height="wrap_content"  android:text="St" android:background="@drawable/circle"
-             android:onClick="suggestionClick" />
+             android:onClick="suggestionClick" android:elevation="2dp"/>
          </LinearLayout>
          </HorizontalScrollView>
      </LinearLayout>
@@ -68,7 +71,7 @@
         android:layout_height="fill_parent" android:id="@+id/searchLayout" android:background="#bdc3c7" android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:text="Search Layout , search cards appear here
-            " android:textSize="30dp"/>
+            android:layout_height="wrap_content" android:text="Search Layout, search cards appear here"
+            android:textSize="30dp"/>
         </LinearLayout>
 </LinearLayout>
