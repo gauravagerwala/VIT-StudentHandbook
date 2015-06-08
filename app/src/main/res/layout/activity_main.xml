@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ffffff"
      tools:context=".MainActivity"
     style="@style/AppTheme">
  <LinearLayout
@@ -34,25 +35,25 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content">
          <TextView
-           android:layout_width="wrap_content" android:textSize="35sp" android:textColor="#FFF"
+           android:layout_width="wrap_content" android:textSize="33sp" android:textColor="#FFF"
            android:layout_height="wrap_content"  android:text="Ac" android:background="@drawable/circle"
            android:onClick="suggestionClick" android:elevation="2dp"
              />
 
          <TextView
-             android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="25dp" android:textColor="#FFF"
+             android:layout_width="wrap_content" android:textSize="33sp"
+             android:layout_marginLeft="15dp" android:textColor="#FFF"
              android:layout_height="wrap_content"  android:text="Co" android:background="@drawable/circle"
              android:onClick="suggestionClick" android:elevation="2dp"
              />
          <TextView
-             android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="25dp" android:textColor="#FFF"
+             android:layout_width="wrap_content" android:textSize="33sp"
+             android:layout_marginLeft="15dp" android:textColor="#FFF"
              android:layout_height="wrap_content"  android:text="Ho" android:background="@drawable/circle"
              android:onClick="suggestionClick" android:elevation="2dp"/>
          <TextView
-             android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="25dp" android:textColor="#FFF"
+             android:layout_width="wrap_content" android:textSize="33sp"
+             android:layout_marginLeft="15dp" android:textColor="#FFF"
              android:layout_height="wrap_content"  android:text="St" android:background="@drawable/circle"
              android:onClick="suggestionClick" android:elevation="2dp"/>
          </LinearLayout>
@@ -64,11 +65,11 @@
         android:layout_width="fill_parent"
         android:orientation="vertical"
          android:gravity="center_horizontal"
-        android:layout_height="fill_parent" android:id="@+id/mainNavigator" android:background="#bdc3c7">
+        android:layout_height="fill_parent" android:id="@+id/mainNavigator" android:background="#ffffff">
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:id="@+id/searchLayout" android:background="#bdc3c7" android:visibility="gone">
+        android:layout_height="fill_parent" android:id="@+id/searchLayout" android:background="#ffffff" android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:text="Search Layout, search cards appear here"
