@@ -21,7 +21,6 @@
          android:layout_width="wrap_content"
          android:layout_marginTop="15dp"
          android:text="Suggestions"
-         android:elevation="5dp"
          android:textSize="20dp" android:textColor="#FFF"
           />
 
@@ -29,32 +28,69 @@
          android:layout_width="fill_parent"
          android:layout_height="wrap_content" android:layout_marginTop="20dp">
          <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="wrap_content" android:layout_height="fill_parent" android:scrollbars="none">
+             android:layout_width="wrap_content" android:layout_height="fill_parent"
+             android:scrollbars="none"
+             >
          <LinearLayout
              android:layout_width="wrap_content"
              android:layout_height="wrap_content">
          <TextView
-           android:layout_width="wrap_content" android:textSize="35sp" android:textColor="#FFF"
-           android:layout_height="wrap_content"  android:text="Ac" android:background="@drawable/circle"
-           android:onClick="suggestionClick" android:elevation="2dp"
-             />
+             android:layout_width="@dimen/suggestion_circle_size"
+             android:layout_height="@dimen/suggestion_circle_size"
+             android:gravity="center"
+             style="@style/suggestionFont"
+             android:text="Ac"
+             android:background="@drawable/circle"
+             android:onClick="suggestionClick" />
+         <TextView
+             android:layout_width="@dimen/suggestion_circle_size"
+             android:layout_height="@dimen/suggestion_circle_size"
+             android:gravity="center"
+             style="@style/suggestionFont"
+             android:layout_marginLeft="@dimen/suggestion_bar_margin"
+             android:text="Co" android:background="@drawable/circle"
+             android:onClick="suggestionClick" />
+         <TextView
+             android:layout_width="@dimen/suggestion_circle_size"
+             android:layout_height="@dimen/suggestion_circle_size"
+             android:gravity="center"
+             style="@style/suggestionFont"
+             android:layout_marginLeft="@dimen/suggestion_bar_margin"
+             android:text="Ho" android:background="@drawable/circle"
+             android:onClick="suggestionClick" />
+         <TextView
+             android:layout_width="@dimen/suggestion_circle_size"
+             android:layout_height="@dimen/suggestion_circle_size"
+             android:gravity="center"
+             style="@style/suggestionFont"
+             android:layout_marginLeft="@dimen/suggestion_bar_margin"
+             android:text="St" android:background="@drawable/circle"
+             android:onClick="suggestionClick" />
 
          <TextView
-             android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="25dp" android:textColor="#FFF"
-             android:layout_height="wrap_content"  android:text="Co" android:background="@drawable/circle"
-             android:onClick="suggestionClick" android:elevation="2dp"
-             />
+             android:layout_width="@dimen/suggestion_circle_size"
+             android:layout_height="@dimen/suggestion_circle_size"
+             android:gravity="center"
+             style="@style/suggestionFont"
+             android:layout_marginLeft="@dimen/suggestion_bar_margin"
+             android:text="Ar" android:background="@drawable/circle"
+             android:onClick="suggestionClick" />
          <TextView
-             android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="25dp" android:textColor="#FFF"
-             android:layout_height="wrap_content"  android:text="Ho" android:background="@drawable/circle"
-             android:onClick="suggestionClick" android:elevation="2dp"/>
+             android:layout_width="@dimen/suggestion_circle_size"
+             android:layout_height="@dimen/suggestion_circle_size"
+             android:gravity="center"
+             style="@style/suggestionFont"
+             android:layout_marginLeft="@dimen/suggestion_bar_margin"
+             android:text="Li" android:background="@drawable/circle"
+             android:onClick="suggestionClick" />
          <TextView
-             android:layout_width="wrap_content" android:textSize="35sp"
-             android:layout_marginLeft="25dp" android:textColor="#FFF"
-             android:layout_height="wrap_content"  android:text="St" android:background="@drawable/circle"
-             android:onClick="suggestionClick" android:elevation="2dp"/>
+             android:layout_width="@dimen/suggestion_circle_size"
+             android:layout_height="@dimen/suggestion_circle_size"
+             android:gravity="center"
+             style="@style/suggestionFont"
+             android:layout_marginLeft="@dimen/suggestion_bar_margin"
+             android:text="St" android:background="@drawable/circle"
+             android:onClick="suggestionClick" />
          </LinearLayout>
          </HorizontalScrollView>
      </LinearLayout>
@@ -71,7 +107,8 @@
         android:layout_height="fill_parent" android:id="@+id/searchLayout" android:background="#bdc3c7" android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:text="Search Layout, search cards appear here"
+            android:layout_height="wrap_content"
+            android:text="Search Layout, search cards appear here"
             android:textSize="30dp"/>
         </LinearLayout>
 </LinearLayout>
