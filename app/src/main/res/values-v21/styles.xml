@@ -9,7 +9,10 @@
    <color name="academics">#e74c3c</color>
     <color name="mainHeader">#3498db</color>
     <color name="hostel">#2ecc71</color>
-    <color name="college">#f1c40f</color>
+    <color name="college">#f1d40f</color>
+    <color name="stud">#b030b0</color>
+    <color name="lifehack">#8080f0</color>
+    <color name="around">#FF9922</color>
 
     <array name="colors">
         <item>#1abc9c</item>

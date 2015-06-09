@@ -7,6 +7,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:columnCount="2"
+    android:animateLayoutChanges="true"
     android:orientation="horizontal">
     <!-- to be changed !-->
 
@@ -56,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
 
         android:layout_gravity="top|left"
         card_view:cardElevation="10dp">
@@ -126,6 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
 
         android:layout_gravity="top|left"
         card_view:cardElevation="10dp">
@@ -133,7 +136,7 @@
             android:layout_width="fill_parent"
             android:padding="10dp"
             android:orientation="vertical"
-            android:background="#b030b0"
+            android:background="@color/stud"
             android:layout_height="fill_parent">
             <TextView
                 android:layout_width="wrap_content"
@@ -168,7 +171,7 @@
             android:layout_width="fill_parent"
             android:padding="10dp"
             android:orientation="vertical"
-            android:background="#8080f0"
+            android:background="@color/lifehack"
             android:layout_height="fill_parent">
             <TextView
                 android:layout_width="wrap_content"
@@ -196,6 +199,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
 
         android:layout_gravity="top|left"
         card_view:cardElevation="10dp">
@@ -203,7 +207,7 @@
             android:layout_width="fill_parent"
             android:padding="10dp"
             android:orientation="vertical"
-            android:background="#FF9922"
+            android:background="@color/around"
             android:layout_height="fill_parent">
             <TextView
                 android:layout_width="wrap_content"
