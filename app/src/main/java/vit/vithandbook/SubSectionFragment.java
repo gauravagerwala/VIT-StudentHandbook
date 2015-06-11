@@ -23,7 +23,6 @@ import java.util.zip.Inflater;
 public class SubSectionFragment extends BackHandlerFragment {
 
     public  String mainCategory ;
-    boolean onSecondLevel =false ;
     ArrayList<String> Subtopics ;
 
     public static SubSectionFragment newInstance(String mainCategory)
@@ -50,7 +49,6 @@ public class SubSectionFragment extends BackHandlerFragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                onSecondLevel = true ;
                 // to navigate to sub sub level
             }
         });
@@ -59,12 +57,7 @@ public class SubSectionFragment extends BackHandlerFragment {
     @Override
     public boolean onBackPressed()
     {
-        if(onSecondLevel) // navigate back to level 1 if on level 2
-        {
-            Toast.makeText(getActivity(),"going back to level 1 ",Toast.LENGTH_LONG).show();
-            onSecondLevel = false ;
-            return true ;
-        }
+
         return false ;
     }
 

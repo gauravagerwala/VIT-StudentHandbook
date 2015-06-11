@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 public class MainNavigator extends BackHandlerFragment {
 
-    int AppState = 1 ;
     GridLayout grid ;
 
     public MainNavigator()
@@ -38,7 +37,7 @@ public class MainNavigator extends BackHandlerFragment {
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                int width = (int)(grid.getWidth());
+                int width = grid.getWidth();
                 allignCards(width);
             }
         });
@@ -46,7 +45,8 @@ public class MainNavigator extends BackHandlerFragment {
     void allignCards(int width)
     {
         int cols = grid.getColumnCount();
-        int idealW = (width - (30*cols))/cols;
+        int spacefactor = dptopx(10);
+        int idealW = (width/cols)-spacefactor;
         for(int i = 0 ; i < grid.getChildCount() ; i ++)
         {
            android.support.v7.widget.CardView card = (android.support.v7.widget.CardView)grid.getChildAt(i) ;
@@ -59,5 +59,11 @@ public class MainNavigator extends BackHandlerFragment {
     public boolean onBackPressed()
     {
         return false ;
+    }
+
+     int dptopx(int dp)
+    {
+        float density = getActivity().getApplicationContext().getResources().getDisplayMetrics().density;
+        return Math.round((float)dp * density);
     }
 }

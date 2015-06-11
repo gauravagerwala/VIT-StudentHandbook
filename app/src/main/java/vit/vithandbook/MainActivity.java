@@ -153,12 +153,12 @@ public class MainActivity extends ActionBarActivity {
         db.execSQL("CREATE TABLE IF NOT EXISTS images ( " +
                 "id VARCHAR primary key ," +
                 "tags varchar ) ;");
-        db.execSQL("CREATE TABLE IF NOT EXISTS subcategories (" +
+      /*  db.execSQL("CREATE TABLE IF NOT EXISTS subcategories (" +
                 "name varchar primary key ," +
                 "main_category varchar ) ;");
         db.execSQL("CREATE TABLE IF NOT EXISTS sub_subcategories (" +
                 "name varchar primary key ," +
-                "subcategory varchar ) ;");
+                "subcategory varchar ) ;");*/
         db.setTransactionSuccessful();
         db.endTransaction();
         Cursor cursor  = db.rawQuery("SELECT * FROM articles",null);
@@ -172,7 +172,7 @@ public class MainActivity extends ActionBarActivity {
        AnimateMainHeader((ViewGroup) view, false);
        MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
         selectedFragment =SubSectionFragment.newInstance("subcat");
-       getFragmentManager().beginTransaction().hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
+       getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out,R.transition.fade_in,R.transition.fade_out).hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
         //currentFragmentint = 1 ;
         //backFragmentint = 0 ;
     }
@@ -200,4 +200,5 @@ public class MainActivity extends ActionBarActivity {
     {
         // show apprpriate info based on the view's tag or id or whatever we decide :p
     }
+
 }
