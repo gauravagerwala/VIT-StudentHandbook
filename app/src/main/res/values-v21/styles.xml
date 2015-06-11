@@ -6,17 +6,22 @@
         <item name = "android:colorPrimaryDark">#2980b9</item>
         <item name = "android:textColorPrimary">#FFFF</item>
     </style>
-   <color name="academics">#e74c3c</color>
+   <color name="academics">#fecd16</color>
     <color name="mainHeader">#3498db</color>
-    <color name="hostel">#2ecc71</color>
-    <color name="college">#f1d40f</color>
-    <color name="stud">#b030b0</color>
-    <color name="lifehack">#8080f0</color>
-    <color name="around">#FF9922</color>
+    <color name="hostel">#ff5b5b</color>
+    <color name="college">#75ba5b</color>
+    <color name="stud">#7c54f0</color>
+    <color name="lifehack">#cc35ba</color>
+    <color name="around">#4aa0e0</color>
 
     <array name="colors">
         <item>#1abc9c</item>
         <item>#2ecc71</item>
         <item>#3498db</item>
     </array>
+
+    <style name="suggestionFont" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#FFF</item>
+    </style>
 </resources>
