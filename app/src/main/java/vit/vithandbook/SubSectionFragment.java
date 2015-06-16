@@ -49,7 +49,9 @@ public class SubSectionFragment extends BackHandlerFragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // to navigate to sub sub level
+                Fragment fr = getActivity().getFragmentManager().findFragmentByTag("subSectionFragment");
+                ArticleListFragment fragment = ArticleListFragment.newInstance(mainCategory);
+                getActivity().getFragmentManager().beginTransaction().hide(fr).add(R.id.mainNavigator,fragment,"ArticleListFragment").addToBackStack(null).commit();
             }
         });
         return view ;

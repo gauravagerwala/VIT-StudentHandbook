@@ -26,9 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
     boolean searchMode = false ;
     GridLayout mainNavGrid;
-    public boolean isInSubSubSection = false ;
     BackHandlerFragment selectedFragment ;
-   // int backFragmentint = -1 , currentFragmentint = 0 ;
     LinearLayout mainNavigator,searchLayout,mainHeader;
 
 
@@ -100,46 +98,7 @@ public class MainActivity extends ActionBarActivity {
             AnimateMainHeader(null,true);
         }
     }
-  /*  old fragment navigation system not to remove
-   public void onBackPressed() {
-       if(searchMode)
-       {
-           mainNavigator.setVisibility(View.VISIBLE);
-           mainNavigator.animate().translationY(0)
-                   .setListener(new AnimatorListenerAdapter() {
-                       @Override
-                       public void onAnimationEnd(Animator animation) {
-                           super.onAnimationEnd(animation);
-                           Toast.makeText(getApplicationContext(), Integer.toString(mainNavigator.getHeight()), Toast.LENGTH_LONG).show();
-                           searchLayout.setVisibility(View.GONE);
-                           searchMode = false;
-                       }
-                   });
-       }
-       else if(backFragmentint == -1)
-       {
-           super.onBackPressed();
-       }
-        else
-       {
-           FragmentTransaction ft = getFragmentManager().beginTransaction() ;
-           switch(currentFragmentint)
-           {
-               case 1 : ft.remove(getFragmentManager().findFragmentByTag("subSectionFragment"));break;
-               case 2 : ft.remove(getFragmentManager().findFragmentByTag("articles"));break;
-           }
-           switch(backFragmentint)
-           {
-               case 1 : ft.show(getFragmentManager().findFragmentByTag("subSectionFragment"));break;
-               case 0 : ft.show(getFragmentManager().findFragmentByTag("mainNavigator"));break;
-           }
-           ft.commit();
-           currentFragmentint = backFragmentint ;
-           backFragmentint -- ;
-           if(currentFragmentint == 0)
-               AnimateMainHeader(null,true);
-       }
-    }*/
+
     void setupDatabase()
     {
         SQLiteDatabase db = openOrCreateDatabase("Handbook",MODE_PRIVATE,null);
@@ -173,8 +132,6 @@ public class MainActivity extends ActionBarActivity {
        MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
         selectedFragment =SubSectionFragment.newInstance("subcat");
        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out,R.transition.fade_in,R.transition.fade_out).hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
-        //currentFragmentint = 1 ;
-        //backFragmentint = 0 ;
     }
     void AnimateMainHeader(ViewGroup view , boolean back )
     {
