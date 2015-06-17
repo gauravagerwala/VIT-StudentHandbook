@@ -50,8 +50,8 @@ public class SubSectionFragment extends BackHandlerFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Fragment fr = getActivity().getFragmentManager().findFragmentByTag("subSectionFragment");
-                ArticleListFragment fragment = ArticleListFragment.newInstance(mainCategory);
-                getActivity().getFragmentManager().beginTransaction().hide(fr).add(R.id.mainNavigator,fragment,"ArticleListFragment").addToBackStack(null).commit();
+                ArticleListFragment fragment = ArticleListFragment.newInstance(Subtopics.get(position));
+                getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out).hide(fr).add(R.id.mainNavigator,fragment,"ArticleListFragment").addToBackStack(null).commit();
             }
         });
         return view ;
@@ -70,10 +70,11 @@ class SubSectionAdapter extends ArrayAdapter<String>
 {
     Context activity ;
     int [] colors ;
-    ArrayList<String> objects;
+    public ArrayList<String> objects;
     class ViewHolder
     {
        public TextView content , circle  ;
+       int color ;
     }
     public SubSectionAdapter(Context context, int resource, ArrayList<String> objects)
     {
@@ -99,7 +100,8 @@ class SubSectionAdapter extends ArrayAdapter<String>
         Random r = new Random();
         int nextindex = r.nextInt(3);
         holder.content.setText(objects.get(position));
-        ((GradientDrawable)holder.circle.getBackground()).setColor(colors[nextindex]);
+        holder.color = colors[nextindex];
+        ((GradientDrawable)holder.circle.getBackground()).setColor(holder.color);
         holder.circle.setText(String.valueOf(objects.get(position).charAt(0)));
         return view ;
     }
