@@ -6,25 +6,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import java.io.File;
 
 import vit.vithandbook.R;
+import vit.vithandbook.helperClass.XmlParseHandler;
 
 
 public class ArticleActivity extends ActionBarActivity {
 
     String topic ;
+    LinearLayout mainArticleLAyout ;
+    XmlParseHandler parser ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-        topic = getIntent().getStringExtra("topic");
-        int color = getIntent().getIntExtra("color",0);
-        setTitle(topic);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        mainArticleLAyout = (LinearLayout)findViewById(R.id.mainArticleLayout);
+        parser = new XmlParseHandler(this,mainArticleLAyout);
+        //initalizeActionBar();
+        parser.parseXml(null);
     }
 
     @Override
@@ -45,4 +49,16 @@ public class ArticleActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    void initalizeActionBar()
+    {
+        topic = getIntent().getStringExtra("topic");
+        int color = getIntent().getIntExtra("color",0);
+        setTitle(topic);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
 }
+
