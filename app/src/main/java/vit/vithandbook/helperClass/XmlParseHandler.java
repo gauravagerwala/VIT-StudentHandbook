@@ -11,6 +11,10 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
 import java.io.StringReader;
 
+/**
+ * Created by pulkit on 15/06/2015.
+ */
+
 public class XmlParseHandler
 {
     public Context context ;
@@ -25,7 +29,8 @@ public class XmlParseHandler
     {
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
-            xmlData = "<p>ye hai mera pyara sa data </p>";
+            //sample xml data
+            xmlData = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>";
             XmlPullParser myparser = xmlFactoryObject.newPullParser();
             myparser.setInput(new StringReader(xmlData));
             int event = myparser.getEventType();

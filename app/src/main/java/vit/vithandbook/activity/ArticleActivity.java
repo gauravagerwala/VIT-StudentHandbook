@@ -27,7 +27,7 @@ public class ArticleActivity extends ActionBarActivity {
         setContentView(R.layout.activity_article);
         mainArticleLAyout = (LinearLayout)findViewById(R.id.mainArticleLayout);
         parser = new XmlParseHandler(this,mainArticleLAyout);
-        //initalizeActionBar();
+        initalizeActionBar();
         parser.parseXml(null);
     }
 
