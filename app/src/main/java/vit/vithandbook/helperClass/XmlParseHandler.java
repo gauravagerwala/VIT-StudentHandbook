@@ -8,6 +8,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.util.Pair;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +27,8 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import vit.vithandbook.R;
 
@@ -36,6 +40,7 @@ public class XmlParseHandler
 {
     public Context context ;
     public LinearLayout container;
+    List<Pair<Integer,String >> images ;
     //ImageSaver saver ;
 
 
@@ -43,14 +48,18 @@ public class XmlParseHandler
     {
         this.context = context ;
         this.container = container ;
-        //saver = new ImageSaver(context);
     }
     public void parseXml(String xmlData)
     {
+        images = new ArrayList<Pair<Integer,String >>();
+        int position = 0 ;
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
             //sample xml data
-            xmlData = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><img src = 'name.png'/><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>";
+            xmlData = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>" +
+                    "<img src = 'name.png'/><img src = 'name2.png'/>" +
+                    "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " +
+                    " labore et dolore magna aliqua. Ut enim</p><img src = 'name.png'/><p> ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  labore et dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>";
             XmlPullParser myparser = xmlFactoryObject.newPullParser();
             myparser.setInput(new StringReader(xmlData));
             int event = myparser.getEventType();
@@ -62,7 +71,8 @@ public class XmlParseHandler
                         if("img".equals(name))
                         {
                             String imagename = myparser.getAttributeValue(null,"src");
-                            AddImageView(imagename);
+                            images.add(new Pair<Integer, String>(position,imagename));
+                            position++;
                         }
                         break;
                     case XmlPullParser.TEXT:
@@ -71,11 +81,17 @@ public class XmlParseHandler
                     case XmlPullParser.END_TAG:
                         if ("p".equals(name)) {
                             AddTextView(text);
+                            position++;
                         }
                         break;
                 }
                 event = myparser.next();
             }
+            for( Pair<Integer,String> p : images)
+            {
+              AddImageView(p.second,p.first);
+            }
+
         }
         catch (Exception e)
         {
@@ -84,17 +100,23 @@ public class XmlParseHandler
     }
     void AddTextView(String content)
     {
-        TextView view = new TextView(context);
+        final TextView view = new TextView(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         view.setTextSize(20);
         view.setText(content);
-        container.addView(view);
+        ((Activity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                container.addView(view);
+            }
+        });
     }
 
-    public void AddImageView(String filename) {
+    public void AddImageView(String filename ,final int pos) {
         final ImageView view = new ImageView(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity= Gravity.CENTER;
         view.setLayoutParams(params);
         File file = new File(context.getExternalFilesDir(null)+"/Images");
        // saver.setParameters(new File(context.getExternalFilesDir(null)+"/Images"),view,filename);
@@ -112,21 +134,26 @@ public class XmlParseHandler
             }
             else
             {
-                //Picasso.with(context).load("http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-transparent-glass-icons-arrows/006764-3d-transparent-glass-icon-arrows-arrowhead-solid-right.png")
-                //        .into(saver);
                 LoadImageFromNet(filename,true,view);
-
             }
         }
         else
         {
-           // Picasso.with(context).load("http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-transparent-glass-icons-arrows/006764-3d-transparent-glass-icon-arrows-arrowhead-solid-right.png")
-            //.error(R.mipmap.ic_launcher).into(view);
             LoadImageFromNet(filename,false,view);
-
-
         }
-        container.addView(view);
+        ((Activity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context,"adding image",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ((Activity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                container.addView(view,pos);
+            }
+        });
     }
 
     public void LoadImageFromNet(String name , boolean std,ImageView view)
@@ -147,7 +174,6 @@ public class XmlParseHandler
         }
         catch (Exception e)
         {
-            Toast.makeText(context,"connection error loading image" ,Toast.LENGTH_LONG).show();
             view.setImageResource(R.mipmap.ic_launcher);
             return;
         }
@@ -155,10 +181,6 @@ public class XmlParseHandler
             try {
                 File file = new File(context.getExternalFilesDir(null), "/Images/" + name);
                 FileOutputStream fout = new FileOutputStream(file);
-                //int read;
-                //byte[] data = new byte[1024];
-                //while ((read = input.read(data)) != -1)
-                 //   fout.write(data, 0, read);
                 myBitmap.compress(Bitmap.CompressFormat.PNG,85,fout);
                 fout.close();
                 input.close();

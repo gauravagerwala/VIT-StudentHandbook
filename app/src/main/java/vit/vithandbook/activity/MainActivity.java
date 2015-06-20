@@ -40,8 +40,10 @@ public class MainActivity extends ActionBarActivity {
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
         setupDatabase();
-        selectedFragment = new MainNavigator();
-        getFragmentManager().beginTransaction().add(R.id.mainNavigator,selectedFragment,"mainNavigator").commit();
+        if (savedInstanceState == null) {
+            selectedFragment = new MainNavigator();
+            getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
+        }
     }
 
     @Override
@@ -96,7 +98,8 @@ public class MainActivity extends ActionBarActivity {
         else if(selectedFragment!=null &&  !selectedFragment.onBackPressed())
         {
             getFragmentManager().popBackStack();
-            AnimateMainHeader(null,true);
+            if(getFragmentManager().getBackStackEntryCount()==1)
+            { AnimateMainHeader(null,true);}
         }
     }
 
@@ -131,7 +134,7 @@ public class MainActivity extends ActionBarActivity {
     {
        AnimateMainHeader((ViewGroup) view, false);
        MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
-        selectedFragment = SubSectionFragment.newInstance("subcat");
+       selectedFragment = SubSectionFragment.newInstance("subcat");
        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out,R.transition.fade_in,R.transition.fade_out).hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
     }
     void AnimateMainHeader(ViewGroup view , boolean back )
