@@ -38,7 +38,6 @@ public class XmlParseHandler
     public LinearLayout container;
     //ImageSaver saver ;
 
-
     public XmlParseHandler(Context context , LinearLayout container)
     {
         this.context = context ;
@@ -169,10 +168,6 @@ public class XmlParseHandler
 
     }
 }
-
-
-
-
 
 // picasso target class
 class ImageSaver implements Target
