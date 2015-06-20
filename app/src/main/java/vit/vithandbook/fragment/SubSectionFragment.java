@@ -1,6 +1,9 @@
 package vit.vithandbook.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -63,6 +66,20 @@ public class SubSectionFragment extends BackHandlerFragment {
         Fragment articleFragment = ArticleListFragment.newInstance(data);
        getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
        .hide(hideFragment).add(R.id.mainNavigator,articleFragment,"articleListFragment").addToBackStack(null).commit();
+    }
+
+    public void fetchData()
+    {
+        SQLiteDatabase db = getActivity().openOrCreateDatabase("handbook", Context.MODE_PRIVATE,null);
+        Cursor cursor = db.rawQuery("SELECT `sub_category` from `articles` Where main_category = ?",new String[]{mainCategory});
+        Subtopics = new ArrayList<String>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+            Subtopics.add(cursor.getString(0));
+        }
+        cursor.close();
+        db.close();
     }
 }
 
