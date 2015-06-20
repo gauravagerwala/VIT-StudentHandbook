@@ -4,6 +4,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedInputStream;
@@ -28,33 +29,17 @@ public class BackConnect {
         dateTime = sdfDate.format(now);
         return dateTime;
     }
-    public void sendIData() throws IOException {
+    public void getIData() throws IOException {
         String iData = null;
         HttpClient connect = new DefaultHttpClient();
-        URL handbookBack = new URL("http://www.handbook-entry.herokuapp.com/api/updates");
-        HttpURLConnection conn = (HttpURLConnection)handbookBack.openConnection();
+        URL url = new URL("http://www.handbook-entry.herokuapp.com/api/updates");
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         try
-        {   conn.setDoOutput(true);
+        {
+            conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(getDateTime());
             wr.flush();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            conn.disconnect();
-        }
-
-    }
-    public String getIData() throws IOException {
-        String result= null;
-        HttpClient connect = new DefaultHttpClient();
-        URL handbookBack = new URL("http://www.handbook-entry.herokuapp.com/api/updates");
-        HttpURLConnection conn = (HttpURLConnection)handbookBack.openConnection();
-        try
-        {   conn.setDoOutput(true);
             InputStream in = new BufferedInputStream(conn.getInputStream());
             in.read();
 
@@ -65,8 +50,7 @@ public class BackConnect {
         }finally {
             conn.disconnect();
         }
-        return result;
-    }
 
+    }
 
 }

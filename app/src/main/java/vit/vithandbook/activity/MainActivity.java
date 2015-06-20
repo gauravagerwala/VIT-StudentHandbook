@@ -127,6 +127,7 @@ public class MainActivity extends ActionBarActivity {
         Cursor cursor  = db.rawQuery("SELECT * FROM articles",null);
         if(cursor.getCount()>0)
             return ;
+        cursor.close();
         // to add data to database
     }
 
@@ -134,8 +135,10 @@ public class MainActivity extends ActionBarActivity {
     {
        AnimateMainHeader((ViewGroup) view, false);
        MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
-       selectedFragment = SubSectionFragment.newInstance("subcat");
-       getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out,R.transition.fade_in,R.transition.fade_out).hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
+        selectedFragment = SubSectionFragment.newInstance("subcat");
+       getFragmentManager().beginTransaction().
+               setCustomAnimations(R.transition.fade_in,R.transition.fade_out,R.transition.fade_in,R.transition.fade_out)
+               .hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
     }
     void AnimateMainHeader(ViewGroup view , boolean back )
     {

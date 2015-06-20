@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
@@ -42,7 +41,6 @@ public class XmlParseHandler
     public LinearLayout container;
     List<Pair<Integer,String >> images ;
     //ImageSaver saver ;
-
 
     public XmlParseHandler(Context context , LinearLayout container)
     {
@@ -167,6 +165,7 @@ public class XmlParseHandler
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setConnectTimeout(2000);
+            connection.setReadTimeout(5000);
             connection.connect();
              input = connection.getInputStream();
              myBitmap = BitmapFactory.decodeStream(input);
@@ -186,16 +185,11 @@ public class XmlParseHandler
                 input.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                return;
             }
         }
 
     }
 }
-
-
-
-
 
 // picasso target class
 class ImageSaver implements Target
