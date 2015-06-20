@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,6 @@ public class MainActivity extends ActionBarActivity {
     BackHandlerFragment selectedFragment ;
     LinearLayout mainNavigator,searchLayout,mainHeader;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
         setupDatabase();
         selectedFragment = new MainNavigator();
-        getFragmentManager().beginTransaction().add(R.id.mainNavigator,selectedFragment,"mainNavigator").commit();
+        getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
     }
 
     @Override
