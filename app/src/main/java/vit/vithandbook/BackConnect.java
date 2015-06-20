@@ -28,7 +28,7 @@ public class BackConnect {
         dateTime = sdfDate.format(now);
         return dateTime;
     }
-    public void sendIData() throws IOException {
+    public void getIData() throws IOException {
         String iData = null;
         HttpClient connect = new DefaultHttpClient();
         URL handbookBack = new URL("http://www.handbook-entry.herokuapp.com/api/updates");
@@ -38,23 +38,6 @@ public class BackConnect {
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(getDateTime());
             wr.flush();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            conn.disconnect();
-        }
-
-    }
-    public String getIData() throws IOException {
-        String result= null;
-        HttpClient connect = new DefaultHttpClient();
-        URL handbookBack = new URL("http://www.handbook-entry.herokuapp.com/api/updates");
-        HttpURLConnection conn = (HttpURLConnection)handbookBack.openConnection();
-        try
-        {   conn.setDoOutput(true);
             InputStream in = new BufferedInputStream(conn.getInputStream());
             in.read();
 
@@ -65,8 +48,7 @@ public class BackConnect {
         }finally {
             conn.disconnect();
         }
-        return result;
-    }
 
+    }
 
 }
