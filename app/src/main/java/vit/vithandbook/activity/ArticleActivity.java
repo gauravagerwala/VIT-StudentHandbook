@@ -1,6 +1,7 @@
 package vit.vithandbook.activity;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,7 +29,19 @@ public class ArticleActivity extends ActionBarActivity {
         mainArticleLAyout = (LinearLayout)findViewById(R.id.mainArticleLayout);
         parser = new XmlParseHandler(this,mainArticleLAyout);
         initalizeActionBar();
-        parser.parseXml(null);
+        new AsyncTask<Void,Void,Void>()
+        {
+            @Override
+            protected Void doInBackground(Void... params) {
+                parser.parseXml(null);
+                return null ;
+            }
+            @Override
+            protected void onPostExecute(Void res)
+            {
+
+            }
+        }.execute();
     }
 
     @Override
