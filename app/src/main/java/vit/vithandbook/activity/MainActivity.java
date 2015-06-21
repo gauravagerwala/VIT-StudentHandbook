@@ -17,6 +17,9 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.IOException;
+
+import vit.vithandbook.BackConnect;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.R;
@@ -29,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
     GridLayout mainNavGrid;
     BackHandlerFragment selectedFragment ;
     LinearLayout mainNavigator,searchLayout,mainHeader;
-
+    BackConnect back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,12 @@ public class MainActivity extends ActionBarActivity {
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
         setupDatabase();
+        try {
+            Toast.makeText(getApplicationContext() , back.getIData(),Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext() , "FAIL",Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
         if (savedInstanceState == null) {
             selectedFragment = new MainNavigator();
             getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
