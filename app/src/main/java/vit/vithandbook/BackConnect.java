@@ -37,7 +37,7 @@ public class BackConnect {
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
         Date now = new Date();
         dateTime = sdfDate.format(now);
-        return dateTime;
+        return dateTime.toString();
     }
     /*  HttpResponse respon = client.execute(fetch);
         int status = respon.getStatusLine().getStatusCode();
@@ -57,6 +57,7 @@ public class BackConnect {
         conn.connect();
         DataOutputStream dout;
         int status = conn.getResponseCode();
+        jsonReply = "YAY";
         try
         {
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
