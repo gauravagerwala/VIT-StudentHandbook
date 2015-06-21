@@ -8,21 +8,25 @@ import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
 
 import vit.vithandbook.R;
-
+import vit.vithandbook.activity.MainActivity;
 
 public class MainNavigator extends BackHandlerFragment {
 
     GridLayout grid ;
+    customScrollView scrollView;
 
     public MainNavigator()
     {
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_main_navigator, container, false);
         grid = (GridLayout)view.findViewById(R.id.mainNavGrid);
+        scrollView = (customScrollView)view.findViewById(R.id.mainScrollView);
+        scrollView.getActivity((MainActivity) getActivity());
         return view ;
     }
     @Override
@@ -37,7 +41,9 @@ public class MainNavigator extends BackHandlerFragment {
                 allignCards(width);
             }
         });
+
     }
+
     void allignCards(int width)
     {
         int cols = grid.getColumnCount();

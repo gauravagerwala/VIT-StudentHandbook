@@ -8,7 +8,7 @@ import android.widget.ScrollView;
 
 import vit.vithandbook.activity.MainActivity;
 
-//Custom view to implement suggestion bar hiding - kinda buggy <- Tanay
+//Custom view to implement suggestion bar hiding - kinda buggy
 public class customScrollView extends ScrollView {
 
     MainActivity activity;
