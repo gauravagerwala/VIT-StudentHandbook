@@ -45,7 +45,7 @@ public class ArticleListAdapter extends ArrayAdapter<String>
         else
             holder = (ViewHolder)view.getTag();
         Random r = new Random();
-        int nextindex = r.nextInt(3);
+        int nextindex = r.nextInt(7);
         holder.content.setText(objects.get(position));
         holder.color = colors[nextindex];
         ((GradientDrawable)holder.circle.getBackground()).setColor(holder.color);

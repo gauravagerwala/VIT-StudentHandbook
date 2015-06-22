@@ -1,5 +1,12 @@
 package vit.vithandbook;
 
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -23,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,75 +38,90 @@ import java.util.Date;
  * Created by Hemant on 20-06-2015.
  */
 public class BackConnect {
-    String dateTime;
-    HttpClient client;
-    public String getDateTime() {
-        dateTime = null;
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
-        Date now = new Date();
-        dateTime = sdfDate.format(now);
-        return dateTime.toString();
+    Context context;
+    String PREF_KEY = "handbook_prefs";
+
+    public BackConnect(Context context)
+    {
+        this.context=context;
     }
-    /*  HttpResponse respon = client.execute(fetch);
-        int status = respon.getStatusLine().getStatusCode();
-        if (status == 200) {
-            HttpEntity en = respon.getEntity();
-            String gotData = EntityUtils.toString(en);
-            article = new JSONArray(gotData);*/
-    public String getIData() throws IOException {
-        String jsonReply = null;
-        JSONArray article = null;
-        HttpClient connect = new DefaultHttpClient();
-        URL url = new URL("http://handbook-entry.herokuapp.com/api/updates");
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setDoOutput(true);
-        conn.setDoInput(true);
-        conn.setUseCaches(false);
-        conn.connect();
-        DataOutputStream dout;
-        int status = conn.getResponseCode();
-        jsonReply = "YAY";
-        try
-        {
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            dout = new DataOutputStream(conn.getOutputStream ());
-            dout.writeBytes(URLEncoder.encode(getDateTime(), "UTF-8"));
-            dout.flush();
-            dout.close();
-            switch (status) {
-                case 200:
-                case 201:
-                    InputStream response = conn.getInputStream();
-                    jsonReply = convertStreamToString(response);
-            }
+    public String getDateTime()
+    {
+        SharedPreferences prefs =  context.getSharedPreferences(PREF_KEY,context.MODE_PRIVATE);
+        String date = prefs.getString("last_sync",null);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        String dateTime = df.format(new Date());
+        prefs.edit().putString("last_sync",dateTime);
+        if(date!=null)
+            return date ;
+        else
+         return dateTime ;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            conn.disconnect();
-        }
-        return jsonReply;
     }
-    private static String convertStreamToString(InputStream is) {
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-
-        String line = null;
+    public void getUpdatedData()
+    {
+         String jsonReply = null;
         try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+            String dateTime = df.format(new Date());
+            String postData = "timestamp=" + dateTime;
+            URL url = new URL("http://handbook-entry.herokuapp.com/api/updates");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", "" + Integer.toString(postData.getBytes().length));
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+            wr.writeBytes(postData);
+            wr.flush();
+            wr.close();
+            final int resposnecode = conn.getResponseCode();
+            if(resposnecode!=200)
+            {
+                ((Activity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context,"Error fetching updates error code : " +  Integer.toString(resposnecode),Toast.LENGTH_LONG).show();
+                    }
+                });
+                return;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line ;
+            while((line = in.readLine())!=null)
+            {
+                jsonReply+=line;
             }
         }
-        return sb.toString();
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void parseJsonData(String jsonData) throws Exception
+    {
+        SQLiteDatabase db = context.openOrCreateDatabase("Handbook",context.MODE_PRIVATE,null);
+        db.beginTransaction();
+       JSONArray array = new JSONArray(jsonData);
+       for(int i = 0 ; i< array.length();i++)
+       {
+           JSONObject obj = array.getJSONObject(i);
+           ContentValues cv = getCV(obj);
+           db.insertOrThrow("articles",null,cv);
+       }
+        db.setTransactionSuccessful();
+        db.endTransaction();
     }
 
+    ContentValues getCV(JSONObject object) throws Exception
+    {
+        ContentValues values = new ContentValues();
+        values.put("main_category",object.getString("main_category"));
+        values.put("sub_category",object.getString("sub_category"));
+        values.put("topic",object.getString("topic"));
+        values.put("content",object.getString("content"));
+        values.put("tags",object.getString("tags"));
+        return values;
+    }
 }

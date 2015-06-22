@@ -4,11 +4,14 @@ import android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
 import java.util.ArrayList;
 import vit.vithandbook.adapter.CardListAdapter;
 import vit.vithandbook.R;
@@ -20,6 +23,7 @@ public class SubSectionFragment extends BackHandlerFragment {
     public  String mainCategory ;
     ArrayList<String> Subtopics ;
     CardListAdapter rvAdapter ;
+    ProgressBar load ;
     android.support.v7.widget.RecyclerView recyclerView;
 
     public static SubSectionFragment newInstance(String mainCategory)
@@ -37,21 +41,43 @@ public class SubSectionFragment extends BackHandlerFragment {
     public View onCreateView (LayoutInflater inflater , ViewGroup container , Bundle SavedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_sub_section,container,false);
-        Subtopics = new ArrayList<String>();
-        Subtopics.add("Hostel Fees");
-        Subtopics.add("Mess Refund and other stuff");
-        Subtopics.add("Hostel Fees");
-        Subtopics.add("Hostel Fees");
-        rvAdapter = new CardListAdapter(getActivity(),Subtopics);
-        rvAdapter.setOnItemClickListener(new onItemClickListener() {
-            @Override
-            public void onItemClick(String data) {
-                rvItemClick(data);
-            }
-        });
+        load = (ProgressBar)view.findViewById(R.id.ssprogressbar);
         recyclerView =(android.support.v7.widget.RecyclerView) view.findViewById(R.id.subSectionList);
-        recyclerView.setAdapter(rvAdapter);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        new AsyncTask<Void,Void,Void>()
+        {
+
+            @Override
+            protected void onPreExecute()
+            {
+                load.setVisibility(View.VISIBLE);
+            }
+            @Override
+            protected Void doInBackground(Void... params) {
+                fetchSubSectionData();
+                // sample data remove to test with actual data
+                Subtopics.add("Hostel Fees");
+                Subtopics.add("Mess Refund and other stuff");
+                Subtopics.add("9 pointer advantages");
+                Subtopics.add("Hostel Fees");
+                Subtopics.add("Hostel Fees");
+                Subtopics.add("Identity card");
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void res)
+            {
+              load.setVisibility(View.GONE);
+              rvAdapter = new CardListAdapter(getActivity(),Subtopics);
+                rvAdapter.setOnItemClickListener(new onItemClickListener() {
+                    @Override
+                    public void onItemClick(String data) {
+                        rvItemClick(data);
+                    }
+                });
+                recyclerView.setAdapter(rvAdapter);
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+            }
+        }.execute();
         return view ;
     }
     @Override
@@ -68,9 +94,9 @@ public class SubSectionFragment extends BackHandlerFragment {
        .hide(hideFragment).add(R.id.mainNavigator,articleFragment,"articleListFragment").addToBackStack(null).commit();
     }
 
-    public void fetchData()
+    public void fetchSubSectionData()
     {
-        SQLiteDatabase db = getActivity().openOrCreateDatabase("handbook", Context.MODE_PRIVATE,null);
+        SQLiteDatabase db = getActivity().openOrCreateDatabase("Handbook", Context.MODE_PRIVATE,null);
         Cursor cursor = db.rawQuery("SELECT `sub_category` from `articles` Where main_category = ?",new String[]{mainCategory});
         Subtopics = new ArrayList<String>();
         cursor.moveToFirst();

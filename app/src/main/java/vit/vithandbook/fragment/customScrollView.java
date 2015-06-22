@@ -26,7 +26,7 @@ public class customScrollView extends ScrollView {
         super(context, attrs, defStyleAttr);
     }
 
-    public void getActivity(MainActivity act){
+    public void setActivity(MainActivity act){
         activity = act;
     }
 

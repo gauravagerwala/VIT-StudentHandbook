@@ -1,4 +1,4 @@
-<vit.vithandbook.fragment.customScrollView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainScrollView"
     android:layout_height="fill_parent"
@@ -10,23 +10,22 @@
     android:layout_height="wrap_content"
     android:columnCount="2"
     android:layout_marginBottom="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginRight="5dp"
     android:animateLayoutChanges="true"
     android:orientation="horizontal">
     <!-- to be changed !-->
 
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
-
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:tag="academics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:onClick="navigate"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_gravity="top|left"
-        card_view:cardElevation="10dp">
+         >
         <LinearLayout
             android:layout_width="fill_parent"
             android:padding="10dp"
@@ -58,10 +57,10 @@
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_gravity="top|left"
-        card_view:cardElevation="10dp">
+         >
         <LinearLayout
             android:layout_width="fill_parent"
             android:padding="10dp"
@@ -91,10 +90,10 @@
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_gravity="top|left"
-        card_view:cardElevation="10dp">
+         >
         <LinearLayout
             android:layout_width="fill_parent"
             android:padding="10dp"
@@ -124,10 +123,10 @@
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_gravity="top|left"
-        card_view:cardElevation="10dp">
+         >
         <LinearLayout
             android:layout_width="fill_parent"
             android:padding="10dp"
@@ -144,6 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
+                android:singleLine="true"
                 android:textSize="15sp"
                 android:text="Student Organizations"
                 android:layout_gravity="left"/>
@@ -157,10 +157,10 @@
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_gravity="top|left"
-        card_view:cardElevation="10dp">
+         >
         <LinearLayout
             android:layout_width="fill_parent"
             android:padding="10dp"
@@ -190,10 +190,10 @@
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_gravity="top|left"
-        card_view:cardElevation="10dp">
+         >
         <LinearLayout
             android:layout_width="fill_parent"
             android:padding="10dp"
@@ -219,4 +219,4 @@
 
     <!-- till here !-->
 </GridLayout>
-</vit.vithandbook.fragment.customScrollView>
+</ScrollView>

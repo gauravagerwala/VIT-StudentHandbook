@@ -4,9 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,9 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import vit.vithandbook.BackConnect;
 import vit.vithandbook.fragment.BackHandlerFragment;
@@ -32,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
     GridLayout mainNavGrid;
     BackHandlerFragment selectedFragment ;
     LinearLayout mainNavigator,searchLayout,mainHeader;
+    public LinearLayout suggestionContainer ;
     BackConnect back;
 
     @Override
@@ -42,17 +50,23 @@ public class MainActivity extends ActionBarActivity {
         mainNavGrid = (GridLayout)findViewById(R.id.mainNavGrid);
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
-        setupDatabase();
-        try {
-            Toast.makeText(getApplicationContext() , back.getIData(),Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext() , "FAIL",Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
+        suggestionContainer = (LinearLayout)findViewById(R.id.llSuggestion);
+        setSuggestionColors();
         if (savedInstanceState == null) {
             selectedFragment = new MainNavigator();
             getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
         }
+        back=new BackConnect(this);
+        new AsyncTask<Void,Void,Void>()
+        {
+            @Override
+            protected Void doInBackground(Void... params)
+            {
+                setupDatabase();
+                back.getUpdatedData();
+                return  null ;
+            }
+        }.execute();
     }
 
     @Override
@@ -81,7 +95,6 @@ public class MainActivity extends ActionBarActivity {
                             mainNavigator.setVisibility(View.GONE);
                             searchLayout.setVisibility(View.VISIBLE);
                             searchMode =true ;
-                            Toast.makeText(getApplicationContext() , Integer.toString(mainNavigator.getHeight()),Toast.LENGTH_LONG).show();
                         }
                     });
         }
@@ -96,7 +109,6 @@ public class MainActivity extends ActionBarActivity {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
-                            Toast.makeText(getApplicationContext(), Integer.toString(mainNavigator.getHeight()), Toast.LENGTH_LONG).show();
                             searchLayout.setVisibility(View.GONE);
                             searchMode = false;
                         }
@@ -169,9 +181,23 @@ public class MainActivity extends ActionBarActivity {
         });
         animator.start();
     }
+
+    void setSuggestionColors()
+    {
+        Resources r = getResources();
+        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(0)).getBackground()).setColor(r.getColor(R.color.academics));
+        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(1)).getBackground()).setColor(r.getColor(R.color.college));
+        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(2)).getBackground()).setColor(r.getColor(R.color.hostel));
+        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(3)).getBackground()).setColor(r.getColor(R.color.stud));
+        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(4)).getBackground()).setColor(r.getColor(R.color.lifehack));
+        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(5)).getBackground()).setColor(r.getColor(R.color.around));
+
+    }
     public void suggestionClick(View view)
     {
-        // show apprpriate info based on the view's tag or id or whatever we decide :p
+        // show apprpriate info based on the view's tag or id or whatever we decide
+        String tag = (String)view.getTag();
+        Toast.makeText(this,tag+" suggestions",Toast.LENGTH_LONG).show();
     }
 
 }

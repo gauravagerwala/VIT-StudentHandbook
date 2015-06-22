@@ -18,6 +18,10 @@
         <item>#1abc9c</item>
         <item>#2ecc71</item>
         <item>#3498db</item>
+        <item>#9b59b6</item>
+        <item>#f39c12</item>
+        <item>#34495e</item>
+        <item>#c0392b</item>
     </array>
 
     <style name="suggestionFont" parent="Base.TextAppearance.AppCompat.Small">

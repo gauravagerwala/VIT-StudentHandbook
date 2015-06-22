@@ -59,7 +59,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     public void onBindViewHolder(CardViewHolder holder, int position)
     {
         Random r = new Random();
-        int nextindex = r.nextInt(3);
+        int nextindex = r.nextInt(7);
         holder.content.setText(objects.get(position));
         holder.circle.setBackgroundDrawable(new ColorDrawable(colors[nextindex]));
         holder.circle.setText(String.valueOf(objects.get(position).charAt(0)));

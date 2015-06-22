@@ -39,7 +39,8 @@
              android:layout_width="wrap_content" android:layout_height="fill_parent" android:scrollbars="none">
          <LinearLayout
              android:layout_width="wrap_content"
-             android:layout_height="wrap_content">
+             android:layout_height="wrap_content"
+             android:id="@+id/llSuggestion">
          <TextView
              android:layout_width="@dimen/suggestion_circle_size"
              android:layout_height="@dimen/suggestion_circle_size"
@@ -47,6 +48,7 @@
              style="@style/suggestionFont"
              android:text="Ac"
              android:background="@drawable/circle"
+             android:tag="academics"
              android:onClick="suggestionClick"
              />
 
@@ -57,6 +59,7 @@
              style="@style/suggestionFont"
              android:layout_marginLeft="@dimen/suggestion_bar_margin"
              android:text="Co" android:background="@drawable/circle"
+             android:tag="college"
              android:onClick="suggestionClick"
              />
          <TextView
@@ -66,6 +69,7 @@
              style="@style/suggestionFont"
              android:layout_marginLeft="@dimen/suggestion_bar_margin" android:textColor="#FFF"
              android:text="Ho" android:background="@drawable/circle"
+             android:tag="hostel"
              android:onClick="suggestionClick" />
          <TextView
              android:layout_width="@dimen/suggestion_circle_size"
@@ -74,7 +78,26 @@
              style="@style/suggestionFont"
              android:layout_marginLeft="@dimen/suggestion_bar_margin"
              android:text="St" android:background="@drawable/circle"
+             android:tag="student organisations"
              android:onClick="suggestionClick"/>
+             <TextView
+                 android:layout_width="@dimen/suggestion_circle_size"
+                 android:layout_height="@dimen/suggestion_circle_size"
+                 android:gravity="center"
+                 style="@style/suggestionFont"
+                 android:layout_marginLeft="@dimen/suggestion_bar_margin"
+                 android:text="Lh" android:background="@drawable/circle"
+                 android:tag="life hacks"
+                 android:onClick="suggestionClick"/>
+             <TextView
+                 android:layout_width="@dimen/suggestion_circle_size"
+                 android:layout_height="@dimen/suggestion_circle_size"
+                 android:gravity="center"
+                 style="@style/suggestionFont"
+                 android:layout_marginLeft="@dimen/suggestion_bar_margin"
+                 android:text="Ar" android:background="@drawable/circle"
+                 android:tag="around vit"
+                 android:onClick="suggestionClick"/>
          </LinearLayout>
          </HorizontalScrollView>
      </LinearLayout>

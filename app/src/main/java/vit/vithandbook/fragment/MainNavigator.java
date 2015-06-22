@@ -25,8 +25,8 @@ public class MainNavigator extends BackHandlerFragment {
     {
         View view = inflater.inflate(R.layout.fragment_main_navigator, container, false);
         grid = (GridLayout)view.findViewById(R.id.mainNavGrid);
-        scrollView = (customScrollView)view.findViewById(R.id.mainScrollView);
-        scrollView.getActivity((MainActivity) getActivity());
+       // scrollView = (customScrollView)view.findViewById(R.id.mainScrollView);
+       // scrollView.setActivity((MainActivity) getActivity());
         return view ;
     }
     @Override
@@ -47,7 +47,7 @@ public class MainNavigator extends BackHandlerFragment {
     void allignCards(int width)
     {
         int cols = grid.getColumnCount();
-        int spacefactor = dptopx(10);
+        int spacefactor = dptopx(5);
         int idealW = (width/cols)-spacefactor;
         for(int i = 0 ; i < grid.getChildCount() ; i ++)
         {
