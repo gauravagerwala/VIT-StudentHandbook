@@ -62,8 +62,7 @@ public class BackConnect {
     {
          String jsonReply = null;
         try {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-            String dateTime = df.format(new Date());
+            String dateTime = getDateTime();
             String postData = "timestamp=" + dateTime;
             URL url = new URL("http://handbook-entry.herokuapp.com/api/updates");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -93,6 +92,7 @@ public class BackConnect {
             {
                 jsonReply+=line;
             }
+            parseJsonData(jsonReply);
         }
         catch (Exception e)
         {
