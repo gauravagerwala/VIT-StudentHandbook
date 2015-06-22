@@ -32,7 +32,6 @@
             android:orientation="vertical"
             android:background="@color/academics"
             android:layout_height="fill_parent">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -212,9 +211,9 @@
                 android:textColor="#FFF"
                 android:textSize="15sp"
                 android:text="Around VIT"
-                android:layout_gravity="left"/>
+                android:layout_gravity="left"
+                />
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 
     <!-- till here !-->

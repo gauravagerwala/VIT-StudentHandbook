@@ -10,12 +10,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
         mainNavGrid = (GridLayout)findViewById(R.id.mainNavGrid);
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
-        suggestionContainer = (LinearLayout)findViewById(R.id.llSuggestion);
+        suggestionContainer = (LinearLayout) findViewById(R.id.llSuggestion);
         setSuggestionColors();
         if (savedInstanceState == null) {
             selectedFragment = new MainNavigator();
@@ -164,22 +166,62 @@ public class MainActivity extends ActionBarActivity {
     void AnimateMainHeader(ViewGroup view , boolean back )
     {
         int startColor = ((ColorDrawable)mainHeader.getBackground()).getColor();
-        int endcolor ;
+        int startColorDark = getResources().getColor(R.color.mainHeaderDark);
+        if(Build.VERSION.SDK_INT >= 21)
+            startColorDark = getWindow().getStatusBarColor();
+        int endcolor;
+        int endColorDark;
         if(back)
         {
             endcolor = getResources().getColor(R.color.mainHeader);
+            endColorDark = getResources().getColor(R.color.mainHeaderDark);
         }
         else {
             endcolor = ((ColorDrawable) ((LinearLayout) view.getChildAt(0)).getBackground()).getColor();
+            switch (view.getTag().toString()){
+                case "academics" :
+                    endColorDark = getResources().getColor(R.color.academicsDark);
+                    break;
+                case "college" :
+                    endColorDark = getResources().getColor(R.color.collegeDark);
+                    break;
+                case "hostel" :
+                    endColorDark = getResources().getColor(R.color.hostelDark);
+                    break;
+                case "student_organisations" :
+                    endColorDark = getResources().getColor(R.color.studDark);
+                    break;
+                case "life_hacks" :
+                    endColorDark = getResources().getColor(R.color.lifehackDark);
+                    break;
+                case "around_vit" :
+                    endColorDark = getResources().getColor(R.color.aroundDark);
+                    break;
+                default:
+                    endColorDark = getResources().getColor(R.color.mainHeaderDark);
+            }
+
         }
         final ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(), startColor, endcolor);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                mainHeader.setBackgroundColor((int)animator.getAnimatedValue());
+                mainHeader.setBackgroundColor((int) animator.getAnimatedValue());
+
             }
         });
+        final ValueAnimator animator1 = ValueAnimator.ofObject(new ArgbEvaluator(), startColorDark, endColorDark);
+        animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                if(Build.VERSION.SDK_INT >=21)
+                    getWindow().setStatusBarColor((int) animator1.getAnimatedValue());
+
+            }
+        });
+        animator1.start();
         animator.start();
+
     }
 
     void setSuggestionColors()

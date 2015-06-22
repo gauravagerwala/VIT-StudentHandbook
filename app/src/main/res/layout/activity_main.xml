@@ -15,8 +15,14 @@
      android:background="#3498db">
      <EditText
          android:layout_width="fill_parent"
-         android:layout_height="wrap_content" android:hint="Search..." android:background="@drawable/searchrectangle"
-         android:elevation="5dp" android:textColor="#2c3e50" android:cursorVisible="false" android:onClick="searchClick"
+         android:id="@+id/search_box"
+         android:layout_height="wrap_content"
+         android:hint="Search..."
+         android:background="@drawable/searchrectangle"
+         android:elevation="5dp"
+         android:textColor="#2c3e50"
+         android:cursorVisible="false"
+         android:onClick="searchClick"
          android:textSize="20dp"/>
 
 
