@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import vit.vithandbook.adapter.CardListAdapter;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.onItemClickListener;
+import vit.vithandbook.helperClass.DataBaseHelper;
 
 
 public class SubSectionFragment extends BackHandlerFragment {
@@ -101,16 +102,27 @@ public class SubSectionFragment extends BackHandlerFragment {
 
     public void fetchSubSectionData()
     {
-        SQLiteDatabase db = getActivity().openOrCreateDatabase("Handbook", Context.MODE_PRIVATE,null);
-        Cursor cursor = db.rawQuery("SELECT `sub_category` from `articles` Where main_category = ?",new String[]{mainCategory});
-        Subtopics = new ArrayList<String>();
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast())
+        Cursor cursor = null;
+        SQLiteDatabase db = null ;
+        try
         {
-            Subtopics.add(cursor.getString(0));
+         db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH+DataBaseHelper.DB_NAME,null,SQLiteDatabase.OPEN_READWRITE);
+         cursor = db.rawQuery("SELECT `sub_category` from `articles` Where main_category = ?",new String[]{mainCategory});
+         Subtopics = new ArrayList<String>();
+         cursor.moveToFirst();
+         while(!cursor.isAfterLast())
+         {
+             Subtopics.add(cursor.getString(0));
+         }
         }
-        cursor.close();
-        db.close();
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            cursor.close();
+            db.close();
+        }
     }
 }
 

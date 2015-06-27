@@ -20,8 +20,8 @@ import java.io.OutputStream;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    private static String DB_PATH ;
-    private static String DB_NAME = "Handbook";
+    public static String DB_PATH ;
+    public static String DB_NAME = "Handbook";
     private SQLiteDatabase myDataBase;
     private final Context context;
 
@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, 1);
         this.context = context;
         DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
-        Log.d("path",DB_PATH);
+        Log.d("path",DB_PATH+DB_NAME);
     }
     public void createDataBase()
     {
@@ -86,7 +86,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     @Override

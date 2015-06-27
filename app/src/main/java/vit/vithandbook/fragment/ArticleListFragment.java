@@ -22,6 +22,7 @@ import vit.vithandbook.activity.ArticleActivity;
 import vit.vithandbook.adapter.ArticleListAdapter;
 import vit.vithandbook.adapter.CardListAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
+import vit.vithandbook.helperClass.DataBaseHelper;
 
 public class ArticleListFragment extends BackHandlerFragment {
 
@@ -97,16 +98,25 @@ public class ArticleListFragment extends BackHandlerFragment {
 
     void fetchArticleData()
     {
-        SQLiteDatabase db = getActivity().openOrCreateDatabase("Handbook", Context.MODE_PRIVATE,null);
-        Cursor cursor = db.rawQuery("SELECT `topic` from `articles` Where main_category = ?",new String[]{articleSubCategory});
-        topics = new ArrayList<String>();
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
-            topics.add(cursor.getString(0));
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH+DataBaseHelper.DB_NAME,null,SQLiteDatabase.OPEN_READWRITE);
+            cursor = db.rawQuery("SELECT `topic` from `articles` Where main_category = ?", new String[]{articleSubCategory});
+            topics = new ArrayList<String>();
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                topics.add(cursor.getString(0));
+            }
         }
-        cursor.close();
-        db.close();
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            cursor.close();
+            db.close();
+        }
     }
 }
 
