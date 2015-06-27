@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import vit.vithandbook.adapter.CardListAdapter;
@@ -51,6 +52,7 @@ public class SubSectionFragment extends BackHandlerFragment {
             protected void onPreExecute()
             {
                 load.setVisibility(View.VISIBLE);
+                Toast.makeText(getActivity(),mainCategory,Toast.LENGTH_LONG).show();
             }
             @Override
             protected Void doInBackground(Void... params) {
@@ -73,6 +75,7 @@ public class SubSectionFragment extends BackHandlerFragment {
                     @Override
                     public void onItemClick(String data) {
                         rvItemClick(data);
+
                     }
                 });
                 recyclerView.setAdapter(rvAdapter);

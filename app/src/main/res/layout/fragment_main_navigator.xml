@@ -18,7 +18,7 @@
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:tag="academics"
+        android:tag="Academics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -52,7 +52,7 @@
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:tag="college"
+        android:tag="College"
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:tag="hostel"
+        android:tag="Hostel"
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:tag="student_organisations"
+        android:tag="Student Organisations"
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:tag="life_hacks"
+        android:tag="Life Hacks"
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:tag="around_vit"
+        android:tag="Around Vit"
         android:onClick="navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

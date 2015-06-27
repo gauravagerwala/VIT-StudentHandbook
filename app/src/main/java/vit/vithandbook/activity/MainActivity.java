@@ -27,6 +27,7 @@ import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.R;
 import vit.vithandbook.fragment.SubSectionFragment;
+import vit.vithandbook.helperClass.DataBaseHelper;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -125,7 +126,8 @@ public class MainActivity extends ActionBarActivity {
 
     void setupDatabase()
     {
-        SQLiteDatabase db = openOrCreateDatabase("Handbook",MODE_PRIVATE,null);
+        
+       /* SQLiteDatabase db = openOrCreateDatabase("Handbook",MODE_PRIVATE,null);
         db.beginTransaction();
         db.execSQL("CREATE TABLE IF NOT EXISTS articles (" +
                 "main_category VARCHAR ," +
@@ -141,12 +143,14 @@ public class MainActivity extends ActionBarActivity {
                 "main_category varchar ) ;");
         db.execSQL("CREATE TABLE IF NOT EXISTS sub_subcategories (" +
                 "name varchar primary key ," +
-                "subcategory varchar ) ;");*/
+                "subcategory varchar ) ;");
         db.setTransactionSuccessful();
         db.endTransaction();
         Cursor cursor  = db.rawQuery("SELECT * FROM articles",null);
         cursor.close();
-        db.close();
+        db.close();*/
+        DataBaseHelper helper = new DataBaseHelper(this);
+        helper.createDataBase();
         // to add data to database
     }
 
@@ -154,7 +158,8 @@ public class MainActivity extends ActionBarActivity {
     {
        AnimateMainHeader((ViewGroup) view, false);
        MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
-        selectedFragment = SubSectionFragment.newInstance("subcat");
+        String category = (String)view.getTag();
+        selectedFragment = SubSectionFragment.newInstance(category);
        getFragmentManager().beginTransaction().
                setCustomAnimations(R.transition.fade_in,R.transition.fade_out,R.transition.fade_in,R.transition.fade_out)
                .hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
@@ -175,22 +180,22 @@ public class MainActivity extends ActionBarActivity {
         else {
             endcolor = ((ColorDrawable) ((LinearLayout) view.getChildAt(0)).getBackground()).getColor();
             switch (view.getTag().toString()){
-                case "academics" :
+                case "Academics" :
                     endColorDark = getResources().getColor(R.color.academicsDark);
                     break;
-                case "college" :
+                case "College" :
                     endColorDark = getResources().getColor(R.color.collegeDark);
                     break;
-                case "hostel" :
+                case "Hostel" :
                     endColorDark = getResources().getColor(R.color.hostelDark);
                     break;
-                case "student_organisations" :
+                case "Student Organisations" :
                     endColorDark = getResources().getColor(R.color.studDark);
                     break;
-                case "life_hacks" :
+                case "Life Hacks" :
                     endColorDark = getResources().getColor(R.color.lifehackDark);
                     break;
-                case "around_vit" :
+                case "Around Vit" :
                     endColorDark = getResources().getColor(R.color.aroundDark);
                     break;
                 default:
