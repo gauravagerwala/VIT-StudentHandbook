@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +76,8 @@ public class SubSectionFragment extends BackHandlerFragment {
                     }
                 });
                 recyclerView.setAdapter(rvAdapter);
-                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+               // recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
             }
         }.execute();
         return view ;

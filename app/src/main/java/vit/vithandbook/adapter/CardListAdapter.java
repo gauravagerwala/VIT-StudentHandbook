@@ -62,7 +62,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         int nextindex = r.nextInt(7);
         holder.content.setText(objects.get(position));
         holder.circle.setBackgroundDrawable(new ColorDrawable(colors[nextindex]));
-        holder.circle.setText(String.valueOf(objects.get(position).charAt(0)));
+        holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
     }
     @Override
     public int getItemCount()

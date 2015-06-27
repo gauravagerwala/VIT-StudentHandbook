@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -54,14 +55,14 @@ public class XmlParseHandler
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
             //sample xml data
-            xmlData = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>" +
+            xmlData = "<p>Lorem <font color = '#FF0000'>ipsum dolor</font> sit amet, consectetur adipiscing elit, sed do eiusmod tempor <b>incididunt</b> ut labore <i>et</i><br/><br/> dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>" +
                     "<img src = 'name.png'/><img src = 'name2.png'/>" +
                     "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " +
                     " labore et dolore magna aliqua. Ut enim</p><img src = 'name.png'/><p> ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  labore et dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>";
             XmlPullParser myparser = xmlFactoryObject.newPullParser();
             myparser.setInput(new StringReader(xmlData));
             int event = myparser.getEventType();
-            String text = null ;
+            StringBuilder text = new StringBuilder("");
             while (event != XmlPullParser.END_DOCUMENT) {
                 String name = myparser.getName();
                 switch (event) {
@@ -72,14 +73,36 @@ public class XmlParseHandler
                             images.add(new Pair<Integer, String>(position,imagename));
                             position++;
                         }
+                        else if(!"p".equals(name))
+                        {
+                            text.append("<"+name);
+                            if(myparser.getAttributeCount()==0)
+                            {
+                                text.append(">");
+                            }
+                            else
+                            {
+                                text.append(" ");
+                                for(int i = 0 ; i < myparser.getAttributeCount();i++)
+                                {
+                                    text.append(myparser.getAttributeName(i)+"='"+myparser.getAttributeValue(i)+"' ");
+                                }
+                                text.append(">");
+                            }
+                        }
                         break;
                     case XmlPullParser.TEXT:
-                        text = myparser.getText();
+                        text.append(myparser.getText());
                         break;
                     case XmlPullParser.END_TAG:
                         if ("p".equals(name)) {
-                            AddTextView(text);
+                            AddTextView(text.toString());
+                            text.setLength(0);
                             position++;
+                        }
+                        else if(!"p".equals(name))
+                        {
+                            text.append("</"+name+">");
                         }
                         break;
                 }
@@ -102,7 +125,7 @@ public class XmlParseHandler
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         view.setTextSize(20);
-        view.setText(content);
+        view.setText(Html.fromHtml(content));
         ((Activity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {

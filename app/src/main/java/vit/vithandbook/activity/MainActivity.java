@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
     BackConnect back;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
@@ -47,15 +47,18 @@ public class MainActivity extends ActionBarActivity {
         searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
         suggestionContainer = (LinearLayout) findViewById(R.id.llSuggestion);
-        setSuggestionColors();
-        if (savedInstanceState == null) {
-            selectedFragment = new MainNavigator();
-            getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
-        }
         back=new BackConnect(this);
         new AsyncTask<Void,Void,Void>()
         {
             @Override
+            protected void onPreExecute() {
+                setSuggestionColors();
+                if (savedInstanceState == null) {
+                    selectedFragment = new MainNavigator();
+                    getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
+                }
+            }
+                @Override
             protected Void doInBackground(Void... params)
             {
                 setupDatabase();
@@ -142,9 +145,8 @@ public class MainActivity extends ActionBarActivity {
         db.setTransactionSuccessful();
         db.endTransaction();
         Cursor cursor  = db.rawQuery("SELECT * FROM articles",null);
-        if(cursor.getCount()>0)
-            return ;
         cursor.close();
+        db.close();
         // to add data to database
     }
 

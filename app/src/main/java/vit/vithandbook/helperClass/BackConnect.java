@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -89,7 +90,7 @@ public class BackConnect {
             {
                 jsonReply+=line;
             }
-            parseJsonData(jsonReply);
+            Log.d("json",jsonReply);
         }
         catch (Exception e)
         {
@@ -109,6 +110,7 @@ public class BackConnect {
        }
         db.setTransactionSuccessful();
         db.endTransaction();
+        db.close();
     }
 
     ContentValues getCV(JSONObject object) throws Exception

@@ -21,6 +21,8 @@
          android:background="@drawable/searchrectangle"
          android:elevation="5dp"
          android:textColor="#2c3e50"
+         android:maxLines="2"
+         android:minLines="1"
          android:cursorVisible="false"
          android:onClick="searchClick"
          android:textSize="20dp"/>

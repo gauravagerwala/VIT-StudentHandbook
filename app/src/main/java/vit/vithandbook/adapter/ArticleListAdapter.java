@@ -49,7 +49,7 @@ public class ArticleListAdapter extends ArrayAdapter<String>
         holder.content.setText(objects.get(position));
         holder.color = colors[nextindex];
         ((GradientDrawable)holder.circle.getBackground()).setColor(holder.color);
-        holder.circle.setText(String.valueOf(objects.get(position).charAt(0)));
+        holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
         return view ;
     }
 
