@@ -7,16 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import java.util.ArrayList;
-
 import vit.vithandbook.R;
 import vit.vithandbook.activity.ArticleActivity;
 import vit.vithandbook.adapter.ArticleListAdapter;
@@ -34,10 +31,10 @@ public class ArticleListFragment extends BackHandlerFragment {
     public ArticleListFragment() {
     }
 
-    public static ArticleListFragment newInstance(String mainCategory)
+    public static ArticleListFragment newInstance(String SubCategory)
     {
         ArticleListFragment frag = new ArticleListFragment();
-        frag.articleSubCategory = mainCategory ;
+        frag.articleSubCategory = SubCategory ;
         return frag ;
     }
 
@@ -59,10 +56,6 @@ public class ArticleListFragment extends BackHandlerFragment {
             protected Void doInBackground(Void... params) {
                 fetchArticleData();
                 // sample data remove to test with actual data
-                topics.add("hostel office");
-                topics.add("Laundry and Other facilities");
-                topics.add("Leaves");
-                topics.add("Outings");
                 return null;
             }
             @Override
@@ -102,11 +95,12 @@ public class ArticleListFragment extends BackHandlerFragment {
         Cursor cursor = null;
         try {
             db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH+DataBaseHelper.DB_NAME,null,SQLiteDatabase.OPEN_READWRITE);
-            cursor = db.rawQuery("SELECT `topic` from `articles` Where main_category = ?", new String[]{articleSubCategory});
+            cursor = db.rawQuery("SELECT distinct `topic` from `articles` Where sub_category = ?", new String[]{articleSubCategory});
             topics = new ArrayList<String>();
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 topics.add(cursor.getString(0));
+                cursor.moveToNext();
             }
         }
         catch (Exception e)

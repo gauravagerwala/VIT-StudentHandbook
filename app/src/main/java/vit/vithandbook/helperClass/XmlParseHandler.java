@@ -55,10 +55,10 @@ public class XmlParseHandler
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
             //sample xml data
-            xmlData = "<p>Lorem <font color = '#FF0000'>ipsum dolor</font> sit amet, consectetur adipiscing elit, sed do eiusmod tempor <b>incididunt</b> ut labore <i>et</i><br/><br/> dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>" +
-                    "<img src = 'name.png'/><img src = 'name2.png'/>" +
-                    "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " +
-                    " labore et dolore magna aliqua. Ut enim</p><img src = 'name.png'/><p> ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  labore et dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>";
+           // xmlData = "<p>Lorem <font color = '#FF0000'>ipsum dolor</font> sit amet, consectetur adipiscing elit, sed do eiusmod tempor <b>incididunt</b> ut labore <i>et</i><br/><br/> dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>" +
+           //         "<img src = 'name.png'/><img src = 'name2.png'/>" +
+           //         "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " +
+          //          " labore et dolore magna aliqua. Ut enim</p><img src = 'name.png'/><p> ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  labore et dolore magna aliqua. Ut enim ad minim veniam, quis  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim </p>";
             XmlPullParser myparser = xmlFactoryObject.newPullParser();
             myparser.setInput(new StringReader(xmlData));
             int event = myparser.getEventType();
@@ -162,13 +162,6 @@ public class XmlParseHandler
         {
             LoadImageFromNet(filename,false,view);
         }
-        ((Activity)context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(context,"adding image",Toast.LENGTH_LONG).show();
-            }
-        });
-
         ((Activity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {

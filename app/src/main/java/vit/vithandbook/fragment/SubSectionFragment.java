@@ -53,18 +53,11 @@ public class SubSectionFragment extends BackHandlerFragment {
             protected void onPreExecute()
             {
                 load.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(),mainCategory,Toast.LENGTH_LONG).show();
             }
             @Override
             protected Void doInBackground(Void... params) {
                 fetchSubSectionData();
                 // sample data remove to test with actual data
-                Subtopics.add("Hostel Fees");
-                Subtopics.add("Mess Refund and other stuff");
-                Subtopics.add("9 pointer advantages");
-                Subtopics.add("Hostel Fees");
-                Subtopics.add("Hostel Fees");
-                Subtopics.add("Identity card");
                 return null;
             }
             @Override
@@ -107,12 +100,13 @@ public class SubSectionFragment extends BackHandlerFragment {
         try
         {
          db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH+DataBaseHelper.DB_NAME,null,SQLiteDatabase.OPEN_READWRITE);
-         cursor = db.rawQuery("SELECT `sub_category` from `articles` Where main_category = ?",new String[]{mainCategory});
+         cursor = db.rawQuery("SELECT distinct `sub_category` from `articles` Where main_category = ?",new String[]{mainCategory});
          Subtopics = new ArrayList<String>();
          cursor.moveToFirst();
          while(!cursor.isAfterLast())
          {
              Subtopics.add(cursor.getString(0));
+             cursor.moveToNext();
          }
         }
         catch (Exception e)
