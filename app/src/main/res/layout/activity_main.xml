@@ -1,131 +1,157 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
     android:background="#ffffff"
-     tools:context=".MainActivity"
+    tools:context=".MainActivity"
     style="@style/AppTheme">
- <LinearLayout
-     android:layout_width="fill_parent"
-     android:layout_marginTop="0dp"
-     android:layout_height="wrap_content" android:padding="20dp" android:orientation="vertical"
-     android:id="@+id/mainHeader"
-     android:elevation="10dp"
-     android:background="#3498db">
-     <EditText
-         android:layout_width="fill_parent"
-         android:id="@+id/search_box"
-         android:layout_height="wrap_content"
-         android:hint="Search..."
-         android:background="@drawable/searchrectangle"
-         android:elevation="5dp"
-         android:textColor="#2c3e50"
-         android:maxLines="2"
-         android:minLines="1"
-         android:cursorVisible="false"
-         android:onClick="searchClick"
-         android:textSize="20dp"/>
 
-
-     <LinearLayout
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:orientation="vertical"
-         android:layout_marginTop="20dp"
-         android:id="@+id/suggestionContainer"
-         >
-         <TextView
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:layout_marginBottom="15dp"
-             android:text="Suggestions"
-             android:elevation="5dp"
-             android:textSize="20dp" android:textColor="#FFF"
-             />
-         <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="wrap_content" android:layout_height="fill_parent" android:scrollbars="none">
-         <LinearLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/llSuggestion">
-         <TextView
-             android:layout_width="@dimen/suggestion_circle_size"
-             android:layout_height="@dimen/suggestion_circle_size"
-             android:gravity="center"
-             style="@style/suggestionFont"
-             android:text="Ac"
-             android:background="@drawable/circle"
-             android:tag="academics"
-             android:onClick="suggestionClick"
-             />
-
-         <TextView
-             android:layout_width="@dimen/suggestion_circle_size"
-             android:layout_height="@dimen/suggestion_circle_size"
-             android:gravity="center"
-             style="@style/suggestionFont"
-             android:layout_marginLeft="@dimen/suggestion_bar_margin"
-             android:text="Co" android:background="@drawable/circle"
-             android:tag="college"
-             android:onClick="suggestionClick"
-             />
-         <TextView
-             android:layout_width="@dimen/suggestion_circle_size"
-             android:layout_height="@dimen/suggestion_circle_size"
-             android:gravity="center"
-             style="@style/suggestionFont"
-             android:layout_marginLeft="@dimen/suggestion_bar_margin" android:textColor="#FFF"
-             android:text="Ho" android:background="@drawable/circle"
-             android:tag="hostel"
-             android:onClick="suggestionClick" />
-         <TextView
-             android:layout_width="@dimen/suggestion_circle_size"
-             android:layout_height="@dimen/suggestion_circle_size"
-             android:gravity="center"
-             style="@style/suggestionFont"
-             android:layout_marginLeft="@dimen/suggestion_bar_margin"
-             android:text="St" android:background="@drawable/circle"
-             android:tag="student organisations"
-             android:onClick="suggestionClick"/>
-             <TextView
-                 android:layout_width="@dimen/suggestion_circle_size"
-                 android:layout_height="@dimen/suggestion_circle_size"
-                 android:gravity="center"
-                 style="@style/suggestionFont"
-                 android:layout_marginLeft="@dimen/suggestion_bar_margin"
-                 android:text="Lh" android:background="@drawable/circle"
-                 android:tag="life hacks"
-                 android:onClick="suggestionClick"/>
-             <TextView
-                 android:layout_width="@dimen/suggestion_circle_size"
-                 android:layout_height="@dimen/suggestion_circle_size"
-                 android:gravity="center"
-                 style="@style/suggestionFont"
-                 android:layout_marginLeft="@dimen/suggestion_bar_margin"
-                 android:text="Ar" android:background="@drawable/circle"
-                 android:tag="around vit"
-                 android:onClick="suggestionClick"/>
-         </LinearLayout>
-         </HorizontalScrollView>
-     </LinearLayout>
-
- </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
+        android:layout_marginTop="0dp"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_height="fill_parent" android:id="@+id/mainNavigator" android:background="#ffffff">
+        android:id="@+id/mainHeader"
+        android:elevation="10dp"
+        android:background="#3498db">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:id="@+id/search_box"
+            android:layout_height="wrap_content"
+            android:hint="Search..."
+            android:background="@drawable/searchrectangle"
+            android:elevation="5dp"
+            android:textColor="#2c3e50"
+            android:maxLines="2"
+            android:minLines="1"
+            android:cursorVisible="false"
+            android:onClick="searchClick"
+            android:textSize="20dp" />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:id="@+id/suggestionContainer">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="Suggestions"
+                android:elevation="5dp"
+                android:textSize="20dp"
+                android:textColor="#FFF" />
+
+            <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/llSuggestion">
+
+                    <TextView
+                        android:layout_width="@dimen/suggestion_circle_size"
+                        android:layout_height="@dimen/suggestion_circle_size"
+                        android:gravity="center"
+                        style="@style/suggestionFont"
+                        android:text="Ac"
+                        android:background="@drawable/circle"
+                        android:tag="academics"
+                        android:onClick="suggestionClick" />
+
+                    <TextView
+                        android:layout_width="@dimen/suggestion_circle_size"
+                        android:layout_height="@dimen/suggestion_circle_size"
+                        android:gravity="center"
+                        style="@style/suggestionFont"
+                        android:layout_marginLeft="@dimen/suggestion_bar_margin"
+                        android:text="Co"
+                        android:background="@drawable/circle"
+                        android:tag="college"
+                        android:onClick="suggestionClick" />
+
+                    <TextView
+                        android:layout_width="@dimen/suggestion_circle_size"
+                        android:layout_height="@dimen/suggestion_circle_size"
+                        android:gravity="center"
+                        style="@style/suggestionFont"
+                        android:layout_marginLeft="@dimen/suggestion_bar_margin"
+                        android:textColor="#FFF"
+                        android:text="Ho"
+                        android:background="@drawable/circle"
+                        android:tag="hostel"
+                        android:onClick="suggestionClick" />
+
+                    <TextView
+                        android:layout_width="@dimen/suggestion_circle_size"
+                        android:layout_height="@dimen/suggestion_circle_size"
+                        android:gravity="center"
+                        style="@style/suggestionFont"
+                        android:layout_marginLeft="@dimen/suggestion_bar_margin"
+                        android:text="St"
+                        android:background="@drawable/circle"
+                        android:tag="student organisations"
+                        android:onClick="suggestionClick" />
+
+                    <TextView
+                        android:layout_width="@dimen/suggestion_circle_size"
+                        android:layout_height="@dimen/suggestion_circle_size"
+                        android:gravity="center"
+                        style="@style/suggestionFont"
+                        android:layout_marginLeft="@dimen/suggestion_bar_margin"
+                        android:text="Lh"
+                        android:background="@drawable/circle"
+                        android:tag="life hacks"
+                        android:onClick="suggestionClick" />
+
+                    <TextView
+                        android:layout_width="@dimen/suggestion_circle_size"
+                        android:layout_height="@dimen/suggestion_circle_size"
+                        android:gravity="center"
+                        style="@style/suggestionFont"
+                        android:layout_marginLeft="@dimen/suggestion_bar_margin"
+                        android:text="Ar"
+                        android:background="@drawable/circle"
+                        android:tag="around vit"
+                        android:onClick="suggestionClick" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:id="@+id/searchLayout" android:background="#ffffff" android:visibility="gone">
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_height="fill_parent"
+        android:id="@+id/mainNavigator"
+        android:background="#ffffff">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/searchLayout"
+        android:background="#ffffff"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:text="Search Layout, search cards appear here"
-            android:textSize="30dp"/>
+            android:layout_height="wrap_content"
+            android:text="Search Layout, search cards appear here"
+            android:textSize="30dp" />
     </LinearLayout>
 
 </LinearLayout>

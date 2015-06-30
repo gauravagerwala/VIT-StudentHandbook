@@ -20,51 +20,45 @@ import java.io.OutputStream;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    public static String DB_PATH ;
+    public static String DB_PATH;
     public static String DB_NAME = "Handbook";
     private SQLiteDatabase myDataBase;
     private final Context context;
 
-    public DataBaseHelper(Context context)
-    {
+    public DataBaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.context = context;
-        DB_PATH = "/data/data/"+context.getPackageName()+"/databases/";
-        Log.d("path",DB_PATH+DB_NAME);
+        DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+        Log.d("path", DB_PATH + DB_NAME);
     }
-    public void createDataBase()
-    {
+
+    public void createDataBase() {
         boolean dbExist = checkDataBase();
-        if(dbExist)
-        {
-            Log.d("exists","true");
-        }
-        else{
+        if (dbExist) {
+            Log.d("exists", "true");
+        } else {
             this.getReadableDatabase();
-            try
-            {
-               copyDataBase();
-            }
-            catch (Exception e)
-            {
-             e.printStackTrace();
+            try {
+                copyDataBase();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
-    private boolean checkDataBase()
-    {
-       boolean checkdb =false ;
-        try{
-            String myPath = context.getFilesDir().getAbsolutePath().replace("files", "databases")+File.separator + DB_NAME;
+
+    private boolean checkDataBase() {
+        boolean checkdb = false;
+        try {
+            String myPath = context.getFilesDir().getAbsolutePath().replace("files", "databases") + File.separator + DB_NAME;
             File dbfile = new File(myPath);
             checkdb = dbfile.exists();
-        }
-        catch(SQLiteException e){
+        } catch (SQLiteException e) {
             e.printStackTrace();
         }
         return checkdb;
     }
-    private void copyDataBase() throws IOException{
+
+    private void copyDataBase() throws IOException {
         //Open your local db as the input stream
         InputStream myInput = context.getAssets().open("articlesSQL");
         // Path to the just created empty db
@@ -74,15 +68,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
         int length;
-        while ((length = myInput.read(buffer))>0){
+        while ((length = myInput.read(buffer)) > 0) {
             myOutput.write(buffer, 0, length);
         }
         //Close the streams
         myOutput.flush();
         myOutput.close();
         myInput.close();
-        Log.d("dbcopied","copied");
+        Log.d("dbcopied", "copied");
     }
+
     public void openDataBase() throws SQLException {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
@@ -91,10 +86,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public synchronized void close() {
-        if(myDataBase != null)
+        if (myDataBase != null)
             myDataBase.close();
         super.close();
-   }
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 

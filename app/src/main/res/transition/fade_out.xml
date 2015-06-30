@@ -4,6 +4,6 @@
         android:propertyName="alpha"
         android:valueType="floatType"
         android:valueTo="0.0"
-        android:valueFrom = "1.0"
-        android:duration="300"/>
+        android:valueFrom="1.0"
+        android:duration="300" />
 </set>

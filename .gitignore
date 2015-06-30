@@ -38,3 +38,6 @@ proguard/
 .idea/modules.xml
 app/app.iml
 
+.idea/gradle.xml
+.idea/compiler.xml
+.idea/gradle.xml

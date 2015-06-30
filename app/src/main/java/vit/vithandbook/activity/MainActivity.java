@@ -5,14 +5,12 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,21 +20,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import vit.vithandbook.helperClass.BackConnect;
+import vit.vithandbook.R;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
-import vit.vithandbook.R;
 import vit.vithandbook.fragment.SubSectionFragment;
+import vit.vithandbook.helperClass.BackConnect;
 import vit.vithandbook.helperClass.DataBaseHelper;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    boolean searchMode = false ;
+    boolean searchMode = false;
     GridLayout mainNavGrid;
-    BackHandlerFragment selectedFragment ;
-    LinearLayout mainNavigator,searchLayout,mainHeader;
-    public LinearLayout suggestionContainer ;
+    BackHandlerFragment selectedFragment;
+    LinearLayout mainNavigator, searchLayout, mainHeader;
+    public LinearLayout suggestionContainer;
     BackConnect back;
 
     @Override
@@ -44,13 +42,12 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
-        mainNavGrid = (GridLayout)findViewById(R.id.mainNavGrid);
-        searchLayout = (LinearLayout)findViewById(R.id.searchLayout);
-        mainHeader = (LinearLayout)findViewById(R.id.mainHeader);
+        mainNavGrid = (GridLayout) findViewById(R.id.mainNavGrid);
+        searchLayout = (LinearLayout) findViewById(R.id.searchLayout);
+        mainHeader = (LinearLayout) findViewById(R.id.mainHeader);
         suggestionContainer = (LinearLayout) findViewById(R.id.llSuggestion);
-        back=new BackConnect(this);
-        new AsyncTask<Void,Void,Void>()
-        {
+        back = new BackConnect(this);
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 setSuggestionColors();
@@ -59,12 +56,12 @@ public class MainActivity extends ActionBarActivity {
                     getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
                 }
             }
-                @Override
-            protected Void doInBackground(Void... params)
-            {
+
+            @Override
+            protected Void doInBackground(Void... params) {
                 setupDatabase();
                 back.getUpdatedData();
-                return  null ;
+                return null;
             }
         }.execute();
     }
@@ -86,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void searchClick(View view) {
-        if(!searchMode) {
+        if (!searchMode) {
             mainNavigator.animate().translationY(-mainNavigator.getHeight())
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
@@ -94,15 +91,15 @@ public class MainActivity extends ActionBarActivity {
                             super.onAnimationEnd(animation);
                             mainNavigator.setVisibility(View.GONE);
                             searchLayout.setVisibility(View.VISIBLE);
-                            searchMode =true ;
+                            searchMode = true;
                         }
                     });
         }
     }
+
     @Override
     public void onBackPressed() {
-        if(searchMode)
-        {
+        if (searchMode) {
             mainNavigator.setVisibility(View.VISIBLE);
             mainNavigator.animate().translationY(0)
                     .setListener(new AnimatorListenerAdapter() {
@@ -113,19 +110,17 @@ public class MainActivity extends ActionBarActivity {
                             searchMode = false;
                         }
                     });
-        }
-        else if(getFragmentManager().getBackStackEntryCount()==0)
+        } else if (getFragmentManager().getBackStackEntryCount() == 0)
             super.onBackPressed();
-        else if(selectedFragment!=null &&  !selectedFragment.onBackPressed())
-        {
+        else if (selectedFragment != null && !selectedFragment.onBackPressed()) {
             getFragmentManager().popBackStack();
-            if(getFragmentManager().getBackStackEntryCount()==1)
-            { AnimateMainHeader(null,true);}
+            if (getFragmentManager().getBackStackEntryCount() == 1) {
+                AnimateMainHeader(null, true);
+            }
         }
     }
 
-    void setupDatabase()
-    {
+    void setupDatabase() {
         
        /* SQLiteDatabase db = openOrCreateDatabase("Handbook",MODE_PRIVATE,null);
         db.beginTransaction();
@@ -154,48 +149,45 @@ public class MainActivity extends ActionBarActivity {
         // to add data to database
     }
 
-    public void navigate(View view)
-    {
-       AnimateMainHeader((ViewGroup) view, false);
-       MainNavigator main = (MainNavigator)getFragmentManager().findFragmentByTag("mainNavigator");
-        String category = (String)view.getTag();
+    public void navigate(View view) {
+        AnimateMainHeader((ViewGroup) view, false);
+        MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
+        String category = (String) view.getTag();
         selectedFragment = SubSectionFragment.newInstance(category);
-       getFragmentManager().beginTransaction().
-               setCustomAnimations(R.transition.fade_in,R.transition.fade_out,R.transition.fade_in,R.transition.fade_out)
-               .hide(main).add(R.id.mainNavigator,selectedFragment,"subSectionFragment").addToBackStack(null).commit();
+        getFragmentManager().beginTransaction().
+                setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                .hide(main).add(R.id.mainNavigator, selectedFragment, "subSectionFragment").addToBackStack(null).commit();
     }
-    void AnimateMainHeader(ViewGroup view , boolean back )
-    {
-        int startColor = ((ColorDrawable)mainHeader.getBackground()).getColor();
+
+    void AnimateMainHeader(ViewGroup view, boolean back) {
+        int startColor = ((ColorDrawable) mainHeader.getBackground()).getColor();
         int startColorDark = getResources().getColor(R.color.mainHeaderDark);
-        if(Build.VERSION.SDK_INT >= 21)
+        if (Build.VERSION.SDK_INT >= 21)
             startColorDark = getWindow().getStatusBarColor();
         int endcolor;
         int endColorDark;
-        if(back)
-        {
+        if (back) {
             endcolor = getResources().getColor(R.color.mainHeader);
             endColorDark = getResources().getColor(R.color.mainHeaderDark);
-        }
-        else {
+        } else {
             endcolor = ((ColorDrawable) ((LinearLayout) view.getChildAt(0)).getBackground()).getColor();
-            switch (view.getTag().toString()){
-                case "Academics" :
+            switch (view.getTag().toString()) {
+                case "Academics":
                     endColorDark = getResources().getColor(R.color.academicsDark);
                     break;
-                case "College" :
+                case "College":
                     endColorDark = getResources().getColor(R.color.collegeDark);
                     break;
-                case "Hostel" :
+                case "Hostel":
                     endColorDark = getResources().getColor(R.color.hostelDark);
                     break;
-                case "Student Organisations" :
+                case "Student Organisations":
                     endColorDark = getResources().getColor(R.color.studDark);
                     break;
-                case "Life Hacks" :
+                case "Life Hacks":
                     endColorDark = getResources().getColor(R.color.lifehackDark);
                     break;
-                case "Around Vit" :
+                case "Around Vit":
                     endColorDark = getResources().getColor(R.color.aroundDark);
                     break;
                 default:
@@ -215,7 +207,7 @@ public class MainActivity extends ActionBarActivity {
         animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                if(Build.VERSION.SDK_INT >=21)
+                if (Build.VERSION.SDK_INT >= 21)
                     getWindow().setStatusBarColor((int) animator1.getAnimatedValue());
 
             }
@@ -225,22 +217,22 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    void setSuggestionColors()
-    {
+    void setSuggestionColors() {
         Resources r = getResources();
-        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(0)).getBackground()).setColor(r.getColor(R.color.academics));
-        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(1)).getBackground()).setColor(r.getColor(R.color.college));
-        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(2)).getBackground()).setColor(r.getColor(R.color.hostel));
-        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(3)).getBackground()).setColor(r.getColor(R.color.stud));
-        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(4)).getBackground()).setColor(r.getColor(R.color.lifehack));
-        ((GradientDrawable)((TextView)suggestionContainer.getChildAt(5)).getBackground()).setColor(r.getColor(R.color.around));
+        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(0)).getBackground()).setColor(r.getColor(R.color.academics));
+        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(1)).getBackground()).setColor(r.getColor(R.color.college));
+        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(2)).getBackground()).setColor(r.getColor(R.color.hostel));
+        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(3)).getBackground()).setColor(r.getColor(R.color.stud));
+        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(4)).getBackground()).setColor(r.getColor(R.color.lifehack));
+        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(5)).getBackground()).setColor(r.getColor(R.color.around));
 
     }
-    public void suggestionClick(View view)
-    {
+
+    public void suggestionClick(View view) {
         // show apprpriate info based on the view's tag or id or whatever we decide
-        String tag = (String)view.getTag();
-        Toast.makeText(this,tag+" suggestions",Toast.LENGTH_LONG).show();
+        String tag = (String) view.getTag();
+        String capTag = tag.substring(0,1).toUpperCase() + tag.substring(1);
+        Toast.makeText(this, capTag + " Suggestions", Toast.LENGTH_LONG).show();
     }
 
 }
