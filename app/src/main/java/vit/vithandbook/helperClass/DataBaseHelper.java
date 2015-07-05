@@ -5,6 +5,7 @@ package vit.vithandbook.helperClass;
  */
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -40,6 +41,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             this.getReadableDatabase();
             try {
                 copyDataBase();
+                createSearchTable();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -101,8 +103,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    // Add your public helper methods to access and get content from the database.
-    // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
-    // to you to create adapters for your views.
+    void createSearchTable() {
+
+        Cursor cursor = null;
+        try {
+            myDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            myDataBase.execSQL("create virtual table search using fts3 (" +
+                    "`_id` integer ," +
+                    "`type` integer ," +
+                    "`content` text ); ");
+            cursor = myDataBase.rawQuery("select _id , main_category,sub_category,tags from articles", null);
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                String content = ";" + cursor.getString(1) + ";" + cursor.getString(2) + ";" + cursor.getString(3);
+                int _id = cursor.getInt(0);
+                myDataBase.execSQL("insert into search(_id,type,content) values(?,?,?)", new Object[]{_id, 1, content});
+                cursor.moveToNext();
+            }
+            Log.d("dbsearch ","search on");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            cursor.close();
+            myDataBase.close();
+        }
+    }
 
 }

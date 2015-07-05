@@ -62,6 +62,11 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
     }
 
+    public void setData(ArrayList<String> data)
+    {
+        objects = data ;
+    }
+
     @Override
     public int getItemCount() {
         return objects.size();

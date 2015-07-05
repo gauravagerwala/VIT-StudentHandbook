@@ -4,26 +4,39 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import vit.vithandbook.R;
+import vit.vithandbook.adapter.CardListAdapter;
+import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.SubSectionFragment;
+import vit.vithandbook.helperClass.AutoCompleteWatcher;
 import vit.vithandbook.helperClass.BackConnect;
 import vit.vithandbook.helperClass.DataBaseHelper;
 
@@ -33,37 +46,67 @@ public class MainActivity extends ActionBarActivity {
     boolean searchMode = false;
     GridLayout mainNavGrid;
     BackHandlerFragment selectedFragment;
+    RecyclerView searchList;
+    CardListAdapter searchListAdapter;
     LinearLayout mainNavigator, searchLayout, mainHeader;
     public LinearLayout suggestionContainer;
+    EditText searchbox;
+    ProgressBar load,searchloadbar;
     BackConnect back;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
-        mainNavGrid = (GridLayout) findViewById(R.id.mainNavGrid);
-        searchLayout = (LinearLayout) findViewById(R.id.searchLayout);
-        mainHeader = (LinearLayout) findViewById(R.id.mainHeader);
-        suggestionContainer = (LinearLayout) findViewById(R.id.llSuggestion);
-        back = new BackConnect(this);
+        initialize();
+
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
+                mainHeader.setVisibility(View.GONE);
+            }
+
+            @Override
+            protected Void doInBackground(Void... params)
+            {
+                setupDatabase();
+                return  null ;
+            }
+
+            @Override
+            protected void onPostExecute(Void res) {
+                mainHeader.setVisibility(View.VISIBLE);
                 setSuggestionColors();
                 if (savedInstanceState == null) {
                     selectedFragment = new MainNavigator();
                     getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
                 }
             }
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                setupDatabase();
-                back.getUpdatedData();
-                return null;
-            }
         }.execute();
+
+    }
+
+    void initialize()
+    {
+        mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
+        mainNavGrid = (GridLayout) findViewById(R.id.mainNavGrid);
+        searchLayout = (LinearLayout) findViewById(R.id.searchLayout);
+        mainHeader = (LinearLayout) findViewById(R.id.mainHeader);
+        searchList = (RecyclerView)findViewById(R.id.rvSearch);
+        suggestionContainer = (LinearLayout) findViewById(R.id.llSuggestion);
+        searchloadbar = (ProgressBar)findViewById(R.id.searchprogressbar);
+        searchbox = (EditText)findViewById(R.id.search_box);
+        searchbox.addTextChangedListener(new AutoCompleteWatcher(this));
+        back = new BackConnect(this);
+        searchList.setLayoutManager(new GridLayoutManager(this,2));
+        searchListAdapter = new CardListAdapter(this,new ArrayList<String>());
+        searchListAdapter.setOnItemClickListener(new onItemClickListener() {
+            @Override
+            public void onItemClick(String data) {
+
+            }
+        });
+        searchList.setAdapter(searchListAdapter);
     }
 
     @Override
@@ -235,4 +278,64 @@ public class MainActivity extends ActionBarActivity {
         Toast.makeText(this, capTag + " Suggestions", Toast.LENGTH_LONG).show();
     }
 
+    public class searchTask extends AsyncTask<String,Void,ArrayList<String>>
+    {
+        Context activity ;
+        @Override
+        protected void onPreExecute()
+        {
+            searchloadbar.setVisibility(View.VISIBLE);
+        }
+
+        public searchTask(Context obj)
+        {
+         activity=obj;
+        }
+        @Override
+        protected ArrayList<String> doInBackground(String ... params)
+        {
+            ArrayList<String> topics = new ArrayList<>();
+            SQLiteDatabase db = null;
+            Cursor cursor =null;
+            try
+            {
+                Log.d("data", params[0]);
+                db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+                cursor = db.rawQuery("SELECT articles.topic FROM articles " +
+                        "INNER JOIN search" +
+                        " ON articles._id = search._id " +
+                        "WHERE search.content match '"+params[0]+"*'",null);
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast())
+                {
+                    topics.add(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                cursor.close();
+                db.close();
+            }
+            return topics;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> results)
+        {
+            searchloadbar.setVisibility(View.GONE);
+                searchListAdapter.setData(results);
+                searchListAdapter.notifyItemRangeChanged(0,searchListAdapter.getItemCount());
+        }
+        public void cancelAndClear()
+        {
+            cancel(true);
+            if(searchListAdapter!=null)
+            searchListAdapter.setData(new ArrayList<String>());
+        }
+    }
 }
