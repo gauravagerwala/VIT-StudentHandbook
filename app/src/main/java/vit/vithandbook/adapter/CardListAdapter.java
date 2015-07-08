@@ -55,11 +55,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-        Random r = new Random();
-        int nextindex = r.nextInt(7);
-        holder.content.setText(objects.get(position));
-        holder.circle.setBackgroundDrawable(new ColorDrawable(colors[nextindex]));
-        holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
+        if(position<getItemCount()) {
+            int index = Math.abs(objects.get(position).hashCode())%7;
+            holder.content.setText(objects.get(position));
+            holder.circle.setBackgroundDrawable(new ColorDrawable(colors[index]));
+            holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
+        }
     }
 
     public void setData(ArrayList<String> data)

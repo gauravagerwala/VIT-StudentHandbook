@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,6 +31,13 @@ public class ArticleListAdapter extends ArrayAdapter<String> {
         colors = activity.getResources().getIntArray(R.array.colors);
     }
 
+    public void setData(ArrayList<String> newdata)
+    {
+        clear();
+        addAll(newdata);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         ViewHolder holder;
@@ -42,10 +50,9 @@ public class ArticleListAdapter extends ArrayAdapter<String> {
             ;
         } else
             holder = (ViewHolder) view.getTag();
-        Random r = new Random();
-        int nextindex = r.nextInt(7);
+        int index = Math.abs(objects.get(position).hashCode())%7;
         holder.content.setText(objects.get(position));
-        holder.color = colors[nextindex];
+        holder.color = colors[index];
         ((GradientDrawable) holder.circle.getBackground()).setColor(holder.color);
         holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
         return view;

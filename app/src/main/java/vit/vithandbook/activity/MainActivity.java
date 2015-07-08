@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,45 +15,45 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-
 import vit.vithandbook.R;
+import vit.vithandbook.adapter.ArticleListAdapter;
 import vit.vithandbook.adapter.CardListAdapter;
-import vit.vithandbook.adapter.onItemClickListener;
+import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.SubSectionFragment;
 import vit.vithandbook.helperClass.AutoCompleteWatcher;
 import vit.vithandbook.helperClass.BackConnect;
 import vit.vithandbook.helperClass.DataBaseHelper;
+import vit.vithandbook.model.Article;
 
 
 public class MainActivity extends ActionBarActivity {
 
     boolean searchMode = false;
     GridLayout mainNavGrid;
-    BackHandlerFragment selectedFragment;
-    RecyclerView searchList;
-    CardListAdapter searchListAdapter;
+    public BackHandlerFragment selectedFragment;
+    ListView searchList;
+    SearchListAdapter ald ;
     LinearLayout mainNavigator, searchLayout, mainHeader;
     public LinearLayout suggestionContainer;
     EditText searchbox;
     ProgressBar load,searchloadbar;
     BackConnect back;
+    public int SuggestionHeight = -1;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -92,21 +93,29 @@ public class MainActivity extends ActionBarActivity {
         mainNavGrid = (GridLayout) findViewById(R.id.mainNavGrid);
         searchLayout = (LinearLayout) findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout) findViewById(R.id.mainHeader);
-        searchList = (RecyclerView)findViewById(R.id.rvSearch);
-        suggestionContainer = (LinearLayout) findViewById(R.id.llSuggestion);
+        searchList = (ListView)findViewById(R.id.rvSearch);
+        suggestionContainer = (LinearLayout) findViewById(R.id.suggestionContainer);
         searchloadbar = (ProgressBar)findViewById(R.id.searchprogressbar);
         searchbox = (EditText)findViewById(R.id.search_box);
         searchbox.addTextChangedListener(new AutoCompleteWatcher(this));
         back = new BackConnect(this);
-        searchList.setLayoutManager(new GridLayoutManager(this,2));
-        searchListAdapter = new CardListAdapter(this,new ArrayList<String>());
-        searchListAdapter.setOnItemClickListener(new onItemClickListener() {
+        ald = new SearchListAdapter(this,R.layout.search_card,new ArrayList<Article>());
+        searchList.setAdapter(ald);
+        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(String data) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                onSearchItemClick(adapterView,view,i,l);
             }
         });
-        searchList.setAdapter(searchListAdapter);
+    }
+
+    public void onSearchItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        Intent intent = new Intent(this, ArticleActivity.class);
+        int color = ((SearchListAdapter.SearchViewHolder) view.getTag()).color;
+        intent.putExtra("topic", ((Article)parent.getAdapter().getItem(position)).topic);
+        intent.putExtra("color", color);
+        startActivity(intent);
     }
 
     @Override
@@ -155,51 +164,40 @@ public class MainActivity extends ActionBarActivity {
                     });
         } else if (getFragmentManager().getBackStackEntryCount() == 0)
             super.onBackPressed();
-        else if (selectedFragment != null && !selectedFragment.onBackPressed()) {
+        else  {
+
             getFragmentManager().popBackStack();
-            if (getFragmentManager().getBackStackEntryCount() == 1) {
+
+            if (getFragmentManager().getBackStackEntryCount() == 1)
+            {
                 AnimateMainHeader(null, true);
             }
         }
     }
 
-    void setupDatabase() {
-        
-       /* SQLiteDatabase db = openOrCreateDatabase("Handbook",MODE_PRIVATE,null);
-        db.beginTransaction();
-        db.execSQL("CREATE TABLE IF NOT EXISTS articles (" +
-                "main_category VARCHAR ," +
-                "sub_category VARCHAR ," +
-                "topic VARCHAR ," +
-                "content VARCHAR ," +
-                "tags VARCHAR ) ;");
-        db.execSQL("CREATE TABLE IF NOT EXISTS images ( " +
-                "id VARCHAR primary key ," +
-                "tags varchar ) ;");
-      /*  db.execSQL("CREATE TABLE IF NOT EXISTS subcategories (" +
-                "name varchar primary key ," +
-                "main_category varchar ) ;");
-        db.execSQL("CREATE TABLE IF NOT EXISTS sub_subcategories (" +
-                "name varchar primary key ," +
-                "subcategory varchar ) ;");
-        db.setTransactionSuccessful();
-        db.endTransaction();
-        Cursor cursor  = db.rawQuery("SELECT * FROM articles",null);
-        cursor.close();
-        db.close();*/
+    void setupDatabase()
+    {
         DataBaseHelper helper = new DataBaseHelper(this);
         helper.createDataBase();
-        // to add data to database
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if(SuggestionHeight<0) {
+            SuggestionHeight = suggestionContainer.getHeight();
+            Log.d("height", Integer.toString(SuggestionHeight));
+        }
     }
 
     public void navigate(View view) {
         AnimateMainHeader((ViewGroup) view, false);
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
         String category = (String) view.getTag();
-        selectedFragment = SubSectionFragment.newInstance(category);
+        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
         getFragmentManager().beginTransaction().
                 setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(main).add(R.id.mainNavigator, selectedFragment, "subSectionFragment").addToBackStack(null).commit();
+                .hide(main).add(R.id.mainNavigator,fragment, "subSectionFragment").addToBackStack(null).commit();
     }
 
     void AnimateMainHeader(ViewGroup view, boolean back) {
@@ -262,12 +260,13 @@ public class MainActivity extends ActionBarActivity {
 
     void setSuggestionColors() {
         Resources r = getResources();
-        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(0)).getBackground()).setColor(r.getColor(R.color.academics));
-        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(1)).getBackground()).setColor(r.getColor(R.color.college));
-        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(2)).getBackground()).setColor(r.getColor(R.color.hostel));
-        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(3)).getBackground()).setColor(r.getColor(R.color.stud));
-        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(4)).getBackground()).setColor(r.getColor(R.color.lifehack));
-        ((GradientDrawable) ((TextView) suggestionContainer.getChildAt(5)).getBackground()).setColor(r.getColor(R.color.around));
+        LinearLayout suggestionContainerinner = (LinearLayout)suggestionContainer.findViewById(R.id.llSuggestion);
+        ((GradientDrawable) (suggestionContainerinner.getChildAt(0)).getBackground()).setColor(r.getColor(R.color.academics));
+        ((GradientDrawable) (suggestionContainerinner.getChildAt(1)).getBackground()).setColor(r.getColor(R.color.college));
+        ((GradientDrawable) (suggestionContainerinner.getChildAt(2)).getBackground()).setColor(r.getColor(R.color.hostel));
+        ((GradientDrawable) (suggestionContainerinner.getChildAt(3)).getBackground()).setColor(r.getColor(R.color.stud));
+        ((GradientDrawable) (suggestionContainerinner.getChildAt(4)).getBackground()).setColor(r.getColor(R.color.lifehack));
+        ((GradientDrawable) (suggestionContainerinner.getChildAt(5)).getBackground()).setColor(r.getColor(R.color.around));
 
     }
 
@@ -278,7 +277,7 @@ public class MainActivity extends ActionBarActivity {
         Toast.makeText(this, capTag + " Suggestions", Toast.LENGTH_LONG).show();
     }
 
-    public class searchTask extends AsyncTask<String,Void,ArrayList<String>>
+    public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
         Context activity ;
         @Override
@@ -292,23 +291,23 @@ public class MainActivity extends ActionBarActivity {
          activity=obj;
         }
         @Override
-        protected ArrayList<String> doInBackground(String ... params)
+        protected ArrayList<Article> doInBackground(String ... params)
         {
-            ArrayList<String> topics = new ArrayList<>();
+            ArrayList<Article> topics = new ArrayList<>();
             SQLiteDatabase db = null;
             Cursor cursor =null;
             try
             {
                 Log.d("data", params[0]);
                 db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-                cursor = db.rawQuery("SELECT articles.topic FROM articles " +
+                cursor = db.rawQuery("SELECT articles.main_category , articles.sub_category , articles.topic FROM articles " +
                         "INNER JOIN search" +
                         " ON articles._id = search._id " +
                         "WHERE search.content match '"+params[0]+"*'",null);
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast())
                 {
-                    topics.add(cursor.getString(0));
+                    topics.add(new Article(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
                     cursor.moveToNext();
                 }
             }
@@ -325,17 +324,16 @@ public class MainActivity extends ActionBarActivity {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<String> results)
+        protected void onPostExecute(ArrayList<Article> results)
         {
             searchloadbar.setVisibility(View.GONE);
-                searchListAdapter.setData(results);
-                searchListAdapter.notifyItemRangeChanged(0,searchListAdapter.getItemCount());
+            ald.setData(results);
         }
         public void cancelAndClear()
         {
             cancel(true);
-            if(searchListAdapter!=null)
-            searchListAdapter.setData(new ArrayList<String>());
+            if(ald!=null)
+            ald.clear();
         }
     }
 }
