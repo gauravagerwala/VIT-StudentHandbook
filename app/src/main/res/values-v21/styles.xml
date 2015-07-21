@@ -2,16 +2,17 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#3498db</item>
-        <item name="android:colorPrimaryDark">#2980b9</item>
+        <item name="android:colorPrimary">#334B82</item>
+        <item name="android:colorPrimaryDark">#25365E</item>
         <item name="android:textColorPrimary">#FFFF</item>
+
     </style>
 
-    <color name="mainHeader">#3498db</color>
-    <color name="mainHeaderDark">#2980b9</color>
+    <color name="mainHeader">#3B5796</color>
+    <color name="mainHeaderDark">#25365E</color>
 
-    <color name="academics">#fecd16</color>
-    <color name="academicsDark">#CCA512</color>
+    <color name="academics">#FFA51C</color>
+    <color name="academicsDark">#F08613</color>
 
     <color name="hostel">#ff5b5b</color>
     <color name="hostelDark">#CC4949</color>
@@ -37,6 +38,7 @@
         <item>#34495e</item>
         <item>#c0392b</item>
     </array>
+
 
     <style name="suggestionFont" parent="Base.TextAppearance.AppCompat.Small">
         <item name="android:textSize">20sp</item>
