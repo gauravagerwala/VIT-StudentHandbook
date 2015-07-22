@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:id="@+id/mainHeader"
         android:elevation="10dp"
-        android:background="#3498db">
+        android:background="@color/mainHeader">
 
         <EditText
             android:layout_width="fill_parent"
@@ -51,12 +51,15 @@
 
             <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
+                android:clipToPadding="false"
                 android:layout_height="fill_parent"
+                android:overScrollMode="never"
                 android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:id="@+id/llSuggestion">
 
                     <TextView

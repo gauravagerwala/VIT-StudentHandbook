@@ -109,7 +109,7 @@ public class XmlParseHandler {
         final TextView view = new TextView(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
-        view.setTextSize(20);
+        view.setTextSize(17);
         view.setText(Html.fromHtml(content));
         ((Activity) context).runOnUiThread(new Runnable() {
             @Override
