@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -32,6 +33,8 @@ public class ArticleActivity extends ActionBarActivity {
     XmlParseHandler parser;
     ProgressBar load;
     TextView title,subtopic,circletopic;
+    Menu menu;
+    boolean bookmarked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class ArticleActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_article, menu);
+        bookmarked = false;
+        this.menu = menu;
         return true;
     }
 
@@ -83,6 +88,17 @@ public class ArticleActivity extends ActionBarActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.article_bookmark:
+                if(!bookmarked){
+                    bookmarked = true;
+                    menu.getItem(0).setIcon(R.drawable.ic_star_black_24dp);
+
+                    //TODO: add bookmarking feature
+                }
+                else {
+                    bookmarked = false;
+                    menu.getItem(0).setIcon(R.drawable.ic_star_border_black_24dp);
+                }
         }
 
         return super.onOptionsItemSelected(item);
