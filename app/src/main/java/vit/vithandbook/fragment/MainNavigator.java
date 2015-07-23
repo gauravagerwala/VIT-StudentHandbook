@@ -12,10 +12,14 @@ import vit.vithandbook.R;
 public class MainNavigator extends BackHandlerFragment {
 
     GridLayout grid;
-    customScrollView scrollView;
 
     public MainNavigator() {
 
+    }
+
+    public static MainNavigator newInstance() {
+        MainNavigator frag = new MainNavigator();
+        return frag;
     }
 
     @Override
