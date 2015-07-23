@@ -148,7 +148,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/searchLayout"
         android:orientation="vertical"
-        android:background="#ffffff"
+        android:background="#efefef"
         android:visibility="gone">
 
         <ProgressBar
@@ -164,7 +164,9 @@
             android:layout_width="match_parent"
             android:divider="@android:color/transparent"
             android:dividerHeight="10.0sp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_height="fill_parent"
             android:id="@+id/rvSearch"/>
 

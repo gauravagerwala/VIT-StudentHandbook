@@ -110,6 +110,7 @@ public class XmlParseHandler {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         view.setTextSize(17);
+        view.setGravity(Gravity.LEFT);
         view.setText(Html.fromHtml(content));
         ((Activity) context).runOnUiThread(new Runnable() {
             @Override
@@ -152,7 +153,6 @@ public class XmlParseHandler {
         InputStream input = null;
         Bitmap myBitmap = null;
         try {
-
 
             URL url = new URL("http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-transparent-glass-icons-arrows/006764-3d-transparent-glass-icon-arrows-arrowhead-solid-right.png");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

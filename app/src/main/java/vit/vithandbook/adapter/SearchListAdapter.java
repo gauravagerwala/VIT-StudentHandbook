@@ -1,7 +1,9 @@
 package vit.vithandbook.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,31 @@ public class SearchListAdapter extends ArrayAdapter<Article>
         else
             holder = (SearchViewHolder)view.getTag();
         int index = Math.abs(current.topic.hashCode())%7;
-        holder.relativeLayout.setBackgroundDrawable(new ColorDrawable(holder.color=colors[index]));
+        //holder.relativeLayout.setBackgroundDrawable(new ColorDrawable(holder.color=colors[index]));
+        Resources colors = context.getResources();
+        switch (current.mainCategory) {
+            case "Academics":
+                ((GradientDrawable)holder.mainCategory.getBackground()).setColor(colors.getColor(R.color.academics));
+                break;
+            case "College":
+                ((GradientDrawable)holder.mainCategory.getBackground()).setColor(colors.getColor(R.color.college));
+                break;
+            case "Hostel":
+                ((GradientDrawable)holder.mainCategory.getBackground()).setColor(colors.getColor(R.color.hostel));
+                break;
+            case "Student Organisations":
+                ((GradientDrawable)holder.mainCategory.getBackground()).setColor(colors.getColor(R.color.stud));
+                break;
+            case "Life Hacks":
+                ((GradientDrawable)holder.mainCategory.getBackground()).setColor(colors.getColor(R.color.lifehack));
+                break;
+            case "Around Vit":
+                ((GradientDrawable)holder.mainCategory.getBackground()).setColor(colors.getColor(R.color.around));
+                break;
+            default:
+                ((GradientDrawable)holder.mainCategory.getBackground()).setColor(colors.getColor(R.color.mainHeader));
+                break;
+        }
         holder.mainCategory.setText(current.mainCategory.substring(0,2));
         holder.subCategory.setText(current.subCategory);
         holder.topic.setText(current.topic);
