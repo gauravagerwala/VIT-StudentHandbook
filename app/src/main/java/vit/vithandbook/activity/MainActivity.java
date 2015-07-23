@@ -14,6 +14,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.ArticleListAdapter;
 import vit.vithandbook.adapter.CardListAdapter;
+import vit.vithandbook.adapter.MainTabAdapter;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
@@ -44,16 +47,16 @@ import vit.vithandbook.model.Article;
 public class MainActivity extends ActionBarActivity {
 
     boolean searchMode = false;
-    GridLayout mainNavGrid;
     public BackHandlerFragment selectedFragment;
     ListView searchList;
+    ViewPager pager ;
+    MainTabAdapter pageradapter ;
+    TabLayout tabs ;
     SearchListAdapter ald ;
     LinearLayout mainNavigator, searchLayout, mainHeader;
-    public LinearLayout suggestionContainer;
     EditText searchbox;
     ProgressBar load,searchloadbar;
     BackConnect back;
-    public int SuggestionHeight = -1;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -77,7 +80,6 @@ public class MainActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(Void res) {
                 mainHeader.setVisibility(View.VISIBLE);
-                setSuggestionColors();
                 if (savedInstanceState == null) {
                     selectedFragment = new MainNavigator();
                     getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
@@ -90,14 +92,23 @@ public class MainActivity extends ActionBarActivity {
     void initialize()
     {
         mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
-        mainNavGrid = (GridLayout) findViewById(R.id.mainNavGrid);
+        pager = (ViewPager)findViewById(R.id.view_pager_main);
+        tabs = (TabLayout)findViewById(R.id.sliding_tabs);
+        pageradapter = new MainTabAdapter(this,this.getFragmentManager());
+        pager.setAdapter(pageradapter);
+        tabs.setupWithViewPager(pager);
         searchLayout = (LinearLayout) findViewById(R.id.searchLayout);
         mainHeader = (LinearLayout) findViewById(R.id.mainHeader);
         searchList = (ListView)findViewById(R.id.rvSearch);
-        suggestionContainer = (LinearLayout) findViewById(R.id.suggestionContainer);
         searchloadbar = (ProgressBar)findViewById(R.id.searchprogressbar);
         searchbox = (EditText)findViewById(R.id.search_box);
         searchbox.addTextChangedListener(new AutoCompleteWatcher(this));
+        searchbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchClick(view);
+            }
+        });
         back = new BackConnect(this);
         ald = new SearchListAdapter(this,R.layout.search_card,new ArrayList<Article>());
         searchList.setAdapter(ald);
@@ -159,6 +170,7 @@ public class MainActivity extends ActionBarActivity {
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
                             searchLayout.setVisibility(View.GONE);
+                            searchbox.setText("");
                             searchMode = false;
                         }
                     });
@@ -181,15 +193,6 @@ public class MainActivity extends ActionBarActivity {
         helper.createDataBase();
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if(SuggestionHeight<0) {
-            SuggestionHeight = suggestionContainer.getHeight();
-            Log.d("height", Integer.toString(SuggestionHeight));
-        }
-    }
-
     public void navigate(View view) {
         AnimateMainHeader((ViewGroup) view, false);
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
@@ -200,7 +203,7 @@ public class MainActivity extends ActionBarActivity {
                 .hide(main).add(R.id.mainNavigator,fragment, "subSectionFragment").addToBackStack(null).commit();
     }
 
-    void AnimateMainHeader(ViewGroup view, boolean back) {
+    public void AnimateMainHeader(ViewGroup view, boolean back) {
         int startColor = ((ColorDrawable) mainHeader.getBackground()).getColor();
         int startColorDark = getResources().getColor(R.color.mainHeaderDark);
         if (Build.VERSION.SDK_INT >= 21)
@@ -241,6 +244,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mainHeader.setBackgroundColor((int) animator.getAnimatedValue());
+                tabs.setBackgroundColor((int) animator.getAnimatedValue());
 
             }
         });
@@ -258,24 +262,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    void setSuggestionColors() {
-        Resources r = getResources();
-        LinearLayout suggestionContainerinner = (LinearLayout)suggestionContainer.findViewById(R.id.llSuggestion);
-        ((GradientDrawable) (suggestionContainerinner.getChildAt(0)).getBackground()).setColor(r.getColor(R.color.academics));
-        ((GradientDrawable) (suggestionContainerinner.getChildAt(1)).getBackground()).setColor(r.getColor(R.color.college));
-        ((GradientDrawable) (suggestionContainerinner.getChildAt(2)).getBackground()).setColor(r.getColor(R.color.hostel));
-        ((GradientDrawable) (suggestionContainerinner.getChildAt(3)).getBackground()).setColor(r.getColor(R.color.stud));
-        ((GradientDrawable) (suggestionContainerinner.getChildAt(4)).getBackground()).setColor(r.getColor(R.color.lifehack));
-        ((GradientDrawable) (suggestionContainerinner.getChildAt(5)).getBackground()).setColor(r.getColor(R.color.around));
-
-    }
-
-    public void suggestionClick(View view) {
-        // show apprpriate info based on the view's tag or id or whatever we decide
-        String tag = (String) view.getTag();
-        String capTag = tag.substring(0,1).toUpperCase() + tag.substring(1);
-        Toast.makeText(this, capTag + " Suggestions", Toast.LENGTH_LONG).show();
-    }
 
     public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
