@@ -28,6 +28,8 @@
     <color name="around">#4aa0e0</color>
     <color name="aroundDark">#4392CC</color>
 
+    <color name = "white">#FFFFFF</color>
+
     <array name="colors">
         <item>#1abc9c</item>
         <item>#2ecc71</item>
@@ -42,6 +44,11 @@
     <style name="suggestionFont" parent="Base.TextAppearance.AppCompat.Small">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFF</item>
+    </style>
+
+    <style name="mainTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#4aa0e0</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
 

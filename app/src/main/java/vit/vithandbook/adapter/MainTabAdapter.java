@@ -3,7 +3,10 @@ package vit.vithandbook.adapter;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v13.app.FragmentStatePagerAdapter;
+
+import vit.vithandbook.R;
 import vit.vithandbook.fragment.BookmarksFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.SubSectionFragment;
@@ -12,10 +15,10 @@ import vit.vithandbook.helperClass.FragmentSwitchListener;
 /**
  * Created by pulkit on 23/07/2015.
  */
-public class MainTabAdapter extends FragmentStatePagerAdapter {
+public class MainTabAdapter extends FragmentPagerAdapter {
 
     Context context ;
-    FragmentManager fm ;
+    public static  FragmentManager fragmentManager ;
     public String [] titles = {"Categories","Bookmarks","Contributors"} ;
     Fragment currentFragment = null ;
     public int ITEM_COUNT = 2 ;
@@ -23,12 +26,13 @@ public class MainTabAdapter extends FragmentStatePagerAdapter {
     public MainTabAdapter(Context context , FragmentManager fm)
     {
         super(fm);
-        this.fm = fm ;
+        fragmentManager = fm ;
         this.context = context;
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return ITEM_COUNT;
     }
 
@@ -38,17 +42,14 @@ public class MainTabAdapter extends FragmentStatePagerAdapter {
         switch (i)
         {
             case 0 :
-                if(currentFragment == null)
-                {
                     currentFragment = MainNavigator.newInstance(new FragmentSwitchListener() {
                         @Override
                         public void onFragmentSwitch(String category) {
-                          fm.beginTransaction().remove(currentFragment).commit();
+                          fragmentManager.beginTransaction().remove(currentFragment).commit();
                           currentFragment = SubSectionFragment.newInstance(category);
                           notifyDataSetChanged();
                         }
                     });
-                }
                 break ;
             case 1 : currentFragment = BookmarksFragment.newInstance();break;
         }
@@ -69,6 +70,18 @@ public class MainTabAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return titles[position];
+    }
+
+     String generateTagName(int index)
+    {
+        int viewId = R.id.view_pager_main ;
+        return "android:switcher:" + viewId + ":" + index;
+    }
+
+    public Fragment getFragmentAtPosition(int position)
+    {
+        Fragment frag = fragmentManager.findFragmentByTag(generateTagName(position));
+        return frag ;
     }
 }
 

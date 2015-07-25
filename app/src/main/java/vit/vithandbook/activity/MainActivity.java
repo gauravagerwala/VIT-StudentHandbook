@@ -94,6 +94,7 @@ public class MainActivity extends ActionBarActivity {
         mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
         pager = (ViewPager)findViewById(R.id.view_pager_main);
         tabs = (TabLayout)findViewById(R.id.sliding_tabs);
+       // tabs.setTabTextColors(R.color.white,R.color.white);
         pageradapter = new MainTabAdapter(this,this.getFragmentManager());
         pager.setAdapter(pageradapter);
         tabs.setupWithViewPager(pager);
@@ -161,7 +162,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
+        BackHandlerFragment current = (BackHandlerFragment)pageradapter.getFragmentAtPosition(pager.getCurrentItem());
         if (searchMode) {
             mainNavigator.setVisibility(View.VISIBLE);
             mainNavigator.animate().translationY(0)
@@ -174,16 +177,10 @@ public class MainActivity extends ActionBarActivity {
                             searchMode = false;
                         }
                     });
-        } else if (getFragmentManager().getBackStackEntryCount() == 0)
+        }
+        else if(!current.onBackPressed())
+        {
             super.onBackPressed();
-        else  {
-
-            getFragmentManager().popBackStack();
-
-            if (getFragmentManager().getBackStackEntryCount() == 1)
-            {
-                AnimateMainHeader(null, true);
-            }
         }
     }
 
@@ -193,6 +190,10 @@ public class MainActivity extends ActionBarActivity {
         helper.createDataBase();
     }
 
+    /*
+
+    //old navigate function kept for legacy purposes
+
     public void navigate(View view) {
         AnimateMainHeader((ViewGroup) view, false);
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
@@ -201,7 +202,7 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction().
                 setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                 .hide(main).add(R.id.mainNavigator,fragment, "subSectionFragment").addToBackStack(null).commit();
-    }
+    }*/
 
     public void AnimateMainHeader(ViewGroup view, boolean back) {
         int startColor = ((ColorDrawable) mainHeader.getBackground()).getColor();

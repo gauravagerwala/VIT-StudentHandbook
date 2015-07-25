@@ -1,5 +1,6 @@
 package vit.vithandbook.fragment;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 import vit.vithandbook.R;
 import vit.vithandbook.activity.MainActivity;
@@ -15,8 +18,11 @@ import vit.vithandbook.helperClass.FragmentSwitchListener;
 
 public class MainNavigator extends BackHandlerFragment {
 
+    ScrollView mainScrollView;
     GridLayout grid;
     FragmentSwitchListener switcher ;
+    public boolean isOnSubLevel = false;
+    Fragment subSectionFragment ;
     DisplayMetrics dm ;
 
     public MainNavigator() {
@@ -34,6 +40,7 @@ public class MainNavigator extends BackHandlerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_navigator, container, false);
         grid = (GridLayout) view.findViewById(R.id.mainNavGrid);
+        mainScrollView = (ScrollView)view.findViewById(R.id.mainScrollView);
         for(int i = 0 ; i < grid.getChildCount() ; i++)
         {
             ((CardView)grid.getChildAt(i)).setOnClickListener(new View.OnClickListener() {
@@ -74,8 +81,14 @@ public class MainNavigator extends BackHandlerFragment {
     }
 
     @Override
-    public boolean onBackPressed() {
-        return false;
+    public boolean onBackPressed()
+    {
+        if(isOnSubLevel)
+        {
+            hideSubLevels();
+            return true ;
+        }
+        return false ;
     }
 
     int dptopx(int dp) {
@@ -87,6 +100,15 @@ public class MainNavigator extends BackHandlerFragment {
     {
         ((MainActivity)getActivity()).AnimateMainHeader((ViewGroup)view,false);
         String category = (String) view.getTag();
-        switcher.onFragmentSwitch(category);
+        mainScrollView.setVisibility(View.GONE);
+        getActivity().getFragmentManager().beginTransaction().add(R.id.linear_layout_bottom,subSectionFragment = SubSectionFragment.newInstance(category),"subSectionFragment").addToBackStack(null).commit();
+        isOnSubLevel = true ;
+    }
+
+    public void hideSubLevels()
+    {
+        getActivity().getFragmentManager().beginTransaction().remove(subSectionFragment).commit();
+        mainScrollView.setVisibility(View.VISIBLE);
+        isOnSubLevel = false ;
     }
 }

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import vit.vithandbook.R;
 
-public class BookmarksFragment extends Fragment {
+public class BookmarksFragment extends BackHandlerFragment {
 
 
     public static BookmarksFragment newInstance() {
@@ -27,4 +27,8 @@ public class BookmarksFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_bookmarks, container, false);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 }

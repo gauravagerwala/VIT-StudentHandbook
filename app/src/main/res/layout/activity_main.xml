@@ -46,8 +46,10 @@
             android:id="@+id/sliding_tabs"
             android:textColor = "#FFF"
             android:layout_width="match_parent"
+            style="@style/mainTabLayout"
             android:background = "@color/mainHeader"
             android:layout_height="wrap_content"
+            app:tabMode="scrollable"
             app:elevation="4dp"
             />
 
