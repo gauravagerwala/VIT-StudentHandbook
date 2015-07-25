@@ -20,7 +20,6 @@ public class MainNavigator extends BackHandlerFragment {
 
     ScrollView mainScrollView;
     GridLayout grid;
-    FragmentSwitchListener switcher ;
     public boolean isOnSubLevel = false;
     Fragment subSectionFragment ;
     DisplayMetrics dm ;
@@ -29,10 +28,9 @@ public class MainNavigator extends BackHandlerFragment {
 
     }
 
-    public static MainNavigator newInstance(FragmentSwitchListener switcher)
+    public static MainNavigator newInstance()
     {
         MainNavigator frag = new MainNavigator();
-        frag.switcher = switcher ;
         return frag ;
     }
 
@@ -109,6 +107,7 @@ public class MainNavigator extends BackHandlerFragment {
     {
         getActivity().getFragmentManager().beginTransaction().remove(subSectionFragment).commit();
         mainScrollView.setVisibility(View.VISIBLE);
+        ((MainActivity)getActivity()).AnimateMainHeader(null,true);
         isOnSubLevel = false ;
     }
 }

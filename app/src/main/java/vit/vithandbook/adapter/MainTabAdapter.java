@@ -41,16 +41,7 @@ public class MainTabAdapter extends FragmentPagerAdapter {
 
         switch (i)
         {
-            case 0 :
-                    currentFragment = MainNavigator.newInstance(new FragmentSwitchListener() {
-                        @Override
-                        public void onFragmentSwitch(String category) {
-                          fragmentManager.beginTransaction().remove(currentFragment).commit();
-                          currentFragment = SubSectionFragment.newInstance(category);
-                          notifyDataSetChanged();
-                        }
-                    });
-                break ;
+            case 0 :currentFragment = MainNavigator.newInstance();  break ;
             case 1 : currentFragment = BookmarksFragment.newInstance();break;
         }
 
