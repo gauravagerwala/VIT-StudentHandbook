@@ -42,9 +42,13 @@
         android:id="@+id/mainNavigator"
         android:background="#ffffff">
 
+
+
         <android.support.design.widget.TabLayout
             android:id="@+id/sliding_tabs"
-            android:textColor = "#FFF"
+            app:tabTextColor="@color/white"
+            app:tabIndicatorHeight="3dp"
+            app:tabSelectedTextColor="@color/white"
             android:layout_width="match_parent"
             style="@style/mainTabLayout"
             android:background = "@color/mainHeader"
@@ -52,6 +56,9 @@
             app:tabMode="scrollable"
             app:elevation="4dp"
             />
+
+
+
 
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"

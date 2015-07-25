@@ -91,7 +91,6 @@ public class MainActivity extends ActionBarActivity {
         mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
         pager = (ViewPager)findViewById(R.id.view_pager_main);
         tabs = (TabLayout)findViewById(R.id.sliding_tabs);
-       // tabs.setTabTextColors(R.color.white,R.color.white);
         pageradapter = new MainTabAdapter(this,this.getFragmentManager());
         pager.setAdapter(pageradapter);
         tabs.setupWithViewPager(pager);

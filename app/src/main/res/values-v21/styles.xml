@@ -47,8 +47,7 @@
     </style>
 
     <style name="mainTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">#4aa0e0</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="tabIndicatorColor">#FFFFFF</item>
     </style>
 
 
