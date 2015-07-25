@@ -99,13 +99,13 @@ public class MainNavigator extends BackHandlerFragment {
         ((MainActivity)getActivity()).AnimateMainHeader((ViewGroup)view,false);
         String category = (String) view.getTag();
         mainScrollView.setVisibility(View.GONE);
-        getActivity().getFragmentManager().beginTransaction().add(R.id.linear_layout_bottom,subSectionFragment = SubSectionFragment.newInstance(category),"subSectionFragment").addToBackStack(null).commit();
+        getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out).add(R.id.linear_layout_bottom, subSectionFragment = ExpandableListFragement.newInstance(category), "subSectionFragment").commit();
         isOnSubLevel = true ;
     }
 
     public void hideSubLevels()
     {
-        getActivity().getFragmentManager().beginTransaction().remove(subSectionFragment).commit();
+        getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out).remove(subSectionFragment).commit();
         mainScrollView.setVisibility(View.VISIBLE);
         ((MainActivity)getActivity()).AnimateMainHeader(null,true);
         isOnSubLevel = false ;
