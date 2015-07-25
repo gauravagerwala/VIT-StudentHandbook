@@ -22,15 +22,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import java.util.ArrayList;
+
+import vit.vithandbook.adapter.ExpandableListAdapter;
 import vit.vithandbook.R;
-import vit.vithandbook.adapter.ArticleListAdapter;
-import vit.vithandbook.adapter.CardListAdapter;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
@@ -104,9 +105,10 @@ public class MainActivity extends ActionBarActivity {
         searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                onSearchItemClick(adapterView,view,i,l);
+                onSearchItemClick(adapterView, view, i, l);
             }
         });
+
     }
 
     public void onSearchItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -285,7 +287,6 @@ public class MainActivity extends ActionBarActivity {
         {
             searchloadbar.setVisibility(View.VISIBLE);
         }
-
         public searchTask(Context obj)
         {
          activity=obj;
