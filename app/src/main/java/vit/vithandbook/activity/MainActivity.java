@@ -34,6 +34,7 @@ import vit.vithandbook.adapter.ExpandableListAdapter;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
+import vit.vithandbook.fragment.ExpandableListFragement;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.SubSectionFragment;
 import vit.vithandbook.helperClass.AutoCompleteWatcher;
@@ -196,7 +197,7 @@ public class MainActivity extends ActionBarActivity {
         AnimateMainHeader((ViewGroup) view, false);
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
         String category = (String) view.getTag();
-        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
+        BackHandlerFragment fragment = ExpandableListFragement.newInstance(category);
         getFragmentManager().beginTransaction().
                 setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                 .hide(main).add(R.id.mainNavigator,fragment, "subSectionFragment").addToBackStack(null).commit();
