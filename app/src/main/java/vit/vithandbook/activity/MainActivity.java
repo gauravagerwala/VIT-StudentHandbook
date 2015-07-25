@@ -24,20 +24,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import java.util.ArrayList;
 import vit.vithandbook.R;
-import vit.vithandbook.adapter.ArticleListAdapter;
-import vit.vithandbook.adapter.CardListAdapter;
+
 import vit.vithandbook.adapter.MainTabAdapter;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
-import vit.vithandbook.fragment.SubSectionFragment;
 import vit.vithandbook.helperClass.AutoCompleteWatcher;
 import vit.vithandbook.helperClass.BackConnect;
 import vit.vithandbook.helperClass.DataBaseHelper;
@@ -116,9 +113,10 @@ public class MainActivity extends ActionBarActivity {
         searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                onSearchItemClick(adapterView,view,i,l);
+                onSearchItemClick(adapterView, view, i, l);
             }
         });
+
     }
 
     public void onSearchItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -198,7 +196,7 @@ public class MainActivity extends ActionBarActivity {
         AnimateMainHeader((ViewGroup) view, false);
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
         String category = (String) view.getTag();
-        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
+        BackHandlerFragment fragment = ExpandableListFragement.newInstance(category);
         getFragmentManager().beginTransaction().
                 setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                 .hide(main).add(R.id.mainNavigator,fragment, "subSectionFragment").addToBackStack(null).commit();
@@ -272,7 +270,6 @@ public class MainActivity extends ActionBarActivity {
         {
             searchloadbar.setVisibility(View.VISIBLE);
         }
-
         public searchTask(Context obj)
         {
          activity=obj;

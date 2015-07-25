@@ -153,7 +153,6 @@ public class XmlParseHandler {
         InputStream input = null;
         Bitmap myBitmap = null;
         try {
-
             URL url = new URL("http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/3d-transparent-glass-icons-arrows/006764-3d-transparent-glass-icon-arrows-arrowhead-solid-right.png");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);

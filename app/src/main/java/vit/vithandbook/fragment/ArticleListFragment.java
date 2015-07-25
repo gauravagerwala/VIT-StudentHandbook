@@ -37,6 +37,7 @@ public class ArticleListFragment extends BackHandlerFragment {
         return frag;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_article_list, container, false);
@@ -103,7 +104,10 @@ public class ArticleListFragment extends BackHandlerFragment {
             cursor.close();
             db.close();
         }
+
     }
+
+
 }
 
 
