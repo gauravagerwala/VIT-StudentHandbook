@@ -33,3 +33,10 @@ proguard/
 
 # Log Files
 *.log
+.idea/.name
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/vcs.xml

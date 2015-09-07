@@ -10,23 +10,23 @@
     <color name="mainHeader">#3B5796</color>
     <color name="mainHeaderDark">#25365E</color>
 
-    <color name="academics">#FFA51C</color>
-    <color name="academicsDark">#F08613</color>
+    <color name="academics">#014d41</color>
+    <color name="academicsDark">#013629</color>
 
-    <color name="hostel">#ff5b5b</color>
-    <color name="hostelDark">#CC4949</color>
+    <color name="hostel">#c2255a</color>
+    <color name="hostelDark">#a92555</color>
 
-    <color name="college">#75ba5b</color>
-    <color name="collegeDark">#ff569048</color>
+    <color name="college">#e5ff7143</color>
+    <color name="collegeDark">#e17142</color>
 
-    <color name="stud">#7c54f0</color>
-    <color name="studDark">#6947CC</color>
+    <color name="stud">#6a1b9a</color>
+    <color name="studDark">#5e147f</color>
 
-    <color name="lifehack">#cc35ba</color>
-    <color name="lifehackDark">#B21DA1</color>
+    <color name="lifehack">#4a148c</color>
+    <color name="lifehackDark">#31127f</color>
 
-    <color name="around">#4aa0e0</color>
-    <color name="aroundDark">#4392CC</color>
+    <color name="around">#3f51b5</color>
+    <color name="aroundDark">#344182</color>
 
     <color name = "white">#FFFFFF</color>
 
