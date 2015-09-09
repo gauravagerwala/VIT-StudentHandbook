@@ -2,13 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-    <item
-        android:id="@+id/nav_first_fragment"
-        android:checked="true"
-        android:title="categories"/>
-    <item
-        android:id="@+id/nav_second_fragment"
-        android:title="Bookmarks"/>
+         <item
+            android:id="@+id/nav_first_fragment"
+            android:checked="true"
+            android:title="Categories"/>
+        <item
+            android:id="@+id/nav_second_fragment"
+            android:title="Bookmarks"/>
+        <item
+            android:id="@+id/nav_third_fragment"
+            android:title="Updates"/>
+        <item
+            android:id="@+id/nav_fourth_fragment"
+            android:title="Map"/>
+        <item
+            android:id="@+id/nav_fifth_fragment"
+            android:title="About Us"/>
+        <item
+            android:id="@+id/nav_sixth_fragment"
+            android:title="Feedback"/>
     </group>
 
 </menu>

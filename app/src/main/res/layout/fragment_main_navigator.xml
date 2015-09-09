@@ -10,6 +10,7 @@
         android:columnCount="2"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:animateLayoutChanges="true"
         android:orientation="horizontal">
         <!-- to be changed !-->
@@ -21,7 +22,8 @@
             android:layout_marginTop="5dp"
             android:onClick="navigate"
             android:layout_marginLeft="5dp"
-            android:layout_gravity="top|left">
+            android:layout_marginStart="5dp"
+            android:layout_gravity="top|start">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -33,19 +35,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="100dp"
+                    android:textSize="100sp"
                     android:id="@+id/tvHeader"
                     android:textColor="#FFF"
                     android:layout_gravity="center"
                     android:text="Ac" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:textSize="15sp"
+                    android:gravity="center"
                     android:text="Academics"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="start" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -57,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_gravity="top|left">
+            android:layout_marginStart="5dp"
+            android:layout_gravity="top|start">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -69,18 +73,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="100dp"
+                    android:textSize="100sp"
                     android:textColor="#FFF"
                     android:layout_gravity="center"
                     android:text="Co" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:textSize="15sp"
+                    android:gravity="center"
                     android:text="College"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="start" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -92,7 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_gravity="top|left">
+            android:layout_marginStart="5dp"
+            android:layout_gravity="top|start">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -104,18 +110,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="100dp"
+                    android:textSize="100sp"
                     android:textColor="#FFF"
                     android:layout_gravity="center"
                     android:text="Ho" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:textSize="15sp"
+                    android:gravity="center"
                     android:text="Hostel"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="start" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -127,7 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_gravity="top|left">
+            android:layout_marginStart="5dp"
+            android:layout_gravity="top|start">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -139,19 +147,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="100dp"
+                    android:textSize="100sp"
                     android:textColor="#FFF"
                     android:layout_gravity="center"
                     android:text="St" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:singleLine="true"
+                    android:gravity="center"
                     android:textSize="15sp"
                     android:text="Student Organizations"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="start" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -163,7 +172,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_gravity="top|left">
+            android:layout_marginStart="5dp"
+            android:layout_gravity="top|start">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -175,18 +185,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="100dp"
+                    android:textSize="100sp"
                     android:textColor="#FFF"
                     android:layout_gravity="center"
                     android:text="Lh" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:textSize="15sp"
+                    android:gravity="center"
                     android:text="Life Hacks"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="start" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -198,7 +209,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_gravity="top|left">
+            android:layout_marginStart="5dp"
+            android:layout_gravity="top|start">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -210,18 +222,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="100dp"
+                    android:textSize="100sp"
                     android:textColor="#FFF"
                     android:layout_gravity="center"
                     android:text="Ar" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:textSize="15sp"
+                    android:gravity="center"
                     android:text="Around VIT"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="start" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 

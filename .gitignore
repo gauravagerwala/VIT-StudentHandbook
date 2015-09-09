@@ -33,3 +33,9 @@ proguard/
 
 # Log Files
 *.log
+.idea/gradle.xml
+.idea/modules.xml
+app/build.gradle
+VIT-StudentHandbook.iml
+build.gradle
+*.iml

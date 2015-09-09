@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
+            android:textSize="50sp"
             android:textColor="#FFF"
             android:gravity="center"
             android:paddingLeft="20dp"
@@ -27,12 +27,12 @@
             android:id="@+id/tvCircle" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"
             android:maxLines="2"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:minLines="1"
             android:padding="10dp"
             android:id="@+id/tvContent"
