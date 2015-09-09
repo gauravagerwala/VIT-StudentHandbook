@@ -6,7 +6,7 @@ android:layout_height="fill_parent"
 <RelativeLayout
 
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/card_contributors">
        <View android:id="@+id/fakeView"
         android:layout_width="5dp"
@@ -89,22 +89,22 @@ android:layout_height="fill_parent"
             />
         <TextView
             android:id="@+id/contributor_name"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="Hemant Jain"
             android:gravity="center"
-            android:textAlignment="center"
             android:textColor="#e0000000"
             android:textSize="20sp"
             android:layout_below="@+id/contributor_image"
             android:layout_centerHorizontal="true" />
         <TextView
             android:id="@+id/contributor_role"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_below="@+id/contributor_name"
-            android:text="Android Developer"
+            android:text="Project Lead and Android Developer"
             android:textStyle="bold"
             android:textColor="#cf165500"
             android:textSize="16sp"

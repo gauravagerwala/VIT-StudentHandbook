@@ -109,7 +109,7 @@ public class ArticleActivity extends ActionBarActivity {
         setTitle("");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(android.R.color.background_light));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.background_light)));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

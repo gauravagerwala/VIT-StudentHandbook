@@ -39,3 +39,8 @@ app/build.gradle
 VIT-StudentHandbook.iml
 build.gradle
 *.iml
+.idea/gradle.xml
+.idea/modules.xml
+VIT-StudentHandbook.iml
+*.iml
+build.gradle
