@@ -44,3 +44,6 @@ build.gradle
 VIT-StudentHandbook.iml
 *.iml
 build.gradle
+.idea/gradle.xml
+.idea/gradle.xml
+build.gradle
