@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
     public BackHandlerFragment selectedFragment;
     ListView searchList;
     SearchListAdapter ald ;
+    CollapsingToolbarLayout collapsingToolbarLayout ;
     LinearLayout mainNavigator, searchLayout, mainHeader;
     EditText searchbox;
     ProgressBar load,searchloadbar;
@@ -51,12 +53,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initialize();
+    //    initialize();
 
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
-                mainHeader.setVisibility(View.GONE);
+               // mainHeader.setVisibility(View.GONE);
             }
 
             @Override
@@ -68,11 +70,14 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             protected void onPostExecute(Void res) {
-                mainHeader.setVisibility(View.VISIBLE);
+               // mainHeader.setVisibility(View.VISIBLE);
               //  setSuggestionColors();
                 if (savedInstanceState == null) {
                     selectedFragment = new MainNavigator();
-                    getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
+                    getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
+                    collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+                    collapsingToolbarLayout.setTitle("Student Handbook");
+                    collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
                 }
             }
         }.execute();
@@ -178,15 +183,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void navigate(View view) {
-        AnimateMainHeader((ViewGroup) view, false);
-        MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
-        String category = (String) view.getTag();
-        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
-        getFragmentManager().beginTransaction().
-                setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(main).add(R.id.mainNavigator,fragment,"subSectionFragment").addToBackStack(null).commit();
-    }
 
     void AnimateMainHeader(ViewGroup view, boolean back) {
         int startColor = ((ColorDrawable) mainHeader.getBackground()).getColor();

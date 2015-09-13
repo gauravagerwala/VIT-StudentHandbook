@@ -51,11 +51,27 @@ public class MainNavigator extends BackHandlerFragment {
         int idealW = (width / cols) - spacefactor;
         for (int i = 0; i < grid.getChildCount(); i++) {
             android.support.v7.widget.CardView card = (android.support.v7.widget.CardView) grid.getChildAt(i);
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    navigate(v);
+                }
+            });
             GridLayout.LayoutParams params = (GridLayout.LayoutParams) card.getLayoutParams();
             params.width = idealW;
             card.setLayoutParams(params);
         }
     }
+
+    public void navigate(View view) {
+        MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
+        String category = (String) view.getTag();
+        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
+        getFragmentManager().beginTransaction().
+                setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                .hide(main).add(R.id.mainNavigator,fragment,"subSectionFragment").addToBackStack(null).commit();
+    }
+
 
     @Override
     public boolean onBackPressed() {
