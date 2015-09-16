@@ -1,4 +1,4 @@
-<NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainScrollView"
     android:layout_height="fill_parent"
@@ -242,4 +242,4 @@
 
         <!-- till here !-->
     </GridLayout>
-</NestedScrollView>
+</android.support.v4.widget.NestedScrollView>

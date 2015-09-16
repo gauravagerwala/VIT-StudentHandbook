@@ -10,6 +10,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,11 +38,11 @@ import vit.vithandbook.R;
 
 public class XmlParseHandler {
     public Context context;
-    public LinearLayout container;
+    public FrameLayout container;
     List<Pair<Integer, String>> images;
     //ImageSaver saver ;
 
-    public XmlParseHandler(Context context, LinearLayout container) {
+    public XmlParseHandler(Context context, FrameLayout container) {
         this.context = context;
         this.container = container;
     }

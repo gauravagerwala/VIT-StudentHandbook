@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ public class ArticleActivity extends ActionBarActivity {
     String topic;
     String subtopicName = "";
     String mainCategory = "";
-    LinearLayout mainArticleLayout;
+    FrameLayout mainArticleLayout;
     XmlParseHandler parser;
     ProgressBar load;
     TextView title,subtopic,circletopic;
@@ -41,7 +42,7 @@ public class ArticleActivity extends ActionBarActivity {
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-        mainArticleLayout = (LinearLayout) findViewById(R.id.mainArticleLayout);
+        mainArticleLayout = (FrameLayout) findViewById(R.id.mainArticleLayout);
         load = (ProgressBar) findViewById(R.id.aaProgressbar);
         parser = new XmlParseHandler(this, mainArticleLayout);
         topic = getIntent().getStringExtra("topic");

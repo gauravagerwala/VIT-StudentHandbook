@@ -1,8 +1,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="#daffa355"
+    android:layout_gravity="right"
+    >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,5 +63,5 @@
             android:visibility="gone"
             android:indeterminate="true"
             android:id="@+id/aaProgressbar" />
-    </LinearLayout>
+    </FrameLayout>
 </ScrollView>
