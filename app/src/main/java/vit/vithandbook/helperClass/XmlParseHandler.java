@@ -38,11 +38,11 @@ import vit.vithandbook.R;
 
 public class XmlParseHandler {
     public Context context;
-    public FrameLayout container;
+    public LinearLayout container;
     List<Pair<Integer, String>> images;
     //ImageSaver saver ;
 
-    public XmlParseHandler(Context context, FrameLayout container) {
+    public XmlParseHandler(Context context, LinearLayout container) {
         this.context = context;
         this.container = container;
     }
