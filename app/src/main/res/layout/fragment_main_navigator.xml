@@ -34,14 +34,20 @@
                 android:background="@color/academics"
                 android:layout_height="fill_parent">
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="100sp"
                     android:id="@+id/tvHeader"
                     android:textColor="#FFF"
                     android:layout_gravity="center"
-                    android:text="Ac" />
+                    android:text="Ac" />-->
+               <ImageView
+                   android:layout_width="100dp"
+                   android:layout_height="125dp"
+                   android:src="@drawable/ic_academics"
+                   android:layout_gravity="center"
+                   />
 
                 <TextView
                     android:layout_width="fill_parent"
