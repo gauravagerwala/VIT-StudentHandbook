@@ -163,7 +163,8 @@ public class MainActivity extends ActionBarActivity {
                             searchMode = false;
                         }
                     });
-        } else if (getFragmentManager().getBackStackEntryCount() == 0)
+        }
+        else if (getFragmentManager().getBackStackEntryCount() == 0)
             super.onBackPressed();
         else  {
 
@@ -171,7 +172,6 @@ public class MainActivity extends ActionBarActivity {
 
             if (getFragmentManager().getBackStackEntryCount() == 1)
             {
-                AnimateMainHeader(null, true);
             }
         }
     }
@@ -181,67 +181,6 @@ public class MainActivity extends ActionBarActivity {
         DataBaseHelper helper = new DataBaseHelper(this);
         helper.createDataBase();
     }
-
-
-
-    void AnimateMainHeader(ViewGroup view, boolean back) {
-        int startColor = ((ColorDrawable) mainHeader.getBackground()).getColor();
-        int startColorDark = getResources().getColor(R.color.mainHeaderDark);
-        if (Build.VERSION.SDK_INT >= 21)
-            startColorDark = getWindow().getStatusBarColor();
-        int endcolor;
-        int endColorDark;
-        if (back) {
-            endcolor = getResources().getColor(R.color.mainHeader);
-            endColorDark = getResources().getColor(R.color.mainHeaderDark);
-        } else {
-            endcolor = ((ColorDrawable) ((LinearLayout) view.getChildAt(0)).getBackground()).getColor();
-            switch (view.getTag().toString()) {
-                case "Academics":
-                    endColorDark = getResources().getColor(R.color.academicsDark);
-                    break;
-                case "College":
-                    endColorDark = getResources().getColor(R.color.collegeDark);
-                    break;
-                case "Hostel":
-                    endColorDark = getResources().getColor(R.color.hostelDark);
-                    break;
-                case "Student Organisations":
-                    endColorDark = getResources().getColor(R.color.studDark);
-                    break;
-                case "Life Hacks":
-                    endColorDark = getResources().getColor(R.color.lifehackDark);
-                    break;
-                case "Around Vit":
-                    endColorDark = getResources().getColor(R.color.aroundDark);
-                    break;
-                default:
-                    endColorDark = getResources().getColor(R.color.mainHeaderDark);
-            }
-
-        }
-        final ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(), startColor, endcolor);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mainHeader.setBackgroundColor((int) animator.getAnimatedValue());
-
-            }
-        });
-        final ValueAnimator animator1 = ValueAnimator.ofObject(new ArgbEvaluator(), startColorDark, endColorDark);
-        animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                if (Build.VERSION.SDK_INT >= 21)
-                    getWindow().setStatusBarColor((int) animator1.getAnimatedValue());
-
-            }
-        });
-        animator1.start();
-        animator.start();
-
-    }
-
 
     public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
