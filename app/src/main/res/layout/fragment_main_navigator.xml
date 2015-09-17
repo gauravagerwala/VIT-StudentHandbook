@@ -34,14 +34,6 @@
                 android:background="@color/academics"
                 android:layout_height="fill_parent">
 
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="100sp"
-                    android:id="@+id/tvHeader"
-                    android:textColor="#FFF"
-                    android:layout_gravity="center"
-                    android:text="Ac" />-->
                <ImageView
                    android:layout_width="100dp"
                    android:layout_height="125dp"
@@ -78,13 +70,12 @@
                 android:background="@color/college"
                 android:layout_height="fill_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="100sp"
-                    android:textColor="#FFF"
+                <!--<ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="125dp"
+                    android:src="@drawable/ic_college"
                     android:layout_gravity="center"
-                    android:text="Co" />
+                    />-->
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -115,13 +106,12 @@
                 android:background="@color/hostel"
                 android:layout_height="fill_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="100sp"
-                    android:textColor="#FFF"
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="125dp"
+                    android:src="@drawable/ic_hostel"
                     android:layout_gravity="center"
-                    android:text="Ho" />
+                    />
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -152,13 +142,12 @@
                 android:background="@color/stud"
                 android:layout_height="fill_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="100sp"
-                    android:textColor="#FFF"
-                    android:layout_gravity="center"
-                    android:text="St" />
+                <!--<ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="125dp"
+                    android:src="@drawable/ic_studentorganizations"
+                    -android:layout_gravity="center"
+                    />-->
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -190,14 +179,12 @@
                 android:background="@color/lifehack"
                 android:layout_height="fill_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="100sp"
-                    android:textColor="#FFF"
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="125dp"
+                    android:src="@drawable/ic_lifehacks"
                     android:layout_gravity="center"
-                    android:text="Lh" />
-
+                    />
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -227,13 +214,11 @@
                 android:background="@color/around"
                 android:layout_height="fill_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="100sp"
-                    android:textColor="#FFF"
-                    android:layout_gravity="center"
-                    android:text="Ar" />
+                <!--<ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="125dp"
+                    android:src="@drawable/ic_around"
+                    android:layout_gravity="center"/>-->
 
                 <TextView
                     android:layout_width="fill_parent"
