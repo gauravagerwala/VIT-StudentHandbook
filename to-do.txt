@@ -1,2 +1,0 @@
-1) add transitions to fragments
-2) add swip up hide to suggestions 
