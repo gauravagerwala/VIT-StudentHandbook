@@ -76,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
                     selectedFragment = new MainNavigator();
                     getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
                     collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-                    collapsingToolbarLayout.setTitle("Student Handbook");
+                    collapsingToolbarLayout.setTitle("VIT Handbook");
                     collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.mainHeader));
                 }
             }

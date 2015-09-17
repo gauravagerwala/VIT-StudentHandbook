@@ -69,7 +69,7 @@ public class MainNavigator extends BackHandlerFragment {
         BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
         getFragmentManager().beginTransaction().
                 setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(main).add(R.id.mainNavigator,fragment,"subSectionFragment").addToBackStack(null).commit();
+                .hide(main).add(R.id.frame_layout_main,fragment,"subSectionFragment").addToBackStack(null).commit();
     }
 
 
