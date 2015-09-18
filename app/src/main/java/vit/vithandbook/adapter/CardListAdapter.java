@@ -58,6 +58,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         if(position<getItemCount()) {
             int index = Math.abs(objects.get(position).hashCode())%7;
             holder.content.setText(objects.get(position));
+            //make this darker
             holder.content.setBackgroundDrawable(new ColorDrawable(colors[index]));
             holder.circle.setBackgroundDrawable(new ColorDrawable(colors[index]));
             holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
