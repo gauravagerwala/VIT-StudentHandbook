@@ -27,8 +27,6 @@ public class MainNavigator extends BackHandlerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_navigator, container, false);
         grid = (GridLayout) view.findViewById(R.id.mainNavGrid);
-        // scrollView = (customScrollView)view.findViewById(R.id.mainScrollView);
-        // scrollView.setActivity((MainActivity) getActivity());
         return view;
     }
 
