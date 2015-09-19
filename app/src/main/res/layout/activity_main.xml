@@ -31,12 +31,19 @@
                 <android.support.design.widget.CollapsingToolbarLayout
                     android:id="@+id/collapsing_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
                     app:contentScrim="?attr/colorPrimary"
                     app:expandedTitleMarginStart="48dp"
                     app:expandedTitleMarginEnd="64dp"
                     android:fitsSystemWindows="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#2345AB">
+
+                    </RelativeLayout>
 
                     <android.support.v7.widget.Toolbar
                         android:id="@+id/toolbar"

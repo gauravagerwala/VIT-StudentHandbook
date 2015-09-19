@@ -164,7 +164,6 @@
                     android:text="Student Organizations"
                     android:layout_gravity="start" />
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"

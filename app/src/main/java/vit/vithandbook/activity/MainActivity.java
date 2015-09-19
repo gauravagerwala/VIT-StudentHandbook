@@ -24,6 +24,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.support.v7.widget.Toolbar;
+
 import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
@@ -43,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
     ListView searchList;
     SearchListAdapter ald ;
     CollapsingToolbarLayout collapsingToolbarLayout ;
+    Toolbar toolbar ;
     LinearLayout mainNavigator, searchLayout, mainHeader;
     EditText searchbox;
     ProgressBar load,searchloadbar;
@@ -75,48 +78,20 @@ public class MainActivity extends ActionBarActivity {
                 if (savedInstanceState == null) {
                     selectedFragment = new MainNavigator();
                     getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
+                    toolbar = (Toolbar)findViewById(R.id.toolbar);
+                    setSupportActionBar(toolbar);
+                    getSupportActionBar().setDisplayShowTitleEnabled(true);
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setHomeButtonEnabled(true);
+                  //  toolbar.setBackgroundColor();
                     collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
                     collapsingToolbarLayout.setTitle("VIT Handbook");
-                    collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.mainHeader));
+                    collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                    collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
                 }
             }
         }.execute();
 
-    }
-
-    void initialize()
-    {
-        mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
-        searchLayout = (LinearLayout) findViewById(R.id.searchLayout);
-        mainHeader = (LinearLayout) findViewById(R.id.mainHeader);
-        searchList = (ListView)findViewById(R.id.rvSearch);
-        searchloadbar = (ProgressBar)findViewById(R.id.searchprogressbar);
-        searchbox = (EditText)findViewById(R.id.search_box);
-        searchbox.addTextChangedListener(new AutoCompleteWatcher(this));
-        searchbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchClick(view);
-            }
-        });
-        back = new BackConnect(this);
-        ald = new SearchListAdapter(this,R.layout.search_card,new ArrayList<Article>());
-        searchList.setAdapter(ald);
-        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                onSearchItemClick(adapterView,view,i,l);
-            }
-        });
-    }
-
-    public void onSearchItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        Intent intent = new Intent(this, ArticleActivity.class);
-        int color = ((SearchListAdapter.SearchViewHolder) view.getTag()).color;
-        intent.putExtra("topic", ((Article)parent.getAdapter().getItem(position)).topic);
-        intent.putExtra("color", color);
-        startActivity(intent);
     }
 
     @Override
@@ -132,22 +107,13 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void searchClick(View view) {
-        if (!searchMode) {
-            mainNavigator.animate().translationY(-mainNavigator.getHeight())
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            mainNavigator.setVisibility(View.GONE);
-                            searchLayout.setVisibility(View.VISIBLE);
-                            searchMode = true;
-                        }
-                    });
+        else if ( id == android.R.id.home)
+        {
+            onBackPressed();
+            return true ;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -164,13 +130,13 @@ public class MainActivity extends ActionBarActivity {
                         }
                     });
         }
-        else if (getFragmentManager().getBackStackEntryCount() == 0)
+        else if (getSupportFragmentManager().getBackStackEntryCount() == 0)
             super.onBackPressed();
         else  {
 
-            getFragmentManager().popBackStack();
+            getSupportFragmentManager().popBackStack();
 
-            if (getFragmentManager().getBackStackEntryCount() == 1)
+            if (getSupportFragmentManager().getBackStackEntryCount() == 1)
             {
             }
         }
