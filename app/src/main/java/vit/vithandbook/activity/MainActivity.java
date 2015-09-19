@@ -31,7 +31,6 @@ import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
-import vit.vithandbook.fragment.SubSectionFragment;
 import vit.vithandbook.helperClass.AutoCompleteWatcher;
 import vit.vithandbook.helperClass.BackConnect;
 import vit.vithandbook.helperClass.DataBaseHelper;

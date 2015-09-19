@@ -81,13 +81,13 @@ public class ArticleListFragment extends BackHandlerFragment {
     public void onListItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), ArticleActivity.class);
         int color = ((ArticleListAdapter.ViewHolder) view.getTag()).color;
-      //  intent.putExtra("topic", topics.get(position));
+       // intent.putExtra("topic", topics.get(position));
        // intent.putExtra("color", color);
        // startActivity(intent);
         Fragment hideFragment = getActivity().getFragmentManager().findFragmentByTag("articleListFragment");
         Fragment newFrag = ArticleFragment.newInstance(topics.get(position));
         getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(hideFragment).add(R.id.frame_layout_main, newFrag, "articleListFragment").addToBackStack(null).commit();
+                .add(R.id.frame_layout_main, newFrag, "articleListFragment").addToBackStack(null).commit();
     }
 
     void fetchArticleData() {

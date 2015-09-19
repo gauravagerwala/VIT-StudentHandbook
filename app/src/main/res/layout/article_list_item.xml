@@ -3,25 +3,28 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:gravity="center_horizontal"
+    android:background="#fff"
     android:padding="10dp"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="@dimen/suggestion_circle_size"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="#FFF"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_height="@dimen/suggestion_circle_size"
         android:background="@drawable/circle"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:id="@+id/tvCircle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_gravity="center_vertical"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:id="@+id/tvContent"
         android:layout_weight="3" />
 </LinearLayout>
