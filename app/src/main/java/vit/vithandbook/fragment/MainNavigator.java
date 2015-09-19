@@ -1,6 +1,7 @@
 package vit.vithandbook.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +35,13 @@ public class MainNavigator extends BackHandlerFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ViewTreeObserver vto = grid.getViewTreeObserver();
+        final ViewTreeObserver vto = grid.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 int width = grid.getWidth();
                 allignCards(width);
+                vto.removeOnGlobalLayoutListener(this);
             }
         });
 

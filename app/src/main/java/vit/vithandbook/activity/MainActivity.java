@@ -116,28 +116,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (searchMode) {
-            mainNavigator.setVisibility(View.VISIBLE);
-            mainNavigator.animate().translationY(0)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            searchLayout.setVisibility(View.GONE);
-                            searchMode = false;
-                        }
-                    });
-        }
-        else if (getSupportFragmentManager().getBackStackEntryCount() == 0)
+    public void onBackPressed()
+    {
+        if ( getFragmentManager().getBackStackEntryCount() == 0)
             super.onBackPressed();
-        else  {
-
-            getSupportFragmentManager().popBackStack();
-
-            if (getSupportFragmentManager().getBackStackEntryCount() == 1)
-            {
-            }
+        else
+        {
+            getFragmentManager().popBackStack();
         }
     }
 
