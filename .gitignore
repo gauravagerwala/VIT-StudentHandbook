@@ -50,3 +50,5 @@ build.gradle
 .idea/gradle.xml
 .idea/gradle.xml
 .idea/modules.xml
+.idea/gradle.xml
+.idea/modules.xml

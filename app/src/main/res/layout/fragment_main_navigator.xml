@@ -1,6 +1,9 @@
+
 <!--<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:id="@+id/mainScrollView"
     android:layout_height="fill_parent"
     android:layout_width="fill_parent">
@@ -36,7 +39,7 @@
                <ImageView
                    android:layout_width="100dp"
                    android:layout_height="125dp"
-                   android:src="@drawable/ic_academics"
+                   android:src="@drawable/ic_academics_box"
                    android:layout_gravity="center"
                    />
 
@@ -72,7 +75,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="125dp"
-                    android:src="@drawable/ic_college"
+                    android:src="@drawable/ic_college_box"
                     android:layout_gravity="center"
                     />
 
@@ -108,7 +111,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="125dp"
-                    android:src="@drawable/ic_hostel"
+                    android:src="@drawable/ic_hostels_box"
                     android:layout_gravity="center"
                     />
 
@@ -144,7 +147,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="125dp"
-                    android:src="@drawable/ic_studentorganizations"
+                    android:src="@drawable/ic_student_organizations"
                     android:layout_gravity="center"
                     />
 
@@ -180,7 +183,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="125dp"
-                    android:src="@drawable/ic_lifehacks"
+                    android:src="@drawable/ic_life_hacks"
                     android:layout_gravity="center"
                     />
                 <TextView
@@ -215,7 +218,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="125dp"
-                    android:src="@drawable/ic_around"
+                    android:src="@drawable/ic_around_vit"
                     android:layout_gravity="center"/>
 
                 <TextView
