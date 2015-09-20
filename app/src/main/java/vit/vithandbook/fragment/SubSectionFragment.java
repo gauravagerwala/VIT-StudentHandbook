@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.CardListAdapter;
+import vit.vithandbook.adapter.MainNavigatorAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.helperClass.DataBaseHelper;
 

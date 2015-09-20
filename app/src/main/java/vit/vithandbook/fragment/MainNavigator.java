@@ -1,6 +1,8 @@
 package vit.vithandbook.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +11,15 @@ import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
 
 import vit.vithandbook.R;
+import vit.vithandbook.adapter.MainNavigatorAdapter;
+import vit.vithandbook.adapter.onItemClickListener;
 
 public class MainNavigator extends BackHandlerFragment {
 
     GridLayout grid;
+    View rootView;
+    RecyclerView mainNavigator ;
+    MainNavigatorAdapter rvAdapter ;
 
     public MainNavigator() {
 
@@ -25,14 +32,21 @@ public class MainNavigator extends BackHandlerFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_navigator, container, false);
-        grid = (GridLayout) view.findViewById(R.id.mainNavGrid);
-        // scrollView = (customScrollView)view.findViewById(R.id.mainScrollView);
-        // scrollView.setActivity((MainActivity) getActivity());
-        return view;
+        rootView = inflater.inflate(R.layout.fragment_main_navigator, container, false);
+        mainNavigator = (RecyclerView)rootView.findViewById(R.id.rv_main_navigator);
+        rvAdapter = new MainNavigatorAdapter(getActivity());
+        rvAdapter.setOnItemClickListener(new onItemClickListener() {
+            @Override
+            public void onItemClick(String data) {
+               navigate(data);
+            }
+        });
+        mainNavigator.setAdapter(rvAdapter);
+        mainNavigator.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        return rootView;
     }
 
-    @Override
+  /*  @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final ViewTreeObserver vto = grid.getViewTreeObserver();
@@ -45,9 +59,9 @@ public class MainNavigator extends BackHandlerFragment {
             }
         });
 
-    }
+    }*/
 
-    void allignCards(int width) {
+   /* void allignCards(int width) {
         int cols = grid.getColumnCount();
         int spacefactor = dptopx(5);
         int idealW = (width / cols) - spacefactor;
@@ -63,11 +77,11 @@ public class MainNavigator extends BackHandlerFragment {
             params.width = idealW;
             card.setLayoutParams(params);
         }
-    }
+    }*/
 
-    public void navigate(View view) {
+    public void navigate(String category) {
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
-        String category = (String) view.getTag();
+        //String category = (String) view.getTag();
         BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
         getFragmentManager().beginTransaction().
                 setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
