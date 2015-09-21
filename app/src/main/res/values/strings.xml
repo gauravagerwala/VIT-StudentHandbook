@@ -18,12 +18,12 @@
         <item>Around VIT</item>
     </string-array>
     <string-array name="iconArray">
-        <item>@drawable/ic_academics</item>
-        <item>@drawable/ic_college</item>
-        <item>@drawable/ic_hostel</item>
-        <item>@drawable/ic_studentorganizations</item>
-        <item>@drawable/ic_lifehacks</item>
-        <item>@drawable/ic_around</item>
+        <item>@drawable/ic_academics_box</item>
+        <item>@drawable/ic_college_box</item>
+        <item>@drawable/ic_hostels_box</item>
+        <item>@drawable/ic_student_organizations</item>
+        <item>@drawable/ic_life_hacks</item>
+        <item>@drawable/ic_around_vit</item>
     </string-array>
 </resources>
 
