@@ -5,7 +5,7 @@
     android:focusable="true"
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground"
-    android:layout_margin="5dp">
+    android:layout_margin="1dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
+            android:textSize="50sp"
             android:textColor="#FFF"
             android:gravity="center"
             android:paddingLeft="20dp"

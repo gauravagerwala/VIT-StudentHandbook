@@ -46,8 +46,7 @@ public class ArticleListAdapter extends ArrayAdapter<String> {
             holder = new ViewHolder();
             holder.content = (TextView) view.findViewById(R.id.tvContent);
             holder.circle = (TextView) view.findViewById(R.id.tvCircle);
-            view.setTag(holder)
-            ;
+            view.setTag(holder);
         } else
             holder = (ViewHolder) view.getTag();
         int index = Math.abs(objects.get(position).hashCode())%7;

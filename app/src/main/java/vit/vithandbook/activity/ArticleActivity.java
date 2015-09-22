@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -109,7 +110,7 @@ public class ArticleActivity extends ActionBarActivity {
         setTitle("");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(android.R.color.background_light));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.background_light)));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

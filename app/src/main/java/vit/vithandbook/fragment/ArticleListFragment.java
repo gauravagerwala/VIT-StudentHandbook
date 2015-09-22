@@ -1,6 +1,7 @@
 package vit.vithandbook.fragment;
 
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -81,9 +82,13 @@ public class ArticleListFragment extends BackHandlerFragment {
     public void onListItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), ArticleActivity.class);
         int color = ((ArticleListAdapter.ViewHolder) view.getTag()).color;
-        intent.putExtra("topic", topics.get(position));
-        intent.putExtra("color", color);
-        startActivity(intent);
+       // intent.putExtra("topic", topics.get(position));
+       // intent.putExtra("color", color);
+       // startActivity(intent);
+        Fragment hideFragment = getActivity().getFragmentManager().findFragmentByTag("articleListFragment");
+        Fragment newFrag = ArticleFragment.newInstance(topics.get(position));
+        getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                .add(R.id.frame_layout_main, newFrag, "articleListFragment").addToBackStack(null).commit();
     }
 
     void fetchArticleData() {

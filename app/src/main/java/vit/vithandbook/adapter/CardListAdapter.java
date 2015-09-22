@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import vit.vithandbook.R;
 
@@ -17,7 +16,7 @@ import vit.vithandbook.R;
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder> {
 
     Context context;
-    int[] colors;
+    int[] color_dark,color_light;
     onItemClickListener itemClickListener;
     ArrayList<String> objects;
 
@@ -44,11 +43,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     public CardListAdapter(Context context, ArrayList<String> objects) {
         this.context = context;
         this.objects = objects;
-        colors = context.getResources().getIntArray(R.array.colors);
+        color_dark = context.getResources().getIntArray(R.array.sub_dark_colors);
+        color_light = context.getResources().getIntArray(R.array.sub_light_colors);
     }
 
     @Override
-    public CardListAdapter.CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.sub_section_card, parent, false);
         return new CardViewHolder(view);
     }
@@ -56,10 +56,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         if(position<getItemCount()) {
-            int index = Math.abs(objects.get(position).hashCode())%7;
+            int index = Math.abs(position)%11;
             holder.content.setText(objects.get(position));
-            holder.content.setBackgroundDrawable(new ColorDrawable(colors[index]));
-            holder.circle.setBackgroundDrawable(new ColorDrawable(colors[index]));
+            holder.content.setBackgroundDrawable(new ColorDrawable(color_dark[index]));
+            holder.circle.setBackgroundDrawable(new ColorDrawable(color_light[index]));
             holder.circle.setText(String.valueOf(Character.toUpperCase(objects.get(position).charAt(0))));
         }
     }

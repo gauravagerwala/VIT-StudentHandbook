@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.CardListAdapter;
+import vit.vithandbook.adapter.MainNavigatorAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.helperClass.DataBaseHelper;
 
@@ -84,7 +85,7 @@ public class SubSectionFragment extends BackHandlerFragment {
         Fragment hideFragment = getActivity().getFragmentManager().findFragmentByTag("subSectionFragment");
         Fragment articleFragment = ArticleListFragment.newInstance(data);
         getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(hideFragment).add(R.id.mainNavigator, articleFragment, "articleListFragment").addToBackStack(null).commit();
+                .hide(hideFragment).add(R.id.frame_layout_main, articleFragment, "articleListFragment").addToBackStack(null).commit();
     }
 
     public void fetchSubSectionData() {

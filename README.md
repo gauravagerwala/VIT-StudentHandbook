@@ -1,2 +1,2 @@
 # VIT-StudentHandbook
-VIT's android application for the Student Handbook
+The Student Handbook Android Application for VIT University.

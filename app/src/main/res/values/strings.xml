@@ -8,4 +8,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_article">ArticleActivity</string>
+
+    <string-array name="main_categories">
+        <item>Academics</item>
+        <item>College</item>
+        <item>Hostel</item>
+        <item>Student Organisations</item>
+        <item>Life Hacks</item>
+        <item>Around VIT</item>
+    </string-array>
+    <string-array name="iconArray">
+        <item>@drawable/ic_academics_box</item>
+        <item>@drawable/ic_college_box</item>
+        <item>@drawable/ic_hostels_box</item>
+        <item>@drawable/ic_student_organizations</item>
+        <item>@drawable/ic_life_hacks</item>
+        <item>@drawable/ic_around_vit</item>
+    </string-array>
 </resources>
+

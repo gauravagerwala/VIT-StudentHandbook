@@ -6,16 +6,13 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -27,11 +24,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import vit.vithandbook.R;
-
-import vit.vithandbook.adapter.MainTabAdapter;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
@@ -50,6 +45,8 @@ public class MainActivity extends ActionBarActivity {
     MainTabAdapter pageradapter ;
     TabLayout tabs ;
     SearchListAdapter ald ;
+    CollapsingToolbarLayout collapsingToolbarLayout ;
+    Toolbar toolbar ;
     LinearLayout mainNavigator, searchLayout, mainHeader;
     EditText searchbox;
     ProgressBar load,searchloadbar;
@@ -59,12 +56,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initialize();
+    //    initialize();
 
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
-                mainHeader.setVisibility(View.GONE);
+               // mainHeader.setVisibility(View.GONE);
             }
 
             @Override
@@ -76,55 +73,25 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             protected void onPostExecute(Void res) {
-                mainHeader.setVisibility(View.VISIBLE);
+               // mainHeader.setVisibility(View.VISIBLE);
+              //  setSuggestionColors();
                 if (savedInstanceState == null) {
                     selectedFragment = new MainNavigator();
-                    getFragmentManager().beginTransaction().add(R.id.mainNavigator, selectedFragment, "mainNavigator").commit();
+                    getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
+                    toolbar = (Toolbar)findViewById(R.id.toolbar);
+                    setSupportActionBar(toolbar);
+                    getSupportActionBar().setDisplayShowTitleEnabled(true);
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setHomeButtonEnabled(true);
+                  //  toolbar.setBackgroundColor();
+                    collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+                    collapsingToolbarLayout.setTitle("VIT Handbook");
+                    collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                    collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
                 }
             }
         }.execute();
 
-    }
-
-    void initialize()
-    {
-        mainNavigator = (LinearLayout) findViewById(R.id.mainNavigator);
-        pager = (ViewPager)findViewById(R.id.view_pager_main);
-        tabs = (TabLayout)findViewById(R.id.sliding_tabs);
-        pageradapter = new MainTabAdapter(this,this.getFragmentManager());
-        pager.setAdapter(pageradapter);
-        tabs.setupWithViewPager(pager);
-        searchLayout = (LinearLayout) findViewById(R.id.searchLayout);
-        mainHeader = (LinearLayout) findViewById(R.id.mainHeader);
-        searchList = (ListView)findViewById(R.id.rvSearch);
-        searchloadbar = (ProgressBar)findViewById(R.id.searchprogressbar);
-        searchbox = (EditText)findViewById(R.id.search_box);
-        searchbox.addTextChangedListener(new AutoCompleteWatcher(this));
-        searchbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchClick(view);
-            }
-        });
-        back = new BackConnect(this);
-        ald = new SearchListAdapter(this,R.layout.search_card,new ArrayList<Article>());
-        searchList.setAdapter(ald);
-        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                onSearchItemClick(adapterView, view, i, l);
-            }
-        });
-
-    }
-
-    public void onSearchItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        Intent intent = new Intent(this, ArticleActivity.class);
-        int color = ((SearchListAdapter.SearchViewHolder) view.getTag()).color;
-        intent.putExtra("topic", ((Article)parent.getAdapter().getItem(position)).topic);
-        intent.putExtra("color", color);
-        startActivity(intent);
     }
 
     @Override
@@ -140,44 +107,23 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void searchClick(View view) {
-        if (!searchMode) {
-            mainNavigator.animate().translationY(-mainNavigator.getHeight())
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            mainNavigator.setVisibility(View.GONE);
-                            searchLayout.setVisibility(View.VISIBLE);
-                            searchMode = true;
-                        }
-                    });
+        else if ( id == android.R.id.home)
+        {
+            onBackPressed();
+            return true ;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed()
     {
-        BackHandlerFragment current = (BackHandlerFragment)pageradapter.getFragmentAtPosition(pager.getCurrentItem());
-        if (searchMode) {
-            mainNavigator.setVisibility(View.VISIBLE);
-            mainNavigator.animate().translationY(0)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            searchLayout.setVisibility(View.GONE);
-                            searchbox.setText("");
-                            searchMode = false;
-                        }
-                    });
-        }
-        else if(!current.onBackPressed())
-        {
+        if ( getFragmentManager().getBackStackEntryCount() == 0)
             super.onBackPressed();
+        else
+        {
+            getFragmentManager().popBackStack();
         }
     }
 
@@ -186,80 +132,6 @@ public class MainActivity extends ActionBarActivity {
         DataBaseHelper helper = new DataBaseHelper(this);
         helper.createDataBase();
     }
-
-    /*
-
-    //old navigate function kept for legacy purposes
-
-    public void navigate(View view) {
-        AnimateMainHeader((ViewGroup) view, false);
-        MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
-        String category = (String) view.getTag();
-        BackHandlerFragment fragment = ExpandableListFragement.newInstance(category);
-        getFragmentManager().beginTransaction().
-                setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(main).add(R.id.mainNavigator,fragment, "subSectionFragment").addToBackStack(null).commit();
-    }*/
-
-    public void AnimateMainHeader(ViewGroup view, boolean back) {
-        int startColor = ((ColorDrawable) mainHeader.getBackground()).getColor();
-        int startColorDark = getResources().getColor(R.color.mainHeaderDark);
-        if (Build.VERSION.SDK_INT >= 21)
-            startColorDark = getWindow().getStatusBarColor();
-        int endcolor;
-        int endColorDark;
-        if (back) {
-            endcolor = getResources().getColor(R.color.mainHeader);
-            endColorDark = getResources().getColor(R.color.mainHeaderDark);
-        } else {
-            endcolor = ((ColorDrawable) ((LinearLayout) view.getChildAt(0)).getBackground()).getColor();
-            switch (view.getTag().toString()) {
-                case "Academics":
-                    endColorDark = getResources().getColor(R.color.academicsDark);
-                    break;
-                case "College":
-                    endColorDark = getResources().getColor(R.color.collegeDark);
-                    break;
-                case "Hostel":
-                    endColorDark = getResources().getColor(R.color.hostelDark);
-                    break;
-                case "Student Organisations":
-                    endColorDark = getResources().getColor(R.color.studDark);
-                    break;
-                case "Life Hacks":
-                    endColorDark = getResources().getColor(R.color.lifehackDark);
-                    break;
-                case "Around Vit":
-                    endColorDark = getResources().getColor(R.color.aroundDark);
-                    break;
-                default:
-                    endColorDark = getResources().getColor(R.color.mainHeaderDark);
-            }
-
-        }
-        final ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(), startColor, endcolor);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mainHeader.setBackgroundColor((int) animator.getAnimatedValue());
-                tabs.setBackgroundColor((int) animator.getAnimatedValue());
-
-            }
-        });
-        final ValueAnimator animator1 = ValueAnimator.ofObject(new ArgbEvaluator(), startColorDark, endColorDark);
-        animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                if (Build.VERSION.SDK_INT >= 21)
-                    getWindow().setStatusBarColor((int) animator1.getAnimatedValue());
-
-            }
-        });
-        animator1.start();
-        animator.start();
-
-    }
-
 
     public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
