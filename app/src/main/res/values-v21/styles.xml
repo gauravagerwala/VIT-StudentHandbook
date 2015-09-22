@@ -3,8 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">#334B82</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:colorPrimaryDark">#25365E</item>
-
+    </style>
+     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">Roboto-Light</item>
     </style>
     <color name="white">#fff</color>
     <color name="black">#e6191919</color>
@@ -32,7 +35,34 @@
         <item>#34495e</item>
         <item>#c0392b</item>
     </array>
-
+    <array name="sub_light_colors">
+        <item>#da6b2f</item>
+        <item>#7aaba2</item>
+        <item>#508e5a</item>
+        <item>#ccb64d</item>
+        <item>#ab2a33</item>
+        <item>#403475</item>
+        <item>#Ed5565</item>
+        <item>#509cec</item>
+        <item>#Ac92ec</item>
+        <item>#4fc1e9</item>
+        <item>#48cfad</item>
+        <item>#Ec87c0</item>
+    </array>
+   <array name="sub_dark_colors">
+    <item>#b84f16</item>
+    <item>#4e9589</item>
+    <item>#32763c</item>
+    <item>#c0a421</item>
+    <item>#8f1922</item>
+    <item>#2d2260</item>
+    <item>#Da4453</item>
+    <item>#4a89dc</item>
+    <item>#967adc</item>
+    <item>#2bafda</item>
+    <item>#37bc9b</item>
+    <item>#D770ad</item>
+   </array>
 
     <style name="suggestionFont" parent="Base.TextAppearance.AppCompat.Small">
         <item name="android:textSize">20sp</item>
@@ -46,6 +76,14 @@
         <item>@color/stud</item>
         <item>@color/lifehack</item>
         <item>@color/around</item>
+    </array>
+    <array name="main_navigator_dark">
+        <item>@color/academicsDark</item>
+        <item>@color/collegeDark</item>
+        <item>@color/hostelDark</item>
+        <item>@color/studDark</item>
+        <item>@color/lifehackDark</item>
+        <item>@color/aroundDark</item>
     </array>
 
 

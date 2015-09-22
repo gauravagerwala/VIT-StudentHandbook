@@ -237,8 +237,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingRight="5dp"
-    android:paddingEnd="5dp"
+    android:paddingRight="2dp"
+    android:paddingEnd="2dp"
     android:layout_width="fill_parent">
 
 

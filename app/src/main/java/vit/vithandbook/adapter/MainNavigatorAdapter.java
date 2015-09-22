@@ -25,7 +25,7 @@ public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdap
     String [] Categories ;
     TypedArray dta ;
     ArrayList<Drawable> drawables ;
-    int [] colors ;
+    int [] colors, colors_dark ;
     onItemClickListener itemClickListener;
 
     class NavCardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -63,6 +63,7 @@ public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdap
             drawables.add(r.getDrawable(dta.getResourceId(i,-1)));
         }
         colors = r.getIntArray(R.array.main_navigator_colors);
+        colors_dark = r.getIntArray(R.array.main_navigator_dark);
     }
 
     @Override
@@ -75,7 +76,8 @@ public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdap
     public void onBindViewHolder(NavCardViewHolder holder, int position) {
 
         holder.categoryName.setText(Categories[position]);
-       // holder.icon.setImageResource(Drawables.getResourceId(position,-1));
+        holder.categoryName.setBackgroundColor(colors_dark[position]);
+        // holder.icon.setImageResource(Drawables.getResourceId(position,-1));
         holder.icon.setImageDrawable(drawables.get(position));
         holder.main.setBackgroundColor(colors[position]);
     }
