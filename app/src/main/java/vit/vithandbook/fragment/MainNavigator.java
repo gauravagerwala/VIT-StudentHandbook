@@ -45,6 +45,19 @@ public class MainNavigator extends BackHandlerFragment {
         mainNavigator.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         return rootView;
     }
+    public void navigate(String category) {
+        MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
+        //String category = (String) view.getTag();
+        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
+        getFragmentManager().beginTransaction().
+                setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                .hide(main).add(R.id.frame_layout_main,fragment,"subSectionFragment").addToBackStack(null).commit();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 
   /*  @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -77,25 +90,13 @@ public class MainNavigator extends BackHandlerFragment {
             params.width = idealW;
             card.setLayoutParams(params);
         }
-    }*/
 
-    public void navigate(String category) {
-        MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
-        //String category = (String) view.getTag();
-        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
-        getFragmentManager().beginTransaction().
-                setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(main).add(R.id.frame_layout_main,fragment,"subSectionFragment").addToBackStack(null).commit();
     }
-
-
-    @Override
-    public boolean onBackPressed() {
-        return false;
-    }
-
     int dptopx(int dp) {
         float density = getActivity().getApplicationContext().getResources().getDisplayMetrics().density;
         return Math.round((float) dp * density);
     }
+    */
+
+
 }

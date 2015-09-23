@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,7 +13,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.NavigationView;
+import android.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +37,7 @@ import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
+import vit.vithandbook.fragment.MapFragment;
 import vit.vithandbook.helperClass.AutoCompleteWatcher;
 import vit.vithandbook.helperClass.BackConnect;
 import vit.vithandbook.helperClass.DataBaseHelper;
@@ -40,7 +47,9 @@ import vit.vithandbook.model.Article;
 public class MainActivity extends ActionBarActivity {
 
     boolean searchMode = false;
+    DrawerLayout drawerLayout;
     public BackHandlerFragment selectedFragment;
+    public AppBarLayout appBarLayout;
     ListView searchList;
     SearchListAdapter ald ;
     CollapsingToolbarLayout collapsingToolbarLayout ;
@@ -55,7 +64,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    //    initialize();
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -75,23 +83,56 @@ public class MainActivity extends ActionBarActivity {
                // mainHeader.setVisibility(View.VISIBLE);
               //  setSuggestionColors();
                 if (savedInstanceState == null) {
-                    selectedFragment = new MainNavigator();
-                    getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
-                    toolbar = (Toolbar)findViewById(R.id.toolbar);
-                    setSupportActionBar(toolbar);
-                    getSupportActionBar().setDisplayShowTitleEnabled(true);
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    getSupportActionBar().setHomeButtonEnabled(true);
-                  //  toolbar.setBackgroundColor();
-                    collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-                    collapsingToolbarLayout.setTitle("VIT Handbook");
-                    collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
-                    collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
+                    initialize();
                 }
             }
         }.execute();
 
     }
+
+    private void initialize(){
+        selectedFragment = new MainNavigator();
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
+        getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle("VIT Handbook");
+        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+        collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
+        view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(final MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.drawer_map:
+                        Fragment fragment =  new MapFragment();
+                        appBarLayout.setExpanded(false);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .hide(selectedFragment).add(R.id.frame_layout_main, fragment, "MapFragment").addToBackStack(null).commit();
+                        break;
+                }
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+    }
+
+    /*private void switchFragment(int id) {
+        BackHandlerFragment fragment = null;
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        switch (id) {
+            case R.id.drawer_map:
+                fragment = MapFragment.newInstance();
+                break;
+
+        }
+        fragmentTransaction.replace(R.id.frame_layout_main,fragment).commit();
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
