@@ -4,18 +4,14 @@ import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.OverScroller;
 
 /**
- * An extension to the standard Android {@link ImageView}, which makes it
- * respond to Scroll and Fling events. Uses a {@link GestureDetectorCompat} and
- * a {@link OverScroller} to provide scrolling functionality.
- *
- * @author EgorAnd
- *
+ * Custom scrollable image view class
  */
 public class ScrollableImageView extends ImageView {
 
@@ -36,6 +32,8 @@ public class ScrollableImageView extends ImageView {
         DisplayMetrics dm = getResources().getDisplayMetrics();
         screenW = dm.widthPixels;
         screenH = dm.heightPixels;
+        Log.d("Screen width",Integer.toString(screenW));
+        Log.d("Screen height",Integer.toString(screenH));
 
         gestureDetector = new GestureDetectorCompat(context, gestureListener);
         overScroller = new OverScroller(context);
@@ -60,16 +58,16 @@ public class ScrollableImageView extends ImageView {
             // when scrolling is over, we will want to "spring back" if the
             // image is overscrolled
             overScroller.springBack(positionX, positionY, 0,
-                    getMaxHorizontal(), 0, getMaxVertical());
+                   getMaxHorizontal(), 0, getMaxVertical());
         }
     }
 
     private int getMaxHorizontal() {
-        return (getDrawable().getBounds().width() - screenW);
+        return (Math.abs(screenW - getDrawable().getBounds().width()));
     }
 
     private int getMaxVertical() {
-        return (getDrawable().getBounds().height() - screenH);
+        return (Math.abs(screenH - getDrawable().getBounds().height()));
     }
 
     private SimpleOnGestureListener gestureListener = new SimpleOnGestureListener() {

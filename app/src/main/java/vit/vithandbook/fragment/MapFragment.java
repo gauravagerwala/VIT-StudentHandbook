@@ -1,10 +1,12 @@
 package vit.vithandbook.fragment;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -17,6 +19,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.io.IOException;
 

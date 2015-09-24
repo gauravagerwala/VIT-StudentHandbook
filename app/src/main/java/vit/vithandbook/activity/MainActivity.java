@@ -122,18 +122,6 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    /*private void switchFragment(int id) {
-        BackHandlerFragment fragment = null;
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        switch (id) {
-            case R.id.drawer_map:
-                fragment = MapFragment.newInstance();
-                break;
-
-        }
-        fragmentTransaction.replace(R.id.frame_layout_main,fragment).commit();
-    }*/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
