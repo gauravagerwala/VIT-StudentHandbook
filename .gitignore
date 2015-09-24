@@ -58,3 +58,4 @@ build.gradle
 .idea/vcs.xml
 .idea/modules.xml
 VIT-StudentHandbook.iml
+.idea/gradle.xml
