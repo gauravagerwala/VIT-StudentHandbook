@@ -76,7 +76,7 @@ public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdap
     public void onBindViewHolder(NavCardViewHolder holder, int position) {
 
         holder.categoryName.setText(Categories[position]);
-        holder.categoryName.setBackgroundColor(colors_dark[position]);
+        holder.categoryName.setBackgroundColor(colors[position]);
         // holder.icon.setImageResource(Drawables.getResourceId(position,-1));
         holder.icon.setImageDrawable(drawables.get(position));
         holder.main.setBackgroundColor(colors[position]);
