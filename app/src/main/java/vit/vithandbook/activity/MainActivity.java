@@ -100,7 +100,7 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("VIT Handbook");
+        collapsingToolbarLayout.setTitle("Categories");
         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
         collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
