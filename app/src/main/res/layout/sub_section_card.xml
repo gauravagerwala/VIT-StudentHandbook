@@ -16,13 +16,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="50sp"
+            android:textSize="70sp"
             android:textColor="#FFF"
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:layout_gravity="center"
             android:id="@+id/tvCircle" />
 
@@ -31,11 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="#fff"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:maxLines="2"
             android:gravity="center"
             android:minLines="1"
-            android:padding="10dp"
+            android:padding="15dp"
             android:id="@+id/tvContent"
             android:layout_weight="1" />
     </LinearLayout>

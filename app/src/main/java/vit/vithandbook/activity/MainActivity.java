@@ -108,12 +108,18 @@ public class MainActivity extends ActionBarActivity {
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(final MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
+                    case R.id.drawer_categories:
+                        Fragment fragment_main = new MainNavigator();
+                        appBarLayout.setExpanded(true);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .hide(selectedFragment).add(R.id.frame_layout_main, fragment_main, "mainNavigator").addToBackStack(null).commit();
+                        break;
                     case R.id.drawer_map:
-                        Fragment fragment =  new MapFragment();
+                        Fragment fragment_map = new MapFragment();
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                                .hide(selectedFragment).add(R.id.frame_layout_main, fragment, "MapFragment").addToBackStack(null).commit();
+                                .hide(selectedFragment).add(R.id.frame_layout_main, fragment_map, "MapFragment").addToBackStack(null).commit();
                         break;
                 }
                 drawerLayout.closeDrawers();
