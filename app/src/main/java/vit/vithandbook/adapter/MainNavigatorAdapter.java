@@ -65,12 +65,13 @@ public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdap
             drawables.add(r.getDrawable(dta.getResourceId(i,-1)));
         }
         colors = r.getIntArray(R.array.main_navigator_colors);
-        colors_dark = r.getIntArray(R.array.main_navigator_dark);
+        //colors_dark = r.getIntArray(R.array.main_navigator_dark);
     }
 
     @Override
     public NavCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.main_navigator_card, parent, false);
+        view.setTag(Categories[getItemCount()-1]);
         return new NavCardViewHolder(view);
     }
 
