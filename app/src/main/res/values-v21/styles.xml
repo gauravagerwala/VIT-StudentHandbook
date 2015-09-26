@@ -7,8 +7,8 @@
         <item name="android:colorPrimaryDark">#25365E</item>
     </style>
      <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">Roboto-Light</item>
-    </style>
+         <item name="android:fontFamily">sans-serif-light</item>
+     </style>
     <color name="white">#fff</color>
     <color name="black">#e6191919</color>
     <color name="mainHeader">#3B5796</color>
