@@ -1,45 +1,29 @@
 package vit.vithandbook.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
-import android.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.Toolbar;
-
 import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.MapFragment;
-import vit.vithandbook.helperClass.AutoCompleteWatcher;
-import vit.vithandbook.helperClass.BackConnect;
 import vit.vithandbook.helperClass.DataBaseHelper;
 import vit.vithandbook.model.Article;
 
@@ -54,11 +38,7 @@ public class MainActivity extends ActionBarActivity {
     SearchListAdapter ald ;
     CollapsingToolbarLayout collapsingToolbarLayout ;
     Toolbar toolbar ;
-    LinearLayout mainNavigator, searchLayout, mainHeader;
-    EditText searchbox;
     ProgressBar load,searchloadbar;
-    BackConnect back;
-    public int SuggestionHeight = -1;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
