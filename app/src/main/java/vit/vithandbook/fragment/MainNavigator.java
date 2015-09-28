@@ -1,6 +1,7 @@
 package vit.vithandbook.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 
 import vit.vithandbook.R;
+import vit.vithandbook.activity.MainActivity;
 import vit.vithandbook.adapter.MainNavigatorAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
 
@@ -20,6 +23,7 @@ public class MainNavigator extends BackHandlerFragment {
     View rootView;
     RecyclerView mainNavigator ;
     MainNavigatorAdapter rvAdapter ;
+    RelativeLayout relativeLayout;
 
     public MainNavigator() {
 
@@ -33,6 +37,7 @@ public class MainNavigator extends BackHandlerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main_navigator, container, false);
+        relativeLayout=((MainActivity)getActivity()).relativeLayout;
         mainNavigator = (RecyclerView)rootView.findViewById(R.id.rv_main_navigator);
         rvAdapter = new MainNavigatorAdapter(getActivity());
         rvAdapter.setOnItemClickListener(new onItemClickListener() {
@@ -47,6 +52,29 @@ public class MainNavigator extends BackHandlerFragment {
     }
     public void navigate(String category) {
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
+        switch (category){
+            case "Academics":
+                relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_academics));
+                break;
+            case "College":
+                relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_college));
+                break;
+            case "Hostel":
+                relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_hostel));
+                break;
+            case "Life Hacks":
+                relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_life_hacks));
+                break;
+            case "Student Organisations":
+                relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_student_organizations));
+                break;
+            case "Around VIT":
+                relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_around_vit));
+                break;
+            default:
+                relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
+        }
+
         //String category = (String) view.getTag();
         BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
         getFragmentManager().beginTransaction().
@@ -56,6 +84,8 @@ public class MainNavigator extends BackHandlerFragment {
 
     @Override
     public boolean onBackPressed() {
+        Log.d("MainNavigator","back pressed");
+        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
         return false;
     }
 

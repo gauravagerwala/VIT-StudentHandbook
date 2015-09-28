@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.RelativeLayout;
+
 import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
@@ -33,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
     boolean searchMode = false;
     DrawerLayout drawerLayout;
     public BackHandlerFragment selectedFragment;
+    public RelativeLayout relativeLayout;
     public AppBarLayout appBarLayout;
     ListView searchList;
     SearchListAdapter ald ;
@@ -72,6 +75,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void initialize(){
         selectedFragment = new MainNavigator();
+        relativeLayout = (RelativeLayout) findViewById(R.id.rv_header);
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
         getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -90,16 +94,18 @@ public class MainActivity extends ActionBarActivity {
             public boolean onNavigationItemSelected(final MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.drawer_categories:
-                        Fragment fragment_main = new MainNavigator();
+                        BackHandlerFragment fragment_main = new MainNavigator();
                         appBarLayout.setExpanded(true);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                                .hide(selectedFragment).add(R.id.frame_layout_main, fragment_main, "mainNavigator").addToBackStack(null).commit();
+                                .replace(R.id.frame_layout_main, fragment_main, "mainNavigator").commit();
+                        selectedFragment = fragment_main;
                         break;
                     case R.id.drawer_map:
-                        Fragment fragment_map = new MapFragment();
+                        BackHandlerFragment fragment_map = new MapFragment();
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                                .hide(selectedFragment).add(R.id.frame_layout_main, fragment_map, "MapFragment").addToBackStack(null).commit();
+                                .replace(R.id.frame_layout_main, fragment_map, "MapFragment").commit();
+                        selectedFragment = fragment_map;
                         break;
                 }
                 drawerLayout.closeDrawers();

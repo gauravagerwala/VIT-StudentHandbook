@@ -38,14 +38,18 @@
                     app:contentScrim="?attr/colorPrimary"
                     app:expandedTitleMarginStart="48dp"
                     app:expandedTitleMarginEnd="64dp"
-                    android:fitsSystemWindows="true"
-                    android:background="@drawable/head_categories">
+                    android:fitsSystemWindows="true">
 
-                      <!--<ImageView
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/head_academics"/>-->
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/rv_header"
+                        android:background="@drawable/head_categories">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+
 
 
                     <android.support.v7.widget.Toolbar
