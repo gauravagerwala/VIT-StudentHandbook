@@ -2,6 +2,7 @@ package vit.vithandbook.activity;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -123,7 +124,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
+            Intent intent = new Intent(this,SearchActivity.class);
+            startActivity(intent);
             return true;
         }
 
