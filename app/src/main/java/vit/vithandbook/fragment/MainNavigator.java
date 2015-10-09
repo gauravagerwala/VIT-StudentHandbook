@@ -1,7 +1,9 @@
 package vit.vithandbook.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import vit.vithandbook.R;
 import vit.vithandbook.activity.MainActivity;
@@ -24,6 +28,7 @@ public class MainNavigator extends BackHandlerFragment {
     RecyclerView mainNavigator ;
     MainNavigatorAdapter rvAdapter ;
     RelativeLayout relativeLayout;
+    CollapsingToolbarLayout collapsingToolbarLayout ;
 
     public MainNavigator() {
 
@@ -38,6 +43,7 @@ public class MainNavigator extends BackHandlerFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main_navigator, container, false);
         relativeLayout=((MainActivity)getActivity()).relativeLayout;
+        collapsingToolbarLayout = ((MainActivity)getActivity()).collapsingToolbarLayout;
         mainNavigator = (RecyclerView)rootView.findViewById(R.id.rv_main_navigator);
         rvAdapter = new MainNavigatorAdapter(getActivity());
         rvAdapter.setOnItemClickListener(new onItemClickListener() {
@@ -52,24 +58,40 @@ public class MainNavigator extends BackHandlerFragment {
     }
     public void navigate(String category) {
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
+        Snackbar snackbar = Snackbar.make(mainNavigator, "In subSection", Snackbar.LENGTH_SHORT);
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(Color.DKGRAY);
+        snackbar.show();
         switch (category){
             case "Academics":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_academics));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.academicsDark));
+                collapsingToolbarLayout.setTitle(category);
                 break;
             case "College":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_college));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.collegeDark));
+                collapsingToolbarLayout.setTitle(category);
                 break;
             case "Hostel":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_hostel));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.hostelDark));
+                collapsingToolbarLayout.setTitle(category);
                 break;
             case "Life Hacks":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_life_hacks));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.lifehackDark));
+                collapsingToolbarLayout.setTitle(category);
                 break;
             case "Student Organisations":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_student_organizations));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.studDark));
+                collapsingToolbarLayout.setTitle(category);
                 break;
             case "Around VIT":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_around_vit));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.aroundDark));
+                collapsingToolbarLayout.setTitle(category);
                 break;
             default:
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
@@ -84,7 +106,6 @@ public class MainNavigator extends BackHandlerFragment {
 
     @Override
     public boolean onBackPressed() {
-        Log.d("MainNavigator","back pressed");
         relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
         return false;
     }

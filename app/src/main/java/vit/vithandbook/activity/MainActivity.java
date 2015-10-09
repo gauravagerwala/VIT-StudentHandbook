@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -40,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     public AppBarLayout appBarLayout;
     ListView searchList;
     SearchListAdapter ald ;
-    CollapsingToolbarLayout collapsingToolbarLayout ;
+    public CollapsingToolbarLayout collapsingToolbarLayout ;
     Toolbar toolbar ;
     ProgressBar load,searchloadbar;
 
@@ -86,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("Categories");
-        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.black));
         collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
@@ -143,7 +145,30 @@ public class MainActivity extends ActionBarActivity {
     public void onBackPressed()
     {
         if ( getFragmentManager().getBackStackEntryCount() == 0)
+        {
             super.onBackPressed();
+        }
+        else if(getFragmentManager().getBackStackEntryCount() == 1)
+        {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "Back to mainNavigator", Snackbar.LENGTH_SHORT);
+            View snackbarView = snackbar.getView();
+            snackbarView.setBackgroundColor(Color.DKGRAY);
+            snackbar.show();
+            relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
+            collapsingToolbarLayout.setTitle("Categories");
+            collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.black));
+            getFragmentManager().popBackStack();
+        }
+        else if(getFragmentManager().getBackStackEntryCount() == 2)
+        {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "Back to subSection", Snackbar.LENGTH_SHORT);
+            View snackbarView = snackbar.getView();
+            snackbarView.setBackgroundColor(Color.DKGRAY);
+            snackbar.show();
+            /*relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
+            collapsingToolbarLayout.setTitle("Categories");*/
+            getFragmentManager().popBackStack();
+        }
         else
         {
             getFragmentManager().popBackStack();
@@ -155,7 +180,12 @@ public class MainActivity extends ActionBarActivity {
         DataBaseHelper helper = new DataBaseHelper(this);
         helper.createDataBase();
     }
-
+    /*public void swap(String data){
+        Intent intent = new Intent(this, ArticleActivity.class);
+        intent.putExtra("topic", data);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    }*/
     public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
         Context activity ;
