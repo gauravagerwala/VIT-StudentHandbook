@@ -1,7 +1,9 @@
 package vit.vithandbook.fragment;
 
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,11 +21,12 @@ import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.activity.ArticleActivity;
+import vit.vithandbook.activity.MainActivity;
 import vit.vithandbook.adapter.ArticleListAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.helperClass.DataBaseHelper;
 
-public class ArticleListFragment extends BackHandlerFragment {
+public class ArticleListFragment extends BackHandlerFragment{
 
     ArrayList<String> topics;
     String articleSubCategory;
@@ -33,7 +36,6 @@ public class ArticleListFragment extends BackHandlerFragment {
 
     public ArticleListFragment() {
     }
-
     public static ArticleListFragment newInstance(String SubCategory) {
         ArticleListFragment frag = new ArticleListFragment();
         frag.articleSubCategory = SubCategory;
@@ -87,10 +89,6 @@ public class ArticleListFragment extends BackHandlerFragment {
         Intent intent = new Intent(getActivity(), ArticleActivity.class);
         intent.putExtra("topic", data);
         startActivity(intent);
-       /* Fragment hideFragment = getActivity().getFragmentManager().findFragmentByTag("articleListFragment");
-        Fragment newFrag = ArticleFragment.newInstance(topics.get(position));
-        getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .add(R.id.frame_layout_main, newFrag, "articleListFragment").addToBackStack(null).commit();*/
     }
 
     void fetchArticleData() {
