@@ -7,7 +7,7 @@
 
     <EditText
         android:id="@+id/edtSearch"
-        android:hint="Search here .."
+        android:hint="Search..."
         android:layout_width="wrap_content"
         android:textColorHint="#AAA"
         android:layout_height="wrap_content"
