@@ -153,10 +153,10 @@ public class MainActivity extends ActionBarActivity {
         }
         else if(getFragmentManager().getBackStackEntryCount() == 1)
         {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "Back to mainNavigator", Snackbar.LENGTH_SHORT);
+            /*Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "Back to mainNavigator", Snackbar.LENGTH_SHORT);
             View snackbarView = snackbar.getView();
             snackbarView.setBackgroundColor(Color.DKGRAY);
-            snackbar.show();
+            snackbar.show();*/
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
             collapsingToolbarLayout.setTitle("Categories");
             collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.black));
@@ -166,10 +166,10 @@ public class MainActivity extends ActionBarActivity {
         }
         else if(getFragmentManager().getBackStackEntryCount() == 2)
         {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "Back to subSection", Snackbar.LENGTH_SHORT);
+            /*Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "Back to subSection", Snackbar.LENGTH_SHORT);
             View snackbarView = snackbar.getView();
             snackbarView.setBackgroundColor(Color.DKGRAY);
-            snackbar.show();
+            snackbar.show();*/
             /*relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
             collapsingToolbarLayout.setTitle("Categories");*/
             getFragmentManager().popBackStack();
@@ -185,12 +185,6 @@ public class MainActivity extends ActionBarActivity {
         DataBaseHelper helper = new DataBaseHelper(this);
         helper.createDataBase();
     }
-    /*public void swap(String data){
-        Intent intent = new Intent(this, ArticleActivity.class);
-        intent.putExtra("topic", data);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-    }*/
     public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
         Context activity ;

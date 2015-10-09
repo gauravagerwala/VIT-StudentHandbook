@@ -59,10 +59,10 @@ public class MainNavigator extends BackHandlerFragment {
     }
     public void navigate(String category) {
         MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
-        Snackbar snackbar = Snackbar.make(mainNavigator, "In subSection", Snackbar.LENGTH_SHORT);
+        /*Snackbar snackbar = Snackbar.make(mainNavigator, "In subSection", Snackbar.LENGTH_SHORT);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(Color.DKGRAY);
-        snackbar.show();
+        snackbar.show();*/
         switch (category){
             case "Academics":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_academics));
