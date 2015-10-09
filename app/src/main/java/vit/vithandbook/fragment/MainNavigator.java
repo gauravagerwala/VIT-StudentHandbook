@@ -1,6 +1,7 @@
 package vit.vithandbook.fragment;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
@@ -65,34 +66,42 @@ public class MainNavigator extends BackHandlerFragment {
         switch (category){
             case "Academics":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_academics));
-                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.academicsDark));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.academics));
                 collapsingToolbarLayout.setTitle(category);
+                if (Build.VERSION.SDK_INT >= 21)
+                    getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.academicsDark));
                 break;
             case "College":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_college));
-                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.collegeDark));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.college));
                 collapsingToolbarLayout.setTitle(category);
+                if (Build.VERSION.SDK_INT >= 21)
+                    getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.collegeDark));
                 break;
             case "Hostel":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_hostel));
-                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.hostelDark));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.hostel));
                 collapsingToolbarLayout.setTitle(category);
-                break;
+                if (Build.VERSION.SDK_INT >= 21)
+                    getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.hostelDark));break;
             case "Life Hacks":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_life_hacks));
-                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.lifehackDark));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.lifehack));
                 collapsingToolbarLayout.setTitle(category);
-                break;
+                if (Build.VERSION.SDK_INT >= 21)
+                    getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.lifehackDark));break;
             case "Student Organisations":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_student_organizations));
-                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.studDark));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.stud));
                 collapsingToolbarLayout.setTitle(category);
-                break;
+                if (Build.VERSION.SDK_INT >= 21)
+                    getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.studDark));break;
             case "Around VIT":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_around_vit));
-                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.aroundDark));
+                collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.around));
                 collapsingToolbarLayout.setTitle(category);
-                break;
+                if (Build.VERSION.SDK_INT >= 21)
+                    getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.aroundDark));break;
             default:
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
         }

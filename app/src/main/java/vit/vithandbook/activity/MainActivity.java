@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -157,6 +158,8 @@ public class MainActivity extends ActionBarActivity {
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
             collapsingToolbarLayout.setTitle("Categories");
             collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.black));
+            if (Build.VERSION.SDK_INT >= 21)
+                getWindow().setStatusBarColor(getResources().getColor(R.color.black));
             getFragmentManager().popBackStack();
         }
         else if(getFragmentManager().getBackStackEntryCount() == 2)
