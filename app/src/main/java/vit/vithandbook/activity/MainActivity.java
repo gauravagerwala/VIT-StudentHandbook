@@ -89,10 +89,8 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("Categories");
-        if (Build.VERSION.SDK_INT >= 21)
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.black));
-        collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
+        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+        collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.black));
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
