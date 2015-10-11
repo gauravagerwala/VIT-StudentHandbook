@@ -9,7 +9,7 @@
 
     <TextView
         android:layout_width="@dimen/suggestion_circle_size"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:textColor="#FFF"
         android:gravity="center"
         android:layout_gravity="center"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:layout_gravity="center_vertical"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:id="@+id/tvContent"
         android:layout_weight="3" />
 </LinearLayout>
