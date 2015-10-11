@@ -1,5 +1,6 @@
 package vit.vithandbook.activity;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,10 +23,15 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import vit.vithandbook.R;
+import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.helperClass.DataBaseHelper;
 import vit.vithandbook.helperClass.XmlParseHandler;
+import vit.vithandbook.model.Article;
 
 
 public class ArticleActivity extends ActionBarActivity {
@@ -81,13 +87,20 @@ public class ArticleActivity extends ActionBarActivity {
         this.menu = menu;
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         switch (id) {
             case android.R.id.home:
-                this.finish();
+                onBackPressed();
                 return true;
             case R.id.article_bookmark:
                 if(!bookmarked){
@@ -158,5 +171,6 @@ public class ArticleActivity extends ActionBarActivity {
             db.close();
         }
     }
+
 }
 

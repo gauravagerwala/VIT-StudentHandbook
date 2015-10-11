@@ -15,6 +15,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +42,6 @@ public class MainActivity extends ActionBarActivity {
     public BackHandlerFragment selectedFragment;
     public RelativeLayout relativeLayout;
     public AppBarLayout appBarLayout;
-    ListView searchList;
     SearchListAdapter ald ;
     public CollapsingToolbarLayout collapsingToolbarLayout ;
     Toolbar toolbar ;
@@ -84,16 +84,22 @@ public class MainActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction().add(R.id.frame_layout_main, selectedFragment, "mainNavigator").commit();
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,drawerLayout,toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        drawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("Categories");
         if (Build.VERSION.SDK_INT >= 21)
             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.black));
         collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.white));
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -185,63 +191,5 @@ public class MainActivity extends ActionBarActivity {
         DataBaseHelper helper = new DataBaseHelper(this);
         helper.createDataBase();
     }
-    public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
-    {
-        Context activity ;
-        @Override
-        protected void onPreExecute()
-        {
-            searchloadbar.setVisibility(View.VISIBLE);
-        }
 
-        public searchTask(Context obj)
-        {
-         activity=obj;
-        }
-        @Override
-        protected ArrayList<Article> doInBackground(String ... params)
-        {
-            ArrayList<Article> topics = new ArrayList<>();
-            SQLiteDatabase db = null;
-            Cursor cursor =null;
-            try
-            {
-                Log.d("data", params[0]);
-                db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-                cursor = db.rawQuery("SELECT articles.main_category , articles.sub_category , articles.topic FROM articles " +
-                        "INNER JOIN search" +
-                        " ON articles._id = search._id " +
-                        "WHERE search.content match '"+params[0]+"*'",null);
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast())
-                {
-                    topics.add(new Article(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
-                    cursor.moveToNext();
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                cursor.close();
-                db.close();
-            }
-            return topics;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Article> results)
-        {
-            searchloadbar.setVisibility(View.GONE);
-            ald.setData(results);
-        }
-        public void cancelAndClear()
-        {
-            cancel(true);
-            if(ald!=null)
-            ald.clear();
-        }
-    }
 }
