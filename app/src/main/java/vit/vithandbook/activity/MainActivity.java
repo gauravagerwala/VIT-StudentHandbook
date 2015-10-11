@@ -157,7 +157,7 @@ public class MainActivity extends ActionBarActivity {
             snackbar.show();*/
             relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
             collapsingToolbarLayout.setTitle("Categories");
-            collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.black));
+            collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
             if (Build.VERSION.SDK_INT >= 21)
                 getWindow().setStatusBarColor(getResources().getColor(R.color.black));
             getFragmentManager().popBackStack();

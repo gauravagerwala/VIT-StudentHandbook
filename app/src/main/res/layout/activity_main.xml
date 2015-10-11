@@ -43,7 +43,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/rv_header"
-                        android:background="@drawable/head_main">
+                        android:background="@drawable/head_categories">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
