@@ -3,23 +3,34 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">#334B82</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+<<<<<<< HEAD
         <item name="android:colorPrimaryDark">#25365E</item>
 
+=======
+        <item name="android:colorPrimaryDark">#000000</item>
+>>>>>>> ui-rehaul
     </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
      <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">Roboto-Light</item>
-    </style>
+         <item name="android:fontFamily">sans-serif-light</item>
+     </style>
     <color name="white">#fff</color>
-    <color name="black">#e6191919</color>
-    <color name="mainHeader">#3B5796</color>
+    <color name="black">#000000</color>
+    <color name="mainHeader">#151515</color>
     <color name="mainHeaderDark">#25365E</color>
 
     <color name="academics">#014d41</color>
     <color name="academicsDark">#013629</color>
     <color name="hostel">#c2255a</color>
     <color name="hostelDark">#a92555</color>
-    <color name="college">#e5ff7143</color>
+    <color name="college">#ff7143</color>
     <color name="collegeDark">#e17142</color>
     <color name="stud">#6a1b9a</color>
     <color name="studDark">#5e147f</color>

@@ -3,8 +3,10 @@ package vit.vithandbook.fragment;
 import android.app.Fragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,6 +86,10 @@ public class SubSectionFragment extends BackHandlerFragment {
     public void rvItemClick(String data) {
         Fragment hideFragment = getActivity().getFragmentManager().findFragmentByTag("subSectionFragment");
         Fragment articleFragment = ArticleListFragment.newInstance(data);
+        /*Snackbar snackbar = Snackbar.make(recyclerView, "In Article List", Snackbar.LENGTH_SHORT);
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(Color.DKGRAY);
+        snackbar.show();*/
         getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                 .hide(hideFragment).add(R.id.frame_layout_main, articleFragment, "articleListFragment").addToBackStack(null).commit();
     }

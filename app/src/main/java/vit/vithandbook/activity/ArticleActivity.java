@@ -1,5 +1,6 @@
 package vit.vithandbook.activity;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,14 +17,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import vit.vithandbook.R;
+import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.helperClass.DataBaseHelper;
 import vit.vithandbook.helperClass.XmlParseHandler;
+import vit.vithandbook.model.Article;
 
 
 public class ArticleActivity extends ActionBarActivity {
@@ -42,6 +51,7 @@ public class ArticleActivity extends ActionBarActivity {
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         mainArticleLayout = (LinearLayout) findViewById(R.id.mainArticleLayout);
         load = (ProgressBar) findViewById(R.id.aaProgressbar);
         parser = new XmlParseHandler(this, mainArticleLayout);
@@ -49,7 +59,6 @@ public class ArticleActivity extends ActionBarActivity {
         title = (TextView) findViewById(R.id.tv_title);
         subtopic = (TextView) findViewById(R.id.tv_subtopic);
         circletopic = (TextView) findViewById(R.id.tv_circle_topic);
-
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -68,8 +77,12 @@ public class ArticleActivity extends ActionBarActivity {
             }
         }.execute();
 
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
@@ -87,7 +100,7 @@ public class ArticleActivity extends ActionBarActivity {
 
         switch (id) {
             case android.R.id.home:
-                this.finish();
+                onBackPressed();
                 return true;
             case R.id.article_bookmark:
                 if(!bookmarked){
@@ -106,7 +119,6 @@ public class ArticleActivity extends ActionBarActivity {
     }
 
     void initalize() {
-
         setTitle("");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
@@ -139,8 +151,6 @@ public class ArticleActivity extends ActionBarActivity {
             default:
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.academics));
         }
-
-
     }
 
     void fetchContent() {
@@ -161,5 +171,6 @@ public class ArticleActivity extends ActionBarActivity {
             db.close();
         }
     }
+
 }
 

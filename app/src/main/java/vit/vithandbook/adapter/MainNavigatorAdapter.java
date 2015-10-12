@@ -1,5 +1,10 @@
 package vit.vithandbook.adapter;
-
+/*
+        ~ VIT Handbook
+        ~ Copyright (C) 2015  Hemant Jain <hemanham@gmail.com>
+        ~ Copyright (C) 2015  Pulkit Juneja <pulkit.16296@gmail.com>
+        ~
+        ~ This file is part of the VIT Handbook Project.*/
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -16,9 +21,6 @@ import java.util.ArrayList;
 
 import vit.vithandbook.R;
 
-/**
- * Created by pulkit juneja on 9/20/2015.
- */
 public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdapter.NavCardViewHolder> {
 
     Context context;
@@ -63,12 +65,13 @@ public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdap
             drawables.add(r.getDrawable(dta.getResourceId(i,-1)));
         }
         colors = r.getIntArray(R.array.main_navigator_colors);
-        colors_dark = r.getIntArray(R.array.main_navigator_dark);
+        //colors_dark = r.getIntArray(R.array.main_navigator_dark);
     }
 
     @Override
     public NavCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.main_navigator_card, parent, false);
+        view.setTag(Categories[getItemCount()-1]);
         return new NavCardViewHolder(view);
     }
 
@@ -76,7 +79,7 @@ public class MainNavigatorAdapter extends RecyclerView.Adapter<MainNavigatorAdap
     public void onBindViewHolder(NavCardViewHolder holder, int position) {
 
         holder.categoryName.setText(Categories[position]);
-        holder.categoryName.setBackgroundColor(colors_dark[position]);
+        holder.categoryName.setBackgroundColor(colors[position]);
         // holder.icon.setImageResource(Drawables.getResourceId(position,-1));
         holder.icon.setImageDrawable(drawables.get(position));
         holder.main.setBackgroundColor(colors[position]);

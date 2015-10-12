@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.util.Log;
@@ -110,6 +111,7 @@ public class XmlParseHandler {
         final TextView view = new TextView(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
+        view.setTextColor(Color.rgb(45,45,45));
         view.setTextSize(17);
         view.setGravity(Gravity.LEFT);
         view.setText(Html.fromHtml(content));

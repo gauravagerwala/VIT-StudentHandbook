@@ -38,14 +38,11 @@ app/build.gradle
 VIT-StudentHandbook.iml
 build.gradle
 *.iml
-.idea/gradle.xml
-.idea/modules.xml
 VIT-StudentHandbook.iml
 *.iml
 build.gradle
-.idea/gradle.xml
-.idea/gradle.xml
 build.gradle
+<<<<<<< HEAD
 .idea/modules.xml
 .idea/gradle.xml
 .idea/gradle.xml
@@ -54,4 +51,6 @@ build.gradle
 .idea/modules.xml
 .idea/gradle.xml
 .idea/modules.xml
+=======
+>>>>>>> ui-rehaul
 VIT-StudentHandbook.iml
