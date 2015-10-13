@@ -12,12 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
+import vit.vithandbook.helperClass.AutoCompleteWatcher;
 import vit.vithandbook.helperClass.DataBaseHelper;
 import vit.vithandbook.model.Article;
 
@@ -36,11 +38,12 @@ public class SearchActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(getResources().getColor(R.color.mainHeader));
         setSupportActionBar(toolbar);
         action = getSupportActionBar();
+        lv_search=(ListView)findViewById(R.id.lv_search);
         action.setDisplayShowCustomEnabled(true);
-        ald = new SearchListAdapter(this,R.layout.search_card,null);
         action.setCustomView(R.layout.search_bar);
         action.setDisplayShowTitleEnabled(false);
         edtSeach = (EditText)action.getCustomView().findViewById(R.id.edtSearch);
+        edtSeach.addTextChangedListener(new AutoCompleteWatcher(this));
         edtSeach.requestFocus();
     }
 
@@ -106,7 +109,14 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Article> results)
         {
-            ald.setData(results);
+            if(ald==null)
+            {
+                ald = new SearchListAdapter(activity,R.layout.search_card,results);
+                lv_search.setAdapter(ald);
+            }
+            else {
+                ald.setData(results);
+            }
         }
         public void cancelAndClear()
         {

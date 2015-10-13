@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VIT-StudentHandbook.iml" filepath="$PROJECT_DIR$/VIT-StudentHandbook.iml" />
-<<<<<<< HEAD
-=======
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
->>>>>>> ui-rehaul
       <module fileurl="file://$PROJECT_DIR$/vithandbook.iml" filepath="$PROJECT_DIR$/vithandbook.iml" />
     </modules>
   </component>
