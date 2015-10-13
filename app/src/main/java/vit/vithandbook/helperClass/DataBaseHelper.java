@@ -112,7 +112,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     "`_id` integer ," +
                     "`type` integer ," +
                     "`content` text ); ");
-            cursor = myDataBase.rawQuery("select _id , main_category,sub_category,tags from articles", null);
+            cursor = myDataBase.rawQuery("select _id ,topic,sub_category,tags from articles", null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 String content = ";" + cursor.getString(1) + ";" + cursor.getString(2) + ";" + cursor.getString(3);

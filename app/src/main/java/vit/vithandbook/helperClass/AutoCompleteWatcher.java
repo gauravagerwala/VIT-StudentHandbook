@@ -2,7 +2,7 @@ package vit.vithandbook.helperClass;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import vit.vithandbook.activity.MainActivity;
+
 import vit.vithandbook.activity.SearchActivity;
 
 /**
@@ -10,11 +10,11 @@ import vit.vithandbook.activity.SearchActivity;
  */
 public class AutoCompleteWatcher implements TextWatcher
 {
-    SearchActivity mainActivity;
+    SearchActivity searchActivity;
     SearchActivity.searchTask mySearchTask;
-    public AutoCompleteWatcher(SearchActivity mainActivity)
+    public AutoCompleteWatcher(SearchActivity searchActivity)
     {
-        this.mainActivity=mainActivity;
+        this.searchActivity =searchActivity;
     }
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -26,12 +26,12 @@ public class AutoCompleteWatcher implements TextWatcher
         if (s != null && !s.toString().equals("")) {
 
             if (mySearchTask == null) {
-                mySearchTask = mainActivity.new searchTask(mainActivity);
+                mySearchTask = searchActivity.new searchTask(searchActivity);
 
             } else {
 
                 mySearchTask.cancel(true);
-                mySearchTask = mainActivity.new searchTask(mainActivity);
+                mySearchTask = searchActivity.new searchTask(searchActivity);
 
             }
             mySearchTask.execute(s.toString());
