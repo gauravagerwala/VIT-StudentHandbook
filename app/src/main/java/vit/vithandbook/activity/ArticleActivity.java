@@ -105,6 +105,7 @@ public class ArticleActivity extends ActionBarActivity {
             case R.id.article_bookmark:
                 if(!bookmarked){
                     bookmarked = true;
+                    //Use cursor to edit the bookmark column of the DB and make bookmarked to 1
                     menu.getItem(0).setIcon(R.drawable.ic_star_black_24dp);
 
                     //TODO: add bookmarking feature
