@@ -73,7 +73,7 @@ public class ArticleActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(Void res) {
                 load.setVisibility(View.GONE);
-                initalize();
+                initialize();
             }
         }.execute();
 
@@ -119,7 +119,7 @@ public class ArticleActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void initalize() {
+    void initialize() {
         setTitle("");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
