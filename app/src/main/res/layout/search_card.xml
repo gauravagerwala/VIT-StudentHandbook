@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
@@ -9,6 +10,25 @@
         android:layout_width="match_parent"
         android:id="@+id/rv_main"
         android:padding="20dp"
+=======
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:background="#eee"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/ll_search_card"
+    app:cardElevation="3dp"
+    card_view:cardCornerRadius="4dp"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:id="@+id/rv_main"
+        android:padding="10dp"
+        android:layout_margin="1dp"
+>>>>>>> Search card redesigned
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
@@ -17,11 +37,24 @@
             android:layout_toEndOf="@+id/tv_main_category"
             android:layout_toRightOf="@+id/tv_main_category"
             android:id="@+id/tv_topic"
+<<<<<<< HEAD
             android:text="Topic"
             android:textColor="@color/abc_primary_text_material_light"
             android:minLines="1"
             android:maxLines="3"
             android:textSize="20sp"
+=======
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Topic"
+            android:textColor="@color/black"
+            android:layout_toLeftOf="@+id/tv_main_category"
+            android:minLines="1"
+            android:maxLines="3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="27sp"
+>>>>>>> Search card redesigned
             />
         <TextView
             android:layout_width="wrap_content"
@@ -30,6 +63,7 @@
             android:id="@+id/tv_subtopic"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/tv_topic"
+<<<<<<< HEAD
             android:layout_toEndOf="@+id/tv_main_category"
             android:layout_toRightOf="@+id/tv_main_category"
             android:text="Subtopic"
@@ -39,6 +73,27 @@
             android:textColor="#ff8f8f8f"
             />
         <TextView
+=======
+            android:layout_toLeftOf="@+id/tv_main_category"
+            android:layout_toStartOf="@+id/tv_main_category"
+            android:text="Subtopic"
+            android:fontFamily="sans-serif-thin"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="17sp"
+            android:minLines="1"
+            android:maxLines="3"
+            android:textColor="@color/mainHeader"
+            android:paddingBottom="5dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="17sp"
+>>>>>>> Search card redesigned
             android:id="@+id/tv_main_category"
             android:layout_width="50dp"
             android:layout_height="50dp"
