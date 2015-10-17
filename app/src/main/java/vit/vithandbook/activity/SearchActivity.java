@@ -4,16 +4,21 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -45,6 +50,22 @@ public class SearchActivity extends AppCompatActivity {
         edtSeach = (EditText)action.getCustomView().findViewById(R.id.edtSearch);
         edtSeach.addTextChangedListener(new AutoCompleteWatcher(this));
         edtSeach.requestFocus();
+        edtSeach.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH)
+                {   /*Snackbar snackbar = Snackbar.make(findViewById(R.id.ll_search), "Close Keyboard", Snackbar.LENGTH_SHORT);
+                    snackbar.show();*/
+                    /*edtSeach.clearFocus();*/
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edtSeach.getWindowToken(),0);
+                    return true;
+                }
+                    return false;
+            }
+        });
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -57,10 +78,27 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_close) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(edtSeach.getWindowToken(),0);
             finish();
         }
+        else if ( id == android.R.id.home)
+        {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(edtSeach.getWindowToken(),0);
+            edtSeach.clearFocus();
+            onBackPressed();
+            return true ;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
         Context activity ;

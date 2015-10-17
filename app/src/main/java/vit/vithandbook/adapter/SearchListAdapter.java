@@ -57,8 +57,8 @@ public class SearchListAdapter extends ArrayAdapter<Article>
         else
             holder = (SearchViewHolder)view.getTag();
         int index = position%7;
-        holder.mainCategory.setText(current.mainCategory.substring(0,2));
-        holder.backMargin.setBackgroundDrawable(new ColorDrawable(holder.color = colors[index]));
+        holder.mainCategory.setText(current.mainCategory.substring(0, 2));
+        //holder.backMargin.setBackgroundDrawable(new ColorDrawable(holder.color = colors[index]));
         mainCat = current.mainCategory.substring(0, 2);
         holder.mainCategory.setText(mainCat);
         holder.subCategory.setText(current.subCategory);
@@ -66,6 +66,7 @@ public class SearchListAdapter extends ArrayAdapter<Article>
         switch(mainCat)
         {
             case "Ac":        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[0]);
+               //holder.backMargin.setBackgroundDrawable(new ColorDrawable(holder.color = catColor[0]));
                 break;
             case "Co":        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[1]);
                 break;

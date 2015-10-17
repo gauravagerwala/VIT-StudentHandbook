@@ -2,9 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="vit.vithandbook.activity.SearchActivity">
-
-    <item android:id="@+id/action_close"
-        android:title="close"
+        <item android:id="@+id/action_close"
+        android:title="Close"
         android:icon="@drawable/ic_cancel_white_24dp"
         android:orderInCategory="100"
         app:showAsAction="always" />
