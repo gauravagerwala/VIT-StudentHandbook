@@ -46,9 +46,10 @@ public class ArticleActivity extends ActionBarActivity {
     TextView title,subtopic,circletopic;
     Menu menu;
     boolean bookmarked;
-  @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        Log.e("Artice Activity", "On create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -90,6 +91,7 @@ public class ArticleActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_article, menu);
         this.menu = menu;
+        Log.e("Artice Activity","On Create Memu ");
         if(bookymark == 1)
             menu.getItem(0).setIcon(R.drawable.ic_star_black_24dp);
         else
@@ -112,15 +114,12 @@ public class ArticleActivity extends ActionBarActivity {
                 else
                     menu.getItem(0).setIcon(R.drawable.ic_star_border_black_24dp);
                 SQLiteDatabase db = null;
-                Cursor cursor = null;
                 try {
                     db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-                    cursor = db.rawQuery("UPDATE articles SET 'bookmark' = ? WHERE topic = ?", new String[]{String.valueOf(bookymark), topic});
-                    cursor.moveToFirst();
+                    db.execSQL("UPDATE articles SET 'bookmark' = ? WHERE topic = ?", new Object[]{bookymark, topic});
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    cursor.close();
                     db.close();
                 }
                 Log.e("Artice Activity","The final value of Bookmark:"+String.valueOf(bookymark));
@@ -131,6 +130,7 @@ public class ArticleActivity extends ActionBarActivity {
 
     void initialize() {
         setTitle("");
+        Log.e("Artice Activity", "On initialize");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.background_light)));
@@ -149,17 +149,17 @@ public class ArticleActivity extends ActionBarActivity {
             case "Hostel":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.hostel));
                 break;
-            case "Student Organisations":
+            case "Student Organizations":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.stud));
                 break;
             case "Life Hacks":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.lifehack));
                 break;
-            case "Around Vit":
+            case "Around VIT and Vellore":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.around));
                 break;
             default:
-                ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.academics));
+                ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.stud));
         }
     }
 
@@ -185,4 +185,3 @@ public class ArticleActivity extends ActionBarActivity {
     }
 
 }
-
