@@ -149,17 +149,17 @@ public class ArticleActivity extends ActionBarActivity {
             case "Hostel":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.hostel));
                 break;
-            case "Student Organisations":
+            case "Student Organizations":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.stud));
                 break;
             case "Life Hacks":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.lifehack));
                 break;
-            case "Around Vit":
+            case "Around Vit and Vellore":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.around));
                 break;
             default:
-                circletopic.setBackgroundColor(colors.getColor(R.color.academics));
+                ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.black));
         }
     }
 

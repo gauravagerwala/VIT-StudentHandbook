@@ -18,7 +18,7 @@
         <item>Hostel</item>
         <item>Student Organizations</item>
         <item>Life Hacks</item>
-        <item>Around VIT</item>
+        <item>Around VIT and Vellore</item>
     </string-array>
     <string-array name="iconArray">
         <item>@drawable/ic_academics_box</item>
