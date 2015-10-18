@@ -62,7 +62,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private void copyDataBase() throws IOException {
         //Open your local db as the input stream
-        InputStream myInput = context.getAssets().open("articlesSQL");
+        InputStream myInput = context.getAssets().open("articleSQL");
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
         //Open the empty db as the output stream
