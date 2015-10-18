@@ -115,7 +115,7 @@ public class ArticleActivity extends ActionBarActivity {
                 Cursor cursor = null;
                 try {
                     db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-                    cursor = db.rawQuery("UPDATE articles SET 'bookmark' = ? WHERE topic = ?", new String[]{String.valueOf(bookymark), topic,});
+                    cursor = db.rawQuery("UPDATE articles SET 'bookmark' = ? WHERE topic = ?", new String[]{String.valueOf(bookymark), topic});
                     cursor.moveToFirst();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -123,6 +123,8 @@ public class ArticleActivity extends ActionBarActivity {
                     cursor.close();
                     db.close();
                 }
+                Log.e("Artice Activity","The final value of Bookmark:"+String.valueOf(bookymark));
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -169,6 +171,7 @@ public class ArticleActivity extends ActionBarActivity {
             cursor = db.rawQuery("SELECT `content` , `sub_category` , `main_category`, 'bookmark' from `articles` Where topic = ? Limit 1", new String[]{topic});
             cursor.moveToFirst();
             bookymark = cursor.getInt(3);
+            Log.e("Artice Activity","The initial value of Bookmark:"+String.valueOf(bookymark));
             String xmlData = cursor.getString(0);
             subtopicName = cursor.getString(1);
             mainCategory = cursor.getString(2);
