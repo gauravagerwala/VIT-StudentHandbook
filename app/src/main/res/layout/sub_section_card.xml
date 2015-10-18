@@ -3,6 +3,7 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:focusable="true"
+    android:foreground="?selectableItemBackground"
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground"
     android:layout_margin="1dp">
