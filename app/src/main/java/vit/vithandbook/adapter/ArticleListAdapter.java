@@ -51,7 +51,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     public ArticleListAdapter(Context context, ArrayList<String> objects) {
         activity = context;
         this.objects = objects;
-        colors = activity.getResources().getIntArray(R.array.colors);
+        colors = activity.getResources().getIntArray(R.array.sub_light_colors);
     }
 
 
