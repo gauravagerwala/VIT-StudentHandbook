@@ -155,7 +155,7 @@ public class ArticleActivity extends ActionBarActivity {
             case "Life Hacks":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.lifehack));
                 break;
-            case "Around Vit and Vellore":
+            case "Around VIT and Vellore":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.around));
                 break;
             default:
