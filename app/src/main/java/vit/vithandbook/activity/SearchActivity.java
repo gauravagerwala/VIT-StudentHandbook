@@ -1,6 +1,7 @@
 package vit.vithandbook.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
+import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.helperClass.AutoCompleteWatcher;
 import vit.vithandbook.helperClass.DataBaseHelper;
 import vit.vithandbook.model.Article;
@@ -98,6 +100,11 @@ public class SearchActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+    public void onListItemClick(String data) {
+        Intent intent = new Intent(SearchActivity.this, ArticleActivity.class);
+        intent.putExtra("topic", data);
+        startActivity(intent);
+    }
 
     public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
     {
@@ -155,6 +162,13 @@ public class SearchActivity extends AppCompatActivity {
             else {
                 ald.setData(results);
             }
+            ald.setOnItemClickListener(new onItemClickListener() {
+                @Override
+                public void onItemClick(String data) {
+                    onListItemClick(data);
+
+                }
+            });
         }
         public void cancelAndClear()
         {
