@@ -159,7 +159,7 @@ public class ArticleActivity extends ActionBarActivity {
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.around));
                 break;
             default:
-                ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.around));
+                ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.stud));
         }
     }
 
