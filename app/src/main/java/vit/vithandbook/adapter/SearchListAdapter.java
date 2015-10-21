@@ -3,8 +3,10 @@ package vit.vithandbook.adapter;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ public class SearchListAdapter extends ArrayAdapter<Article>
     String mainCat = "";
     int[] catColor;
     ArrayList<Article> objects ;
+    onItemClickListener itemClickListener;
 
 
     public SearchListAdapter(Context context,int Rid,ArrayList<Article> objects)
@@ -46,8 +49,8 @@ public class SearchListAdapter extends ArrayAdapter<Article>
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        SearchViewHolder holder ;
-        Article current = getItem(position);
+        final SearchViewHolder holder ;
+        final Article current = getItem(position);
         if(view == null)
         {
             view = LayoutInflater.from(context).inflate(R.layout.search_card,parent,false);
@@ -81,7 +84,18 @@ public class SearchListAdapter extends ArrayAdapter<Article>
             default:        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[0]);
                 break;
         }
+        holder.backMargin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View varg) {
+                Log.e("Article Search", current.topic);
+                itemClickListener.onItemClick(current.topic);
+            }
+        });
         return view ;
+    }
+    public void setOnItemClickListener(onItemClickListener listener) {
+        this.itemClickListener = listener;
     }
 
     public class SearchViewHolder
@@ -90,7 +104,7 @@ public class SearchListAdapter extends ArrayAdapter<Article>
         public int color;
         public RelativeLayout relativeLayout;
         public TextView topic , mainCategory , subCategory;
-        SearchViewHolder(View view)
+        public SearchViewHolder(View view)
         {
             backMargin = view.findViewById(R.id.ll_search_card);
             topic = (TextView)view.findViewById(R.id.tv_topic);
