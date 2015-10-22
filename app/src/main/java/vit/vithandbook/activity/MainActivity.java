@@ -119,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.frame_layout_main, fragment_map, "MapFragment").commit();
                         selectedFragment = fragment_map;
                         break;
+                    /*case R.id.drawer_updates:
+                        BackHandlerFragment fragment_updates = new UpdatesFragment();
+                        appBarLayout.setExpanded(false);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .replace(R.id.frame_layout_main, fragment_updates, "MapFragment").commit();
+                        selectedFragment = fragment_updates;
+                        break;*/
                 }
                 drawerLayout.closeDrawers();
                 return true;
