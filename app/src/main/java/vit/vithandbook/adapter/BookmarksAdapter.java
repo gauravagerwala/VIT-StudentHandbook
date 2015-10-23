@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import vit.vithandbook.R;
+import vit.vithandbook.model.Article;
 
 /**
  * Created by Hemant on 10/16/2015.
@@ -17,8 +18,15 @@ import vit.vithandbook.R;
 public class BookmarksAdapter extends RecyclerView.Adapter<BookmarksAdapter.BookmarksViewHolder> {
 
     Context activity;
-    onItemClickListener itemClickListener;
+//    onItemClickListener itemClickListener;
     ArrayList<String> objects;
+
+    Context context ;
+    int[] colors;
+    String mainCat = "";
+    int[] catColor;
+    onItemClickListener itemClickListener;
+
 
     class BookmarksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         BookmarksViewHolder(View v)
@@ -45,8 +53,11 @@ public class BookmarksAdapter extends RecyclerView.Adapter<BookmarksAdapter.Book
     public BookmarksAdapter(Context context, ArrayList<String> objects) {
         activity = context;
         this.objects = objects;
+        colors = context.getResources().getIntArray(R.array.colors);
+        this.objects = objects ;
+        colors = context.getResources().getIntArray(R.array.colors);
+        catColor = context.getResources().getIntArray(R.array.main_navigator_colors);
     }
-
 
     @Override
     public void onBindViewHolder(BookmarksViewHolder holder, int position) {

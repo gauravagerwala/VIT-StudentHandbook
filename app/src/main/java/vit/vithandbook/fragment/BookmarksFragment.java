@@ -1,6 +1,9 @@
 package vit.vithandbook.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +17,10 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import vit.vithandbook.R;
+import vit.vithandbook.activity.ArticleActivity;
 import vit.vithandbook.adapter.BookmarksAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
+import vit.vithandbook.helperClass.DataBaseHelper;
 
 public class BookmarksFragment extends BackHandlerFragment {
 
@@ -49,7 +54,7 @@ public class BookmarksFragment extends BackHandlerFragment {
 
             @Override
             protected Void doInBackground(Void... params) {
-                //fetchBookmarkData();
+                fetchBookmarkData();
                 return null;
             }
 
@@ -60,8 +65,7 @@ public class BookmarksFragment extends BackHandlerFragment {
                 bkAdapter.setOnItemClickListener(new onItemClickListener() {
                     @Override
                     public void onItemClick(String data) {
-                        //onListItemClick(data);
-
+                        onListItemClick(data);
                     }
                 });
                 recyclerView.setAdapter(bkAdapter);
@@ -74,5 +78,29 @@ public class BookmarksFragment extends BackHandlerFragment {
     @Override
     public boolean onBackPressed() {
         return false;
+    }
+    public void onListItemClick(String data) {
+        /*Intent intent = new Intent(getActivity(), ArticleActivity.class);
+        intent.putExtra("topic", data);
+        startActivity(intent);*/
+    }
+    void fetchBookmarkData() {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            cursor = db.rawQuery("SELECT distinct `topic` from `articles` WHERE bookmark = ?", new String[]{"1"});
+            topics = new ArrayList<String>();
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                topics.add(cursor.getString(0));
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+            db.close();
+        }
     }
 }
