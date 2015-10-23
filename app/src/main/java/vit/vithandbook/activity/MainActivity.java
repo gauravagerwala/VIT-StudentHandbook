@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
+import vit.vithandbook.fragment.BookmarksFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.MapFragment;
 import vit.vithandbook.helperClass.DataBaseHelper;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.drawer_map:
                         BackHandlerFragment fragment_map = new MapFragment();
+                        collapsingToolbarLayout.setTitle("Map");
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_map, "MapFragment").commit();
@@ -121,11 +123,20 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     /*case R.id.drawer_updates:
                         BackHandlerFragment fragment_updates = new UpdatesFragment();
+                        collapsingToolbarLayout.setTitle("Updates");
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_updates, "MapFragment").commit();
                         selectedFragment = fragment_updates;
                         break;*/
+                    case R.id.drawer_bookmarks:
+                        BackHandlerFragment fragment_bookmark = new BookmarksFragment();
+                        collapsingToolbarLayout.setTitle("Bookmarks");
+                        appBarLayout.setExpanded(false);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .replace(R.id.frame_layout_main, fragment_bookmark, "BookmarkFragment").commit();
+                        selectedFragment = fragment_bookmark;
+                        break;
                 }
                 drawerLayout.closeDrawers();
                 return true;
