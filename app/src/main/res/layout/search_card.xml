@@ -58,8 +58,12 @@
             android:minLines="1"
             android:maxLines="3"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+<<<<<<< HEAD
             android:textSize="27sp"
 >>>>>>> Search card redesigned
+=======
+            android:textSize="24sp"
+>>>>>>> Search card circle text replaced by image
             />
         <TextView
             android:layout_width="wrap_content"
@@ -84,21 +88,22 @@
             android:text="Subtopic"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:minLines="1"
             android:maxLines="3"
             android:textColor="@color/mainHeader"
             android:paddingBottom="5dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="37dp"
+            android:layout_height="37dp"
             android:background="@drawable/circle"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="17sp"
 >>>>>>> Search card redesigned
             android:id="@+id/tv_main_category"
+<<<<<<< HEAD
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/circle"
@@ -110,6 +115,13 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+=======
+            android:padding="3dp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:src="@drawable/ic_academics_box"
+            android:textColor="#FFF"/>
+>>>>>>> Search card circle text replaced by image
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
