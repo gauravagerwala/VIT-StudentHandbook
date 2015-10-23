@@ -31,7 +31,7 @@
             android:minLines="1"
             android:maxLines="3"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textSize="27sp"
+            android:textSize="24sp"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -43,24 +43,24 @@
             android:text="Subtopic"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:minLines="1"
             android:maxLines="3"
             android:textColor="@color/mainHeader"
             android:paddingBottom="5dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="37dp"
+            android:layout_height="37dp"
             android:background="@drawable/circle"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="17sp"
             android:id="@+id/tv_main_category"
-            android:padding="10dp"
+            android:padding="3dp"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
-            android:text="Ac"
+            android:src="@drawable/ic_academics_box"
             android:textColor="#FFF"/>
     </RelativeLayout>
 

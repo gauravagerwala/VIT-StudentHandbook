@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -60,28 +61,33 @@ public class SearchListAdapter extends ArrayAdapter<Article>
         else
             holder = (SearchViewHolder)view.getTag();
         int index = position%7;
-        holder.mainCategory.setText(current.mainCategory.substring(0, 2));
         //holder.backMargin.setBackgroundDrawable(new ColorDrawable(holder.color = colors[index]));
         mainCat = current.mainCategory.substring(0, 2);
-        holder.mainCategory.setText(mainCat);
         holder.subCategory.setText(current.subCategory);
         holder.topic.setText(current.topic);
         switch(mainCat)
         {
             case "Ac":        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[0]);
+                holder.mainCategory.setImageResource(R.drawable.ic_academics_box);
                //holder.backMargin.setBackgroundDrawable(new ColorDrawable(holder.color = catColor[0]));
                 break;
             case "Co":        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[1]);
+                holder.mainCategory.setImageResource(R.drawable.ic_college_box);
                 break;
             case "Ho":        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[2]);
+                holder.mainCategory.setImageResource(R.drawable.ic_hostels_box);
                 break;
             case "St":        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[3]);
+                holder.mainCategory.setImageResource(R.drawable.ic_student_organizations);
                 break;
             case "Li":        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[4]);
+                holder.mainCategory.setImageResource(R.drawable.ic_life_hacks);
                 break;
             case "Ar":      ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[5]);
+                holder.mainCategory.setImageResource(R.drawable.ic_around_vit);
                 break;
             default:        ((GradientDrawable) holder.mainCategory.getBackground()).setColor(catColor[0]);
+                holder.mainCategory.setImageResource(R.drawable.ic_academics_box);
                 break;
         }
         holder.backMargin.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +109,13 @@ public class SearchListAdapter extends ArrayAdapter<Article>
         View rootView, backMargin;
         public int color;
         public RelativeLayout relativeLayout;
-        public TextView topic , mainCategory , subCategory;
+        public TextView topic , subCategory;
+        public ImageView mainCategory;
         public SearchViewHolder(View view)
         {
             backMargin = view.findViewById(R.id.ll_search_card);
             topic = (TextView)view.findViewById(R.id.tv_topic);
-            mainCategory = (TextView)view.findViewById(R.id.tv_main_category);
+            mainCategory = (ImageView)view.findViewById(R.id.tv_main_category);
             relativeLayout = (RelativeLayout)view.findViewById(R.id.rv_main);
             subCategory = (TextView)view.findViewById(R.id.tv_subtopic);
             rootView = view ;
