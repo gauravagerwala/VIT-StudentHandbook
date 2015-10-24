@@ -3,6 +3,8 @@ package vit.vithandbook.fragment;
 /**
  * Created by Hemant on 10/22/2015.
  */
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteDatabase;
         import android.os.AsyncTask;
         import android.os.Bundle;
         import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ package vit.vithandbook.fragment;
         import vit.vithandbook.R;
         import vit.vithandbook.adapter.UpdatesAdapter;
         import vit.vithandbook.adapter.onItemClickListener;
+        import vit.vithandbook.helperClass.DataBaseHelper;
 
 
 public class UpdatesFragment extends BackHandlerFragment {
@@ -51,7 +54,7 @@ public class UpdatesFragment extends BackHandlerFragment {
 
             @Override
             protected Void doInBackground(Void... params) {
-                //fetchBookmarkData();
+                fetchUpdatesData();
                 return null;
             }
 
@@ -77,5 +80,8 @@ public class UpdatesFragment extends BackHandlerFragment {
     public boolean onBackPressed() {
 
         return false;
+    }
+    void fetchUpdatesData() {
+        //Fetch articles from the back-end
     }
 }
