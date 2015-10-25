@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -126,7 +124,7 @@ public class SearchActivity extends AppCompatActivity {
             Cursor cursor =null;
             try
             {
-                Log.d("data", params[0]);
+                Log.d("Data:", params[0]);
                 db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
                 cursor = db.rawQuery("SELECT articles.main_category , articles.sub_category , articles.topic FROM articles " +
                         "INNER JOIN search" +
@@ -156,7 +154,7 @@ public class SearchActivity extends AppCompatActivity {
         {
             if(ald==null)
             {
-                ald = new SearchListAdapter(activity,R.layout.search_card,results);
+                ald = new SearchListAdapter(activity,R.layout.card_search,results);
                 lv_search.setAdapter(ald);
             }
             else {

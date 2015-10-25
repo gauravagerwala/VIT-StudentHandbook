@@ -1,11 +1,7 @@
 package vit.vithandbook.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.Random;
+
 import vit.vithandbook.R;
 import vit.vithandbook.model.Article;
 
@@ -54,7 +50,7 @@ public class SearchListAdapter extends ArrayAdapter<Article>
         final Article current = getItem(position);
         if(view == null)
         {
-            view = LayoutInflater.from(context).inflate(R.layout.search_card,parent,false);
+            view = LayoutInflater.from(context).inflate(R.layout.card_search,parent,false);
             holder = new SearchViewHolder(view);
             view.setTag(holder);
         }
