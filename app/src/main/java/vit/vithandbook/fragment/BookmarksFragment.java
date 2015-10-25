@@ -21,10 +21,11 @@ import vit.vithandbook.activity.ArticleActivity;
 import vit.vithandbook.adapter.BookmarksAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.helperClass.DataBaseHelper;
+import vit.vithandbook.model.Article;
 
 public class BookmarksFragment extends BackHandlerFragment {
 
-    ArrayList<String> topics;
+    ArrayList<Article> topics;
     BookmarksAdapter bkAdapter;
     ProgressBar load;
     android.support.v7.widget.RecyclerView recyclerView;
@@ -80,20 +81,20 @@ public class BookmarksFragment extends BackHandlerFragment {
         return false;
     }
     public void onListItemClick(String data) {
-        /*Intent intent = new Intent(getActivity(), ArticleActivity.class);
+        Intent intent = new Intent(getActivity(), ArticleActivity.class);
         intent.putExtra("topic", data);
-        startActivity(intent);*/
+        startActivity(intent);
     }
     void fetchBookmarkData() {
         SQLiteDatabase db = null;
         Cursor cursor = null;
+        topics = new ArrayList<>();
         try {
             db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-            cursor = db.rawQuery("SELECT distinct `topic` from `articles` WHERE bookmark = ?", new String[]{"1"});
-            topics = new ArrayList<String>();
+            cursor = db.rawQuery("SELECT articles.main_category , articles.sub_category , articles.topic FROM articles WHERE bookmark = ?", new String[]{"1"});
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                topics.add(cursor.getString(0));
+                topics.add(new Article(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
                 cursor.moveToNext();
             }
         } catch (Exception e) {
