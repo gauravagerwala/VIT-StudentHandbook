@@ -100,13 +100,13 @@ public class MainNavigator extends BackHandlerFragment {
                 collapsingToolbarLayout.setTitle(category);
                 if (Build.VERSION.SDK_INT >= 21)
                     getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.lifehackDark));break;
-            case "Student Organisations":
+            case "Student Organizations":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_student_organizations));
                 collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.stud));
                 collapsingToolbarLayout.setTitle(category);
                 if (Build.VERSION.SDK_INT >= 21)
                     getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.studDark));break;
-            case "Around VIT":
+            case "Around VIT and Vellore":
                 relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_around_vit));
                 collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.around));
                 collapsingToolbarLayout.setTitle(category);

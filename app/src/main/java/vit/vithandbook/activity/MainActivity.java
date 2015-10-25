@@ -13,9 +13,11 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,13 +34,15 @@ import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
+import vit.vithandbook.fragment.BookmarksFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.MapFragment;
+import vit.vithandbook.fragment.UpdatesFragment;
 import vit.vithandbook.helperClass.DataBaseHelper;
 import vit.vithandbook.model.Article;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     boolean searchMode = false;
     DrawerLayout drawerLayout;
@@ -127,10 +131,27 @@ public class MainActivity extends ActionBarActivity {
                         break;
                     case R.id.drawer_map:
                         BackHandlerFragment fragment_map = new MapFragment();
+                        collapsingToolbarLayout.setTitle("Map");
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_map, "MapFragment").commit();
                         selectedFragment = fragment_map;
+                        break;
+                    case R.id.drawer_updates:
+                        BackHandlerFragment fragment_updates = new UpdatesFragment();
+                        collapsingToolbarLayout.setTitle("Updates");
+                        appBarLayout.setExpanded(false);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .replace(R.id.frame_layout_main, fragment_updates, "MapFragment").commit();
+                        selectedFragment = fragment_updates;
+                        break;
+                    case R.id.drawer_bookmarks:
+                        BackHandlerFragment fragment_bookmark = new BookmarksFragment();
+                        collapsingToolbarLayout.setTitle("Bookmarks");
+                        appBarLayout.setExpanded(false);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .replace(R.id.frame_layout_main, fragment_bookmark, "BookmarkFragment").commit();
+                        selectedFragment = fragment_bookmark;
                         break;
                 }
                 drawerLayout.closeDrawers();
@@ -166,7 +187,10 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onBackPressed()
     {
-        if ( getFragmentManager().getBackStackEntryCount() == 0)
+        if(this.drawerLayout.isDrawerOpen(GravityCompat.START)){ //replace this with actual function which returns if the drawer is open
+            this.drawerLayout.closeDrawer(GravityCompat.START);     // replace this with actual function which closes drawer
+        }
+        else if ( getFragmentManager().getBackStackEntryCount() == 0)
         {
             super.onBackPressed();
         }

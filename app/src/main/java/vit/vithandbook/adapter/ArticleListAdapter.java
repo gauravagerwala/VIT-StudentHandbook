@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
     public void onClick(View v) {
         String data = objects.get(getAdapterPosition());
+        Log.e("Oh",data);
         if (itemClickListener != null) {
             itemClickListener.onItemClick(data);
         }
@@ -51,7 +53,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     public ArticleListAdapter(Context context, ArrayList<String> objects) {
         activity = context;
         this.objects = objects;
-        colors = activity.getResources().getIntArray(R.array.colors);
+        colors = activity.getResources().getIntArray(R.array.sub_light_colors);
     }
 
 

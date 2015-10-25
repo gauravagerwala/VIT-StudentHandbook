@@ -41,14 +41,15 @@ public class ArticleActivity extends ActionBarActivity {
     String mainCategory = "";
     LinearLayout mainArticleLayout;
     XmlParseHandler parser;
+    int bookymark = 0;
     ProgressBar load;
     TextView title,subtopic,circletopic;
     Menu menu;
     boolean bookmarked;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        Log.e("Artice Activity", "On create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -73,7 +74,7 @@ public class ArticleActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(Void res) {
                 load.setVisibility(View.GONE);
-                initalize();
+                initialize();
             }
         }.execute();
 
@@ -89,8 +90,12 @@ public class ArticleActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_article, menu);
-        bookmarked = false;
         this.menu = menu;
+        Log.e("Artice Activity","On Create Memu ");
+        if(bookymark == 1)
+            menu.getItem(0).setIcon(R.drawable.ic_star_black_24dp);
+        else
+            menu.getItem(0).setIcon(R.drawable.ic_star_border_black_24dp);
         return true;
     }
 
@@ -103,29 +108,34 @@ public class ArticleActivity extends ActionBarActivity {
                 onBackPressed();
                 return true;
             case R.id.article_bookmark:
-                if(!bookmarked){
-                    bookmarked = true;
+                bookymark = Math.abs(bookymark - 1);
+                if (bookymark == 1)
                     menu.getItem(0).setIcon(R.drawable.ic_star_black_24dp);
-
-                    //TODO: add bookmarking feature
-                }
-                else {
-                    bookmarked = false;
+                else
                     menu.getItem(0).setIcon(R.drawable.ic_star_border_black_24dp);
+                SQLiteDatabase db = null;
+                try {
+                    db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+                    db.execSQL("UPDATE articles SET 'bookmark' = ? WHERE topic = ?", new Object[]{bookymark, topic});
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    db.close();
                 }
-        }
+                Log.e("Artice Activity","The final value of Bookmark:"+String.valueOf(bookymark));
 
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    void initalize() {
+    void initialize() {
         setTitle("");
+        Log.e("Artice Activity", "On initialize");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.background_light)));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         subtopic.setText(subtopicName);
         circletopic.setText(mainCategory.substring(0, 2));
         Resources colors = getResources();
@@ -139,17 +149,17 @@ public class ArticleActivity extends ActionBarActivity {
             case "Hostel":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.hostel));
                 break;
-            case "Student Organisations":
+            case "Student Organizations":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.stud));
                 break;
             case "Life Hacks":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.lifehack));
                 break;
-            case "Around Vit":
+            case "Around VIT and Vellore":
                 ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.around));
                 break;
             default:
-                ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.academics));
+                ((GradientDrawable)circletopic.getBackground()).setColor(colors.getColor(R.color.stud));
         }
     }
 
@@ -158,8 +168,10 @@ public class ArticleActivity extends ActionBarActivity {
         Cursor cursor = null;
         try {
             db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-            cursor = db.rawQuery("SELECT `content` , `sub_category` , `main_category` from `articles` Where topic = ? Limit 1", new String[]{topic});
+            cursor = db.rawQuery("SELECT `content` , `sub_category` , `main_category`, 'bookmark' from `articles` Where topic = ? Limit 1", new String[]{topic});
             cursor.moveToFirst();
+            bookymark = cursor.getInt(3);
+            Log.e("Artice Activity","The initial value of Bookmark:"+String.valueOf(bookymark));
             String xmlData = cursor.getString(0);
             subtopicName = cursor.getString(1);
             mainCategory = cursor.getString(2);
@@ -173,4 +185,3 @@ public class ArticleActivity extends ActionBarActivity {
     }
 
 }
-

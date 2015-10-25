@@ -1,8 +1,20 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"    android:orientation="vertical"
     android:layout_height="match_parent" tools:context="vit.vithandbook.fragment.BookmarksFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="Bookmarks Fragment " />
-</FrameLayout>
+    <!--<TextView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="Bookmarks Fragment " />-->
+    <ProgressBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:id="@+id/alprogressbar" />
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        tools:context="vit.vithandbook.fragment.BookmarksFragment"
+        android:id="@+id/bookmarks_rv_list" >
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

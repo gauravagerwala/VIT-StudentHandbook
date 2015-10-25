@@ -3,6 +3,7 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:focusable="true"
+    android:foreground="?selectableItemBackground"
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground"
     android:layout_margin="1dp">
@@ -29,14 +30,6 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:textSize="15sp"
-            android:layout_gravity="center"
-=======
-            android:layout_gravity="center_vertical"
-            android:textColor="#fff"
-            android:textSize="14sp"
->>>>>>> ui-rehaul
             android:maxLines="2"
             android:gravity="center"
             android:minLines="1"

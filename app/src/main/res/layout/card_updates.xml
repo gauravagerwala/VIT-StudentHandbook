@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="10dp">
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/ll_date">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fd008c"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:text="20th"
+            android:id="@+id/tv_date" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#fd008c"
+            android:text="Aug, 2015"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_monthyear"
+            android:layout_below="@+id/tv_date"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="APT made compulsory."
+            android:background="#014437"
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="14sp"
+            android:padding="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ll_date"
+            android:layout_toEndOf="@+id/ll_date" />
+
+
+
+
+</RelativeLayout>
