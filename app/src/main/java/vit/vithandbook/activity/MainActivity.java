@@ -25,11 +25,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.Toolbar;
-<<<<<<< HEAD
-=======
 import android.widget.RelativeLayout;
 
->>>>>>> ui-rehaul
 import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
@@ -47,23 +44,12 @@ public class MainActivity extends AppCompatActivity {
     boolean searchMode = false;
     DrawerLayout drawerLayout;
     public BackHandlerFragment selectedFragment;
-<<<<<<< HEAD
-    ListView searchList;
-    ViewPager pager ;
-    MainTabAdapter pageradapter ;
-    TabLayout tabs ;
-=======
     public RelativeLayout relativeLayout;
     public AppBarLayout appBarLayout;
->>>>>>> ui-rehaul
     SearchListAdapter ald ;
     public CollapsingToolbarLayout collapsingToolbarLayout ;
     Toolbar toolbar ;
     ProgressBar load,searchloadbar;
-<<<<<<< HEAD
-    BackConnect back;
-=======
->>>>>>> ui-rehaul
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -73,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
-               // mainHeader.setVisibility(View.GONE);
+                // mainHeader.setVisibility(View.GONE);
             }
 
             @Override
@@ -85,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Void res) {
-               // mainHeader.setVisibility(View.VISIBLE);
-              //  setSuggestionColors();
+                // mainHeader.setVisibility(View.VISIBLE);
+                //  setSuggestionColors();
                 if (savedInstanceState == null) {
                     initialize();
                 }
@@ -229,65 +215,4 @@ public class MainActivity extends AppCompatActivity {
         helper.createDataBase();
     }
 
-<<<<<<< HEAD
-    public class searchTask extends AsyncTask<String,Void,ArrayList<Article>>
-    {
-        Context activity ;
-        @Override
-        protected void onPreExecute()
-        {
-            searchloadbar.setVisibility(View.VISIBLE);
-        }
-        public searchTask(Context obj)
-        {
-         activity=obj;
-        }
-        @Override
-        protected ArrayList<Article> doInBackground(String ... params)
-        {
-            ArrayList<Article> topics = new ArrayList<>();
-            SQLiteDatabase db = null;
-            Cursor cursor =null;
-            try
-            {
-                Log.d("data", params[0]);
-                db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-                cursor = db.rawQuery("SELECT articles.main_category , articles.sub_category , articles.topic FROM articles " +
-                        "INNER JOIN search" +
-                        " ON articles._id = search._id " +
-                        "WHERE search.content match '"+params[0]+"*'",null);
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast())
-                {
-                    topics.add(new Article(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
-                    cursor.moveToNext();
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                cursor.close();
-                db.close();
-            }
-            return topics;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Article> results)
-        {
-            searchloadbar.setVisibility(View.GONE);
-            ald.setData(results);
-        }
-        public void cancelAndClear()
-        {
-            cancel(true);
-            if(ald!=null)
-            ald.clear();
-        }
-    }
-=======
->>>>>>> ui-rehaul
 }

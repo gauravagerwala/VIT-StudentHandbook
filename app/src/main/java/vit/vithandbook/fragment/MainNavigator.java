@@ -1,11 +1,7 @@
 package vit.vithandbook.fragment;
 
-<<<<<<< HEAD
-import android.app.Fragment;
-=======
 import android.graphics.Color;
 import android.os.Build;
->>>>>>> ui-rehaul
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
@@ -17,15 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
-<<<<<<< HEAD
-import android.widget.ScrollView;
-import android.widget.Toast;
-=======
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
->>>>>>> ui-rehaul
 import vit.vithandbook.R;
 import vit.vithandbook.activity.MainActivity;
 import vit.vithandbook.adapter.MainNavigatorAdapter;
@@ -33,7 +24,6 @@ import vit.vithandbook.adapter.onItemClickListener;
 
 public class MainNavigator extends BackHandlerFragment {
 
-    ScrollView mainScrollView;
     GridLayout grid;
     View rootView;
     RecyclerView mainNavigator ;
@@ -60,7 +50,7 @@ public class MainNavigator extends BackHandlerFragment {
         rvAdapter.setOnItemClickListener(new onItemClickListener() {
             @Override
             public void onItemClick(String data) {
-               navigate(data);
+                navigate(data);
             }
         });
         mainNavigator.setAdapter(rvAdapter);
@@ -161,54 +151,12 @@ public class MainNavigator extends BackHandlerFragment {
             card.setLayoutParams(params);
         }
 
-<<<<<<< HEAD
-    public void navigate(String category) {
-        MainNavigator main = (MainNavigator) getFragmentManager().findFragmentByTag("mainNavigator");
-        //String category = (String) view.getTag();
-        BackHandlerFragment fragment = SubSectionFragment.newInstance(category);
-        getFragmentManager().beginTransaction().
-                setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                .hide(main).add(R.id.frame_layout_main,fragment,"subSectionFragment").addToBackStack(null).commit();
-    }
-
-
-    @Override
-    public boolean onBackPressed()
-    {
-        if(isOnSubLevel)
-        {
-            hideSubLevels();
-            return true ;
-        }
-        return false ;
-=======
->>>>>>> ui-rehaul
     }
     int dptopx(int dp) {
-        float density = dm.density;
+        float density = getActivity().getApplicationContext().getResources().getDisplayMetrics().density;
         return Math.round((float) dp * density);
     }
-<<<<<<< HEAD
-
-    public void navigate(View view)
-    {
-        ((MainActivity)getActivity()).AnimateMainHeader((ViewGroup)view,false);
-        String category = (String) view.getTag();
-        mainScrollView.setVisibility(View.GONE);
-        getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out).add(R.id.linear_layout_bottom, subSectionFragment = SubSectionFragment.newInstance(category), "subSectionFragment").commit();
-        isOnSubLevel = true ;
-    }
-
-    public void hideSubLevels()
-    {
-        getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out).remove(subSectionFragment).commit();
-        mainScrollView.setVisibility(View.VISIBLE);
-        ((MainActivity)getActivity()).AnimateMainHeader(null,true);
-        isOnSubLevel = false ;
-    }
-=======
     */
 
 
->>>>>>> ui-rehaul
 }

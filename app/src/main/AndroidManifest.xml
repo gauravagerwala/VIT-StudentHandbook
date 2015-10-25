@@ -46,9 +46,4 @@
             android:label="@string/title_activity_search" >
         </activity>
     </application>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> ui-rehaul
 </manifest>

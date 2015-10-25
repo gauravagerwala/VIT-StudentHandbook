@@ -5,12 +5,7 @@
         <item name="android:colorPrimary">#334B82</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
-<<<<<<< HEAD
-        <item name="android:colorPrimaryDark">#25365E</item>
-
-=======
         <item name="android:colorPrimaryDark">#000000</item>
->>>>>>> ui-rehaul
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

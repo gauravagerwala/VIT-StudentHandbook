@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="70sp"
             android:textColor="#FFF"
@@ -30,14 +30,9 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:textSize="15sp"
-            android:layout_gravity="center"
-=======
             android:layout_gravity="center_vertical"
             android:textColor="#fff"
             android:textSize="14sp"
->>>>>>> ui-rehaul
             android:maxLines="2"
             android:gravity="center"
             android:minLines="1"
