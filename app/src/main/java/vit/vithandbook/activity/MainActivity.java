@@ -13,6 +13,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -186,7 +187,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        if ( getFragmentManager().getBackStackEntryCount() == 0)
+        if(this.drawerLayout.isDrawerOpen(GravityCompat.START)){ //replace this with actual function which returns if the drawer is open
+            this.drawerLayout.closeDrawer(GravityCompat.START);     // replace this with actual function which closes drawer
+        }
+        else if ( getFragmentManager().getBackStackEntryCount() == 0)
         {
             super.onBackPressed();
         }
