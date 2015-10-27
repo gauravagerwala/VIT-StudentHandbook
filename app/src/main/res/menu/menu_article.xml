@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="vit.vithandbook.activity.ArticleActivity">
     <item
+        android:id="@+id/article_share"
+        android:title="Share"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/article_bookmark"
         android:title="Bookmark"
         android:icon="@drawable/ic_star_border_black_24dp"

@@ -29,5 +29,9 @@
         <item>@drawable/ic_around_vit</item>
     </string-array>
     <string name="title_activity_search">SearchActivity</string>
+
+    <string name="android_share_select">Share VIT Handbook using&#8230;</string>
+    <string name="android_share_message_subject">VIT Handbook</string>
+    <string name="android_share_message_end">Shared via the VIT Handbook app. Download it from: www.x.com</string>
 </resources>
 

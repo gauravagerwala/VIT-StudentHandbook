@@ -41,6 +41,7 @@ public class XmlParseHandler {
     public Context context;
     public LinearLayout container;
     List<Pair<Integer, String>> images;
+    public String final_content;
     //ImageSaver saver ;
 
     public XmlParseHandler(Context context, LinearLayout container) {
@@ -115,6 +116,7 @@ public class XmlParseHandler {
         view.setTextSize(17);
         view.setGravity(Gravity.LEFT);
         view.setText(Html.fromHtml(content));
+        final_content = view.getText().toString();
         ((Activity) context).runOnUiThread(new Runnable() {
             @Override
             public void run() {

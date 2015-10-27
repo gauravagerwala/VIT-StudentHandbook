@@ -1,6 +1,7 @@
 package vit.vithandbook.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -43,13 +45,14 @@ public class ArticleActivity extends ActionBarActivity {
     XmlParseHandler parser;
     int bookymark = 0;
     ProgressBar load;
+    String xmlData;
     TextView title,subtopic,circletopic;
     Menu menu;
     boolean bookmarked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        Log.e("Artice Activity", "On create");
+        Log.e("Article Activity", "On create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -91,11 +94,11 @@ public class ArticleActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_article, menu);
         this.menu = menu;
-        Log.e("Artice Activity","On Create Memu ");
+        Log.e("Article Activity","On Create Memu ");
         if(bookymark == 1)
-            menu.getItem(0).setIcon(R.drawable.ic_star_black_24dp);
+            menu.getItem(1).setIcon(R.drawable.ic_star_black_24dp);
         else
-            menu.getItem(0).setIcon(R.drawable.ic_star_border_black_24dp);
+            menu.getItem(1).setIcon(R.drawable.ic_star_border_black_24dp);
         return true;
     }
 
@@ -107,30 +110,39 @@ public class ArticleActivity extends ActionBarActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.article_share:
+                Intent share = new Intent(android.content.Intent.ACTION_SEND);
+                //share.setType(Constants.INTENT_TYPE_PLAIN);
+                share.putExtra(Intent.EXTRA_TEXT, getString(R.string.android_share_message_subject) + "\n\n" + mainCategory +"\n" + subtopicName + "\n" + topic + "\n\n" + parser.final_content + "\n\n" + getString(R.string.android_share_message_end));
+                share.setType("text/plain");
+                //share.putExtra(Intent.EXTRA_TEXT, getString(R.string.android_share_message_start, Constants.API_BASE_URL));
+                //share.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.android_share_message_start));
+                startActivity(Intent.createChooser(share, "Share Article using"));
+                return true;
             case R.id.article_bookmark:
                 bookymark = Math.abs(bookymark - 1);
                 if (bookymark == 1)
-                    menu.getItem(0).setIcon(R.drawable.ic_star_black_24dp);
+                    menu.getItem(1).setIcon(R.drawable.ic_star_black_24dp);
                 else
-                    menu.getItem(0).setIcon(R.drawable.ic_star_border_black_24dp);
+                    menu.getItem(1).setIcon(R.drawable.ic_star_border_black_24dp);
                 SQLiteDatabase db = null;
                 try {
                     db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
                     db.execSQL("UPDATE articles SET 'bookmark' = ? WHERE topic = ?", new Object[]{bookymark, topic});
+                    Log.e("Article Activity", "The final value of Bookmark:" + String.valueOf(bookymark));
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     db.close();
                 }
-                Log.e("Artice Activity","The final value of Bookmark:"+String.valueOf(bookymark));
-
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     void initialize() {
         setTitle("");
-        Log.e("Artice Activity", "On initialize");
+        Log.e("Article Activity", "On initialize");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.background_light)));
@@ -171,8 +183,8 @@ public class ArticleActivity extends ActionBarActivity {
             cursor = db.rawQuery("SELECT `content` , `sub_category` , `main_category`, 'bookmark' from `articles` Where topic = ? Limit 1", new String[]{topic});
             cursor.moveToFirst();
             bookymark = cursor.getInt(3);
-            Log.e("Artice Activity","The initial value of Bookmark:"+String.valueOf(bookymark));
-            String xmlData = cursor.getString(0);
+            Log.e("Article Activity","The initial value of Bookmark:"+String.valueOf(bookymark));
+            xmlData = cursor.getString(0);
             subtopicName = cursor.getString(1);
             mainCategory = cursor.getString(2);
             parser.parseXml(xmlData);
