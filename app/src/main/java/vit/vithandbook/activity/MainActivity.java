@@ -110,13 +110,24 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.drawer_categories:
                         BackHandlerFragment fragment_main = new MainNavigator();
+                        collapsingToolbarLayout.setTitle("Categories");
+                        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.black));
                         appBarLayout.setExpanded(true);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_main, "mainNavigator").commit();
                         selectedFragment = fragment_main;
                         break;
                     case R.id.drawer_map:
+                        if(getFragmentManager().getBackStackEntryCount() > 1)
+                            getFragmentManager().popBackStack();
+                        if(getFragmentManager().getBackStackEntryCount() > 0)
+                            getFragmentManager().popBackStack();
                         BackHandlerFragment fragment_map = new MapFragment();
+                        collapsingToolbarLayout.setTitle("Map");
+                        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        if (Build.VERSION.SDK_INT >= 21)
+                            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
                         collapsingToolbarLayout.setTitle("Map");
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
@@ -132,8 +143,16 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = fragment_updates;
                         break;
                     case R.id.drawer_bookmarks:
+                         if(getFragmentManager().getBackStackEntryCount() > 1)
+                             getFragmentManager().popBackStack();
+                        if(getFragmentManager().getBackStackEntryCount() > 0)
+                            getFragmentManager().popBackStack();
                         BackHandlerFragment fragment_bookmark = new BookmarksFragment();
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
                         collapsingToolbarLayout.setTitle("Bookmarks");
+                        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        if (Build.VERSION.SDK_INT >= 21)
+                            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_bookmark, "BookmarkFragment").commit();
