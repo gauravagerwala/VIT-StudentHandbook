@@ -63,15 +63,13 @@ public class ArticleActivity extends ActionBarActivity {
         title = (TextView) findViewById(R.id.tv_title);
         subtopic = (TextView) findViewById(R.id.tv_subtopic);
         circletopic = (TextView) findViewById(R.id.tv_circle_topic);
-
-        new AsyncTask<Void, Void, Void>() {
+     /*   new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 load.setVisibility(View.VISIBLE);
             }
             @Override
             protected Void doInBackground(Void... params) {
-                fetchContent();
                 return null;
             }
             @Override
@@ -79,8 +77,10 @@ public class ArticleActivity extends ActionBarActivity {
                 load.setVisibility(View.GONE);
                 initialize();
             }
-        }.execute();
-
+        }.execute();*/
+        fetchContent();
+        load.setVisibility(View.GONE);
+        initialize();
     }
 
     @Override

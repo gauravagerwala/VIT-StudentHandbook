@@ -118,6 +118,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String content = ";" + cursor.getString(1) + ";" + cursor.getString(2) + ";" + cursor.getString(3);
                 int _id = cursor.getInt(0);
                 myDataBase.execSQL("insert into search(_id,type,content) values(?,?,?)", new Object[]{_id, 1, content});
+
                 cursor.moveToNext();
             }
             Log.d("dbsearch ","search on");
