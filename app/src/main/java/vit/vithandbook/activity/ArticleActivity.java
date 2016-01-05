@@ -52,7 +52,6 @@ public class ArticleActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        Log.e("Article Activity", "On create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -63,21 +62,6 @@ public class ArticleActivity extends ActionBarActivity {
         title = (TextView) findViewById(R.id.tv_title);
         subtopic = (TextView) findViewById(R.id.tv_subtopic);
         circletopic = (TextView) findViewById(R.id.tv_circle_topic);
-     /*   new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                load.setVisibility(View.VISIBLE);
-            }
-            @Override
-            protected Void doInBackground(Void... params) {
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void res) {
-                load.setVisibility(View.GONE);
-                initialize();
-            }
-        }.execute();*/
         fetchContent();
         load.setVisibility(View.GONE);
         initialize();
@@ -94,7 +78,7 @@ public class ArticleActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_article, menu);
         this.menu = menu;
-        Log.e("Article Activity","On Create Memu ");
+        Log.e("menu",String.valueOf(bookymark));
         if(bookymark == 1)
             menu.getItem(1).setIcon(R.drawable.ic_star_black_24dp);
         else
@@ -142,7 +126,6 @@ public class ArticleActivity extends ActionBarActivity {
 
     void initialize() {
         setTitle("");
-        Log.e("Article Activity", "On initialize");
         title.setText(topic);
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.background_light)));
@@ -180,10 +163,9 @@ public class ArticleActivity extends ActionBarActivity {
         Cursor cursor = null;
         try {
             db = SQLiteDatabase.openDatabase(DataBaseHelper.DB_PATH + DataBaseHelper.DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-            cursor = db.rawQuery("SELECT `content` , `sub_category` , `main_category`, 'bookmark' from `articles` Where topic = ? Limit 1", new String[]{topic});
+            cursor = db.rawQuery("SELECT `content` , `sub_category` , `main_category`, `bookmark` from `articles` Where topic = ? Limit 1", new String[]{topic});
             cursor.moveToFirst();
             bookymark = cursor.getInt(3);
-            Log.e("Article Activity","The initial value of Bookmark:"+String.valueOf(bookymark));
             xmlData = cursor.getString(0);
             subtopicName = cursor.getString(1);
             mainCategory = cursor.getString(2);
