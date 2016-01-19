@@ -3,10 +3,9 @@ package vit.vithandbook.fragment;
 /**
  * Created by Hemant on 10/22/2015.
  */
-import android.app.Activity;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,23 +14,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.UpdatesAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
-import vit.vithandbook.helperClass.DataBaseHelper;
 
 
 public class UpdatesFragment extends BackHandlerFragment {
@@ -123,5 +117,6 @@ public class UpdatesFragment extends BackHandlerFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
