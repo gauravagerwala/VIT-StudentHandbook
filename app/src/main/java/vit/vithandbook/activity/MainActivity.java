@@ -135,15 +135,22 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = fragment_map;
                         break;
                     case R.id.drawer_updates:
+                        if(getFragmentManager().getBackStackEntryCount() > 1)
+                            getFragmentManager().popBackStack();
+                        if(getFragmentManager().getBackStackEntryCount() > 0)
+                            getFragmentManager().popBackStack();
                         BackHandlerFragment fragment_updates = new UpdatesFragment();
                         collapsingToolbarLayout.setTitle("Updates");
+                        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        if (Build.VERSION.SDK_INT >= 21)
+                            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_updates, "MapFragment").commit();
                         selectedFragment = fragment_updates;
                         break;
                     case R.id.drawer_bookmarks:
-                         if(getFragmentManager().getBackStackEntryCount() > 1)
+                        if(getFragmentManager().getBackStackEntryCount() > 1)
                              getFragmentManager().popBackStack();
                         if(getFragmentManager().getBackStackEntryCount() > 0)
                             getFragmentManager().popBackStack();
