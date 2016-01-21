@@ -25,7 +25,6 @@ public class MapFragment extends BackHandlerFragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_map, container, false);
