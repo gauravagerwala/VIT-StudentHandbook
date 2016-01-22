@@ -7,6 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Feedback"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:id="@+id/feedback_title"
         android:layout_centerHorizontal="true"
@@ -16,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="From"
+        android:textColor="@color/black"
         android:textSize="17sp"
         android:id="@+id/from_tv"
         android:layout_below="@+id/feedback_title"
@@ -29,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/from_text"
+        android:backgroundTint="@color/black"
         android:textSize="17sp"
         android:paddingTop="20dp"
         android:layout_alignBaseline="@+id/from_tv"
@@ -44,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Message"
+        android:textColor="@color/black"
         android:textSize="17sp"
         android:id="@+id/message_tv"
         android:layout_below="@+id/from_tv"
@@ -58,8 +62,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/feedback_text"
         android:textSize="17sp"
+        android:scrollHorizontally="false"
+        android:scrollbars="vertical"
+        android:lines="5"
+        android:background="@drawable/textbox"
         android:inputType="textMultiLine"
-        android:layout_alignBaseline="@+id/message_tv"
+        android:layout_below="@+id/from_text"
         android:layout_toRightOf="@+id/message_tv"
         android:layout_toEndOf="@+id/message_tv"
         android:layout_marginLeft="10dp"
@@ -67,7 +75,8 @@
         android:layout_marginRight="15dp"
         android:layout_marginEnd="15dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -78,7 +87,6 @@
         android:textColor="@color/white"
         android:id="@+id/send_button"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp" />
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

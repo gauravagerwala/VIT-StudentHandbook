@@ -32,6 +32,7 @@ import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.BookmarksFragment;
+import vit.vithandbook.fragment.FeedbackFragment;
 import vit.vithandbook.fragment.MainNavigator;
 import vit.vithandbook.fragment.MapFragment;
 import vit.vithandbook.fragment.UpdatesFragment;
@@ -164,6 +165,22 @@ public class MainActivity extends AppCompatActivity {
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_bookmark, "BookmarkFragment").commit();
                         selectedFragment = fragment_bookmark;
+                        break;
+                    case R.id.drawer_feedback:
+                        if(getFragmentManager().getBackStackEntryCount() > 1)
+                            getFragmentManager().popBackStack();
+                        if(getFragmentManager().getBackStackEntryCount() > 0)
+                            getFragmentManager().popBackStack();
+                        BackHandlerFragment fragment_feedback = new FeedbackFragment();
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
+                        collapsingToolbarLayout.setTitle("Feedback");
+                        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        if (Build.VERSION.SDK_INT >= 21)
+                            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+                        appBarLayout.setExpanded(false);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .replace(R.id.frame_layout_main, fragment_feedback, "FeedbackFragment").commit();
+                        selectedFragment = fragment_feedback;
                         break;
                 }
                 drawerLayout.closeDrawers();

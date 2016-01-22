@@ -29,6 +29,10 @@
         <item>@drawable/ic_around_vit</item>
     </string-array>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="INTENT_TYPE_PLAIN">text/plain</string>
+    <string name="FEEDBACK_EMAIL_LINK">mailto:hemant.jain2013@vit.ac.in</string>
+    <string name="FEEDBACK_EMAIL_SUBJECT">VIT Handbook Feedback</string>
+
 
     <string name="android_share_select">Share VIT Handbook using&#8230;</string>
     <string name="android_share_message_subject">VIT Handbook</string>
