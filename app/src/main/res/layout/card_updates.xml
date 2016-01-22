@@ -26,7 +26,7 @@
             android:textSize="17sp"
             android:text="Aug, 2015"
             android:layout_centerHorizontal="true"
-            android:id="@+id/tv_monthyear"
+            android:id="@+id/tv_monthYear"
             android:layout_below="@+id/tv_date"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

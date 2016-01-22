@@ -86,10 +86,6 @@ public class SubSectionFragment extends BackHandlerFragment {
     public void rvItemClick(String data) {
         Fragment hideFragment = getActivity().getFragmentManager().findFragmentByTag("subSectionFragment");
         Fragment articleFragment = ArticleListFragment.newInstance(data);
-        /*Snackbar snackbar = Snackbar.make(recyclerView, "In Article List", Snackbar.LENGTH_SHORT);
-        View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(Color.DKGRAY);
-        snackbar.show();*/
         getActivity().getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                 .hide(hideFragment).add(R.id.frame_layout_main, articleFragment, "articleListFragment").addToBackStack(null).commit();
     }

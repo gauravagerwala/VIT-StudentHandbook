@@ -25,7 +25,6 @@ import java.net.URL;
 
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.UpdatesAdapter;
-import vit.vithandbook.adapter.onItemClickListener;
 
 
 public class UpdatesFragment extends BackHandlerFragment {
@@ -33,6 +32,7 @@ public class UpdatesFragment extends BackHandlerFragment {
     ArrayList<String> news;
     UpdatesAdapter upAdapter;
     ProgressBar load;
+    int updatePointer;
     android.support.v7.widget.RecyclerView recyclerView;
 
     public static UpdatesFragment newInstance()
@@ -49,20 +49,21 @@ public class UpdatesFragment extends BackHandlerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        updatePointer = 0;
         news = new ArrayList<>();
-        View view = inflater.inflate(R.layout.card_updates, container, false);
-        load = (ProgressBar) view.findViewById(R.id.alprogressbar);
+        View view = inflater.inflate(R.layout.fragment_updates, container, false);
+        load = (ProgressBar) view.findViewById(R.id.ulprogressbar);
         recyclerView = (android.support.v7.widget.RecyclerView) view.findViewById(R.id.updates_rv_list);
         new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected void onPreExecute() {
-                //load.setVisibility(View.VISIBLE);
+//                load.setVisibility(View.VISIBLE);
             }
 
             @Override
             protected Void doInBackground(Void... params) {
-                fetchUpdatesData(0);
+                fetchUpdatesData(updatePointer);
                 return null;
             }
 
@@ -70,13 +71,6 @@ public class UpdatesFragment extends BackHandlerFragment {
             protected void onPostExecute(Void res) {
                 load.setVisibility(View.GONE);
                 upAdapter = new UpdatesAdapter(getActivity(),news);
-                upAdapter.setOnItemClickListener(new onItemClickListener() {
-                    @Override
-                    public void onItemClick(String data) {
-                        //onListItemClick(data);
-
-                    }
-                });
                 recyclerView.setAdapter(upAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
@@ -101,6 +95,7 @@ public class UpdatesFragment extends BackHandlerFragment {
             }
             Log.d("json", jsonReply);
             parseJson(jsonReply);
+            updatePointer += 10;
         } catch (Exception e) {
             e.printStackTrace();
         }
