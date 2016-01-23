@@ -3,10 +3,8 @@ package vit.vithandbook.fragment;
 import android.app.Fragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,6 @@ import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.CardListAdapter;
-import vit.vithandbook.adapter.MainNavigatorAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.helperClass.DataBaseHelper;
 

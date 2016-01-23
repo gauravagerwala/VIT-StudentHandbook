@@ -1,9 +1,6 @@
 package vit.vithandbook.fragment;
 
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,15 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 import vit.vithandbook.R;
 import vit.vithandbook.activity.ArticleActivity;
-import vit.vithandbook.activity.MainActivity;
 import vit.vithandbook.adapter.ArticleListAdapter;
 import vit.vithandbook.adapter.onItemClickListener;
 import vit.vithandbook.helperClass.DataBaseHelper;
