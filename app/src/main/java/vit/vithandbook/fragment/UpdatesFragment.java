@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,8 @@ public class UpdatesFragment extends BackHandlerFragment {
     UpdatesAdapter upAdapter;
     ProgressBar load;
     int updatePointer;
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
+    private boolean loading = true;
     android.support.v7.widget.RecyclerView recyclerView;
 
     public static UpdatesFragment newInstance()
@@ -72,7 +75,25 @@ public class UpdatesFragment extends BackHandlerFragment {
                 load.setVisibility(View.GONE);
                 upAdapter = new UpdatesAdapter(getActivity(),news);
                 recyclerView.setAdapter(upAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        if (dy > 0) {
+                                visibleItemCount = layoutManager.getChildCount();
+                                totalItemCount = layoutManager.getItemCount();
+                                pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+                            if(loading){
+                                if((visibleItemCount + pastVisiblesItems)>=totalItemCount){
+                                    loading = false;
+                                    fetchUpdatesData(updatePointer);
+                                }
+                            }
+                        }
+                        super.onScrolled(recyclerView, dx, dy);
+                    }
+                });
             }
         }.execute();
         return view;
