@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
                         if (Build.VERSION.SDK_INT >= 21)
                             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-                        appBarLayout.setExpanded(false);
+                        appBarLayout.setExpanded(true);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_updates, "MapFragment").commit();
                         selectedFragment = fragment_updates;
@@ -159,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
                         relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
                         collapsingToolbarLayout.setTitle("Bookmarks");
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        appBarLayout.setExpanded(true);
                         if (Build.VERSION.SDK_INT >= 21)
                             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-                        appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_bookmark, "BookmarkFragment").commit();
                         selectedFragment = fragment_bookmark;
@@ -175,9 +175,9 @@ public class MainActivity extends AppCompatActivity {
                         relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
                         collapsingToolbarLayout.setTitle("Feedback");
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        appBarLayout.setExpanded(false);
                         if (Build.VERSION.SDK_INT >= 21)
                             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-                        appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_feedback, "FeedbackFragment").commit();
                         selectedFragment = fragment_feedback;
