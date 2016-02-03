@@ -66,7 +66,7 @@ public class UpdatesFragment extends BackHandlerFragment {
 
             @Override
             protected Void doInBackground(Void... params) {
-                fetchUpdatesData(updatePointer);
+                //fetchUpdatesData(updatePointer);
                 return null;
             }
 

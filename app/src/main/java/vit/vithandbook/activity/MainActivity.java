@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.drawer_categories:
                         BackHandlerFragment fragment_main = new MainNavigator();
                         collapsingToolbarLayout.setTitle("Categories");
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
                         collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(android.R.color.black));
                         appBarLayout.setExpanded(true);
@@ -125,11 +126,11 @@ public class MainActivity extends AppCompatActivity {
                         if(getFragmentManager().getBackStackEntryCount() > 0)
                             getFragmentManager().popBackStack();
                         BackHandlerFragment fragment_map = new MapFragment();
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_maps));
                         collapsingToolbarLayout.setTitle("Map");
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
                         if (Build.VERSION.SDK_INT >= 21)
                             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-                        collapsingToolbarLayout.setTitle("Map");
                         appBarLayout.setExpanded(false);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
                                 .replace(R.id.frame_layout_main, fragment_map, "MapFragment").commit();
@@ -141,13 +142,14 @@ public class MainActivity extends AppCompatActivity {
                         if(getFragmentManager().getBackStackEntryCount() > 0)
                             getFragmentManager().popBackStack();
                         BackHandlerFragment fragment_updates = new UpdatesFragment();
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_updates));
                         collapsingToolbarLayout.setTitle("Updates");
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
                         if (Build.VERSION.SDK_INT >= 21)
                             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
                         appBarLayout.setExpanded(true);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                                .replace(R.id.frame_layout_main, fragment_updates, "MapFragment").commit();
+                                .replace(R.id.frame_layout_main, fragment_updates, "UpdatesFragment").commit();
                         selectedFragment = fragment_updates;
                         break;
                     case R.id.drawer_bookmarks:
@@ -156,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                         if(getFragmentManager().getBackStackEntryCount() > 0)
                             getFragmentManager().popBackStack();
                         BackHandlerFragment fragment_bookmark = new BookmarksFragment();
-                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_bookmarks));
                         collapsingToolbarLayout.setTitle("Bookmarks");
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
                         appBarLayout.setExpanded(true);
@@ -172,10 +174,10 @@ public class MainActivity extends AppCompatActivity {
                         if(getFragmentManager().getBackStackEntryCount() > 0)
                             getFragmentManager().popBackStack();
                         BackHandlerFragment fragment_feedback = new FeedbackFragment();
-                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_categories));
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_feedback));
                         collapsingToolbarLayout.setTitle("Feedback");
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
-                        appBarLayout.setExpanded(false);
+                        appBarLayout.setExpanded(true);
                         if (Build.VERSION.SDK_INT >= 21)
                             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
