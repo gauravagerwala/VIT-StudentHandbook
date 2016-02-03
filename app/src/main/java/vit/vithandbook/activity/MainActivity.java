@@ -184,6 +184,22 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.frame_layout_main, fragment_feedback, "FeedbackFragment").commit();
                         selectedFragment = fragment_feedback;
                         break;
+                    case R.id.drawer_about_us:
+                        if(getFragmentManager().getBackStackEntryCount() > 1)
+                            getFragmentManager().popBackStack();
+                        if(getFragmentManager().getBackStackEntryCount() > 0)
+                            getFragmentManager().popBackStack();
+                        BackHandlerFragment fragment_about = new UpdatesFragment();
+                        relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_updates));
+                        collapsingToolbarLayout.setTitle("About Us");
+                        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
+                        if (Build.VERSION.SDK_INT >= 21)
+                            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+                        appBarLayout.setExpanded(true);
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
+                                .replace(R.id.frame_layout_main, fragment_about, "AboutUs").commit();
+                        selectedFragment = fragment_about;
+                        break;
                 }
                 drawerLayout.closeDrawers();
                 return true;

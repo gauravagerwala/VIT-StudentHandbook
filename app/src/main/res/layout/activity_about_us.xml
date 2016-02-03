@@ -1,6 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
+    tools:context="vit.vithandbook.activity.AboutUs"
     android:background="@color/white">
 
     <ProgressBar
@@ -9,6 +12,7 @@
         android:visibility="gone"
         android:indeterminate="true"
         android:id="@+id/alprogressbar" />
+
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
