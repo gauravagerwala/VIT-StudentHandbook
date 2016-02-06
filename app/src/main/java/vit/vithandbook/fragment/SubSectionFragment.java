@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +101,12 @@ public class SubSectionFragment extends BackHandlerFragment {
                 cursor.moveToNext();
             }
         } catch (Exception e) {
+            if(db.isOpen()){
+                Log.e("db issue","YES. Open");
+            }
+            else{
+                Log.e("db issue","CLOSED");
+            }
             e.printStackTrace();
         } finally {
             cursor.close();
