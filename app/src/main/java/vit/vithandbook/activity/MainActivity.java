@@ -30,6 +30,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import vit.vithandbook.R;
 import vit.vithandbook.adapter.SearchListAdapter;
+import vit.vithandbook.fragment.AboutUsFragment;
 import vit.vithandbook.fragment.BackHandlerFragment;
 import vit.vithandbook.fragment.BookmarksFragment;
 import vit.vithandbook.fragment.FeedbackFragment;
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                             getFragmentManager().popBackStack();
                         if(getFragmentManager().getBackStackEntryCount() > 0)
                             getFragmentManager().popBackStack();
-                        BackHandlerFragment fragment_about = new UpdatesFragment();
+                        BackHandlerFragment fragment_about = new AboutUsFragment();
                         relativeLayout.setBackground(getResources().getDrawable(R.drawable.head_updates));
                         collapsingToolbarLayout.setTitle("About Us");
                         collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.mainHeader));
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
                         appBarLayout.setExpanded(true);
                         getFragmentManager().beginTransaction().setCustomAnimations(R.transition.fade_in, R.transition.fade_out, R.transition.fade_in, R.transition.fade_out)
-                                .replace(R.id.frame_layout_main, fragment_about, "AboutUs").commit();
+                                .replace(R.id.frame_layout_main, fragment_about, "AboutUsFragment").commit();
                         selectedFragment = fragment_about;
                         break;
                 }
